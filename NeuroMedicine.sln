@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuroMedicine.PresentationLayer", "NeuroMedicine\NeuroMedicine.PresentationLayer.csproj", "{28E31588-13C6-4076-AF20-797E68B1FE91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuroMedicine.DataLayer", "NeuroMedicine.DataLayer\NeuroMedicine.DataLayer.csproj", "{D0F0302A-5203-4B79-894F-108A4DC411EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuroMedicine.BusinessLayer", "NeuroMedicine.BusinessLayer\NeuroMedicine.BusinessLayer.csproj", "{4A8EFACB-C5FD-4013-BDE7-21AF47AC2CF9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{28E31588-13C6-4076-AF20-797E68B1FE91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28E31588-13C6-4076-AF20-797E68B1FE91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28E31588-13C6-4076-AF20-797E68B1FE91}.Debug|x64.ActiveCfg = Debug|x64
+		{28E31588-13C6-4076-AF20-797E68B1FE91}.Debug|x64.Build.0 = Debug|x64
+		{28E31588-13C6-4076-AF20-797E68B1FE91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28E31588-13C6-4076-AF20-797E68B1FE91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28E31588-13C6-4076-AF20-797E68B1FE91}.Release|x64.ActiveCfg = Release|x64
+		{28E31588-13C6-4076-AF20-797E68B1FE91}.Release|x64.Build.0 = Release|x64
+		{D0F0302A-5203-4B79-894F-108A4DC411EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0F0302A-5203-4B79-894F-108A4DC411EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0F0302A-5203-4B79-894F-108A4DC411EA}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D0F0302A-5203-4B79-894F-108A4DC411EA}.Debug|x64.Build.0 = Debug|Any CPU
+		{D0F0302A-5203-4B79-894F-108A4DC411EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0F0302A-5203-4B79-894F-108A4DC411EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0F0302A-5203-4B79-894F-108A4DC411EA}.Release|x64.ActiveCfg = Release|Any CPU
+		{D0F0302A-5203-4B79-894F-108A4DC411EA}.Release|x64.Build.0 = Release|Any CPU
+		{4A8EFACB-C5FD-4013-BDE7-21AF47AC2CF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A8EFACB-C5FD-4013-BDE7-21AF47AC2CF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A8EFACB-C5FD-4013-BDE7-21AF47AC2CF9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4A8EFACB-C5FD-4013-BDE7-21AF47AC2CF9}.Debug|x64.Build.0 = Debug|Any CPU
+		{4A8EFACB-C5FD-4013-BDE7-21AF47AC2CF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A8EFACB-C5FD-4013-BDE7-21AF47AC2CF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A8EFACB-C5FD-4013-BDE7-21AF47AC2CF9}.Release|x64.ActiveCfg = Release|Any CPU
+		{4A8EFACB-C5FD-4013-BDE7-21AF47AC2CF9}.Release|x64.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {03C2631D-FBF1-4762-A211-C2BBC885C517}
+	EndGlobalSection
+EndGlobal
