@@ -93,6 +93,30 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Views\WindowView\AuthorizationView.xaml.cs">
+      <DependentUpon>AuthorizationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WindowView\DiagnosticsView.xaml.cs">
+      <DependentUpon>DiagnosticsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WindowView\MasterWindowView.xaml.cs">
+      <DependentUpon>MasterWindowView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WindowView\PatientsDiagnosticView.xaml.cs">
+      <DependentUpon>PatientsDiagnosticView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WindowView\PatientsView.xaml.cs">
+      <DependentUpon>PatientsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WindowView\PersonalCabinetView.xaml.cs">
+      <DependentUpon>PersonalCabinetView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WindowView\PersonalResultView.xaml.cs">
+      <DependentUpon>PersonalResultView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WindowView\ResultsDiagnosticsView.xaml.cs">
+      <DependentUpon>ResultsDiagnosticsView.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -106,6 +130,38 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Styles\StyleDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WindowView\AuthorizationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WindowView\DiagnosticsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WindowView\MasterWindowView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WindowView\PatientsDiagnosticView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WindowView\PatientsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WindowView\PersonalCabinetView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WindowView\PersonalResultView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WindowView\ResultsDiagnosticsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -138,7 +194,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\" />
+    <Folder Include="Views\ModalWindowView\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NeuroMedicine.BusinessLayer\NeuroMedicine.BusinessLayer.csproj">
