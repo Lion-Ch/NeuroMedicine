@@ -4,9 +4,26 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NeuroMedicine.Views.WindowView"
+        xmlns:hamburger="clr-namespace:HamburgerMenu;assembly=HamburgerMenu"
         mc:Ignorable="d"
-        Title="MasterWindowView" Height="450" Width="800">
+        Title="НейроМедицина" Height="768" Width="1366">
     <Grid>
-        
+        <Grid.Background>
+            <ImageBrush ImageSource="/NeuroMedicine;component/Img/Background.jpg"/>
+        </Grid.Background>
+        <ContentControl Margin="50 0 0 0">
+
+        </ContentControl>
+        <hamburger:HamburgerMenu Background="#37648d" 
+                                 MenuIconColor="White" 
+                                 SelectionIndicatorColor="White" 
+                                 MenuItemForeground="White" 
+                                 HorizontalAlignment="Left">
+            <hamburger:HamburgerMenuItem Text="Диагностика" Icon="/NeuroMedicine;component/Icons/analysis.png"/>
+            <hamburger:HamburgerMenuItem Text="История обследований" Icon="/NeuroMedicine;component/Icons/analytics.png"/>
+            <hamburger:HamburgerMenuItem Text="База пациентов" Icon="/NeuroMedicine;component/Icons/hospitalisation.png"/>
+            <hamburger:HamburgerMenuItem Text="Личный кабинет" Icon="/NeuroMedicine;component/Icons/user.png"/>
+            <hamburger:HamburgerMenuItem VerticalAlignment="Bottom" Text="Выход" Icon="/NeuroMedicine;component/Icons/logout.png"/>    
+        </hamburger:HamburgerMenu>
     </Grid>
 </Window>

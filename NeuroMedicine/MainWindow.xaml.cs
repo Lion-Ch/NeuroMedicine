@@ -1,23 +1,6 @@
-﻿using Keras;
-using Keras.Layers;
-using Keras.Models;
-using Keras.PreProcessing.Image;
-using Microsoft.Scripting.Hosting;
-using Numpy;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
+using NeuroMedicine.Views.WindowView;
 
 namespace NeuroMedicine
 {
@@ -26,10 +9,13 @@ namespace NeuroMedicine
     /// </summary>
     public partial class MainWindow : Window
     {
-        BaseModel model;
+        //BaseModel model;
         public MainWindow()
         {
             InitializeComponent();
+            AuthorizationView authorizationView = new AuthorizationView();
+            authorizationView.Show();
+            this.Close();
             //model = Sequential.LoadModel(@"C:\Users\levac\OneDrive\Рабочий стол\Учеба\Диплом\Модель");
         }
 
@@ -98,16 +84,16 @@ namespace NeuroMedicine
             #endregion
 
             #region Запуск
-            var datagen = new ImageDataGenerator(rescale: 1.0f / 255);
-            var testGenerator = datagen.FlowFromDirectory(@"C:\Users\levac\OneDrive\Рабочий стол\Учеба\Диплом\Dataset\Clients",
-                target_size: (150, 150).ToTuple(),
-                batch_size: 16,
-                class_mode: "binary");
-            var result = model.PredictGenerator(testGenerator);
-            for (int i = 0; i < result.len; i++)
-            {
-                Console.WriteLine($"Вероятность пневмонии: {result[i]}");
-            }
+            //var datagen = new ImageDataGenerator(rescale: 1.0f / 255);
+            //var testGenerator = datagen.FlowFromDirectory(@"C:\Users\levac\OneDrive\Рабочий стол\Учеба\Диплом\Dataset\Clients",
+            //    target_size: (150, 150).ToTuple(),
+            //    batch_size: 16,
+            //    class_mode: "binary");
+            //var result = model.PredictGenerator(testGenerator);
+            //for (int i = 0; i < result.len; i++)
+            //{
+            //    Console.WriteLine($"Вероятность пневмонии: {result[i]}");
+            //}
 
             #endregion
         }

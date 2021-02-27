@@ -55,6 +55,9 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HamburgerMenu, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HamburgerMenu.0.1.0\lib\net40\HamburgerMenu.dll</HintPath>
+    </Reference>
     <Reference Include="Keras, Version=3.8.5.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Keras.NET.3.8.5\lib\netstandard2.0\Keras.dll</HintPath>
     </Reference>
@@ -201,6 +204,21 @@
       <Project>{4a8efacb-c5fd-4013-bde7-21af47ac2cf9}</Project>
       <Name>NeuroMedicine.BusinessLayer</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Img\Background.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\analysis.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\analytics.png" />
+    <Resource Include="Icons\call-center.png" />
+    <Resource Include="Icons\chip.png" />
+    <Resource Include="Icons\folder.png" />
+    <Resource Include="Icons\hospitalisation.png" />
+    <Resource Include="Icons\logout.png" />
+    <Resource Include="Icons\user.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
