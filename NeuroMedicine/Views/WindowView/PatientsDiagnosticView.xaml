@@ -4,9 +4,145 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NeuroMedicine.Views.WindowView"
+             xmlns:style="Neur"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+             d:DesignHeight="768" d:DesignWidth="1266">
+    <UserControl.Resources>
+        <ResourceDictionary Source="/NeuroMedicine;component/Styles/StyleDictionary.xaml"/>
+    </UserControl.Resources>
+    <Grid Background="Red">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.2*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="0.1*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="0.2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.05*"/>
+            <RowDefinition Height="0.8*"/>
+            <RowDefinition Height="0.05*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Column="1" Grid.Row="1"
+              Background="Wheat">
+            <StackPanel Width="250"
+                    Orientation="Vertical"
+                    HorizontalAlignment="Stretch">
+
+                <TextBlock Text="Найстройки"
+                           TextWrapping="Wrap"
+                           FontSize="18"
+                           FontWeight="Bold"
+                           FontFamily="{StaticResource MyFont}"/>
+
+                <CheckBox Margin="0 10 0 -5"
+                          Content="Считывать дату из названия"/>
+                <CheckBox Margin="0 10 0 -5"
+                          Content="Считывать пациента из названия"/>
+                <Button Content="Загрузить снимки из директории" 
+                        Margin="0 10"
+                        Padding="20 10"
+                        Background="White"
+                        HorizontalAlignment="Stretch"/>
+                <Button Content="Начать анализ" 
+                        Margin="0 10"
+                        Padding="20 10"
+                        HorizontalAlignment="Stretch"
+                        Background="White"/>
+                <Button Content="Сохранить и выйти" 
+                        Margin="0 10"
+                        Padding="20 10"
+                        HorizontalAlignment="Stretch"
+                        Background="White"/>
+
+                <TextBlock Text="Управление списком пациентов"
+                           TextWrapping="Wrap"
+                           FontSize="18"
+                           FontWeight="Bold"/>
+
+                <Button Content="Добавить" 
+                        Margin="0 10"
+                        Padding="20 10"
+                        HorizontalAlignment="Stretch"
+                        Background="White"/>
+                <Button Content="Очистить список" 
+                        Margin="0 10"
+                        Padding="20 10"
+                        HorizontalAlignment="Stretch"
+                        Background="White"/>
+                <Button Content="Удалить" 
+                        Margin="0 10"
+                        Padding="20 10"
+                        HorizontalAlignment="Stretch"
+                        Background="White"/>
+
+
+                <TextBlock Text="Дата грид или ItemSource в нем:"/>
+                <TextBlock Text="Галочка/Крестик - есть ли пациент в базе"/>
+                <TextBlock Text="ФИО"/>
+                <TextBlock Text="Дата снимка"/>
+                <TextBlock Text="Просмотр снимка"/>
+
+
+                <TextBlock Text="Кнопка добавить пациента в список"/>
+                <TextBlock Text="Зарегистрировать нового пациента(передача фио на форму)"/>
+                <TextBlock Text="Удалить из списка"/>
+                <TextBlock Text="Очистить список"/>
+            </StackPanel>
+        </Grid>
+        
+        
+        <DataGrid Grid.Column="3" Grid.Row="1" FontSize="16"
+                  AutoGenerateColumns="False"
+                  ColumnHeaderStyle="{StaticResource DataGrid}"
+                  x:Name="PatientGrid"
+                  ItemsSource="{Binding Patients}"
+                  SelectedItem="{Binding SelectedPatient}"
+                  IsReadOnly="True"
+                  >
             
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Фото">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Width="100" Height="50" Source="{Binding PhotoUrl}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Пациент" Width="400">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="{Binding FIO, Mode=TwoWay}"
+                                    Background="White"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Дата снимка" Binding="{Binding Date}"/>
+                <DataGridTemplateColumn x:Name="PhotoUrl" Header="Путь к снимку" Width="400">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox TextWrapping="Wrap"
+                                     MouseDoubleClick="TextBox_MouseDoubleClick"
+                                     Text="{Binding PhotoUrl, Mode=TwoWay}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+            <DataGrid.Resources>
+                
+            </DataGrid.Resources>
+            
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Margin="0 10" VerticalAlignment="Top">
+                        <Button Content="Изменить пациента" Margin="0 0 10 0" Height="50" Padding="10 5"/>
+                        <Button Content="Указать путь к снимку" Margin="10 0" Height="50"  Padding="10 5"/>
+                        <Button Content="Удалить" Margin="10 0" Padding="10 5" Height="50" />
+                    </StackPanel>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+
+        </DataGrid>
     </Grid>
 </UserControl>

@@ -13,8 +13,9 @@ namespace NeuroMedicine
         public MainWindow()
         {
             InitializeComponent();
-            AuthorizationView authorizationView = new AuthorizationView();
+            MasterWindowView authorizationView = new MasterWindowView();
             authorizationView.Show();
+            authorizationView.DataContext = new DiagnosticsView();
             this.Close();
             //model = Sequential.LoadModel(@"C:\Users\levac\OneDrive\Рабочий стол\Учеба\Диплом\Модель");
         }

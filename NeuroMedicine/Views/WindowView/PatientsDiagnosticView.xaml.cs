@@ -1,6 +1,10 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,11 +22,81 @@ namespace NeuroMedicine.Views.WindowView
     /// <summary>
     /// Логика взаимодействия для PatientsDiagnosticView.xaml
     /// </summary>
-    public partial class PatientsDiagnosticView : UserControl
+    public partial class PatientsDiagnosticView : UserControl, INotifyPropertyChanged
     {
+        private Patient _selectedPatient;
+
+        public Patient SelectedPatient
+        {
+            get { return _selectedPatient; }
+            set { _selectedPatient = value; }
+        }
+
+        public ObservableCollection<Patient> Patients { get; set; }
         public PatientsDiagnosticView()
         {
             InitializeComponent();
+            Patients = new ObservableCollection<Patient>()
+            {
+                new Patient(){FIO = "Иванов Иван Иванович", PhotoUrl="C:\\Users\\levac\\Downloads\\NORMAL2-IM-1440-0001.jpeg"},
+                new Patient(){FIO = "Петров Петр Петрович"}
+            };
+        }
+
+        private void TextBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+
+            // Set filter for file extension and default file extension 
+            dlg.DefaultExt = ".png";
+            dlg.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
+
+
+            // Display OpenFileDialog by calling ShowDialog method 
+            Nullable<bool> result = dlg.ShowDialog();
+
+
+            // Get the selected file name and display in a TextBox 
+            if (result == true)
+            {
+                SelectedPatient.PhotoUrl = dlg.FileName;
+                OnPropertyChanged("Patients");
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
+
+    public class Patient: INotifyPropertyChanged
+    {
+        public bool InBase { get; set; }
+        public string FIO { get; set; }
+        public string Date { get; set; }
+        public float Neuro { get; set; }
+        public float Doc { get; set; }
+        private string photoUrl;
+        public string PhotoUrl
+        {
+            get { return photoUrl; }
+            set
+            {
+                photoUrl = value;
+                OnPropertyChanged("PhotoUrl");
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
+    }
+
+    
 }
