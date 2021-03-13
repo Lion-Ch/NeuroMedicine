@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuroMedicine.PresentationLayer", "NeuroMedicine\NeuroMedicine.PresentationLayer.csproj", "{28E31588-13C6-4076-AF20-797E68B1FE91}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PresentationLayer", "NeuroMedicine\PresentationLayer.csproj", "{28E31588-13C6-4076-AF20-797E68B1FE91}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuroMedicine.DataLayer", "NeuroMedicine.DataLayer\NeuroMedicine.DataLayer.csproj", "{D0F0302A-5203-4B79-894F-108A4DC411EA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLayer", "NeuroMedicine.DataLayer\DataLayer.csproj", "{D0F0302A-5203-4B79-894F-108A4DC411EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuroMedicine.BusinessLayer", "NeuroMedicine.BusinessLayer\NeuroMedicine.BusinessLayer.csproj", "{4A8EFACB-C5FD-4013-BDE7-21AF47AC2CF9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLayer", "NeuroMedicine.BusinessLayer\BusinessLayer.csproj", "{4A8EFACB-C5FD-4013-BDE7-21AF47AC2CF9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

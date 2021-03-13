@@ -96,9 +96,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BussinesModel.cs" />
+    <Compile Include="Views\ModalWindowView\PhotoModalWindow.xaml.cs">
+      <DependentUpon>PhotoModalWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ViewNavigator\ViewNavigator.cs" />
     <Compile Include="Views\WindowView\AuthorizationView.xaml.cs">
       <DependentUpon>AuthorizationView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\WindowView\BaseView.cs" />
     <Compile Include="Views\WindowView\DiagnosticsView.xaml.cs">
       <DependentUpon>DiagnosticsView.xaml</DependentUpon>
     </Compile>
@@ -133,6 +139,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Styles\StyleDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ModalWindowView\PhotoModalWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -209,12 +219,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\ModalWindowView\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\NeuroMedicine.BusinessLayer\NeuroMedicine.BusinessLayer.csproj">
+    <ProjectReference Include="..\NeuroMedicine.BusinessLayer\BusinessLayer.csproj">
       <Project>{4a8efacb-c5fd-4013-bde7-21af47ac2cf9}</Project>
-      <Name>NeuroMedicine.BusinessLayer</Name>
+      <Name>BusinessLayer</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

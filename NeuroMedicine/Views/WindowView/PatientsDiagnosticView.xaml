@@ -7,9 +7,6 @@
              xmlns:style="Neur"
              mc:Ignorable="d" 
              d:DesignHeight="768" d:DesignWidth="1266">
-    <UserControl.Resources>
-        <ResourceDictionary Source="/NeuroMedicine;component/Styles/StyleDictionary.xaml"/>
-    </UserControl.Resources>
     <Grid Background="Red">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.2*"/>
@@ -26,9 +23,11 @@
 
         <Grid Grid.Column="1" Grid.Row="1"
               Background="Wheat">
-            <StackPanel Width="250"
-                    Orientation="Vertical"
-                    HorizontalAlignment="Stretch">
+            <ScrollViewer>
+                <StackPanel Orientation="Vertical"
+                        Width="Auto"
+                        HorizontalAlignment="Stretch"
+                        Margin="40 20">
 
                 <TextBlock Text="Найстройки"
                            TextWrapping="Wrap"
@@ -50,18 +49,13 @@
                         Padding="20 10"
                         HorizontalAlignment="Stretch"
                         Background="White"/>
-                <Button Content="Сохранить и выйти" 
-                        Margin="0 10"
-                        Padding="20 10"
-                        HorizontalAlignment="Stretch"
-                        Background="White"/>
 
                 <TextBlock Text="Управление списком пациентов"
                            TextWrapping="Wrap"
                            FontSize="18"
                            FontWeight="Bold"/>
 
-                <Button Content="Добавить" 
+                <Button Content="Добавить пациента" 
                         Margin="0 10"
                         Padding="20 10"
                         HorizontalAlignment="Stretch"
@@ -71,25 +65,39 @@
                         Padding="20 10"
                         HorizontalAlignment="Stretch"
                         Background="White"/>
-                <Button Content="Удалить" 
+                <Button Content="Зарегистрировать нового пациента" 
                         Margin="0 10"
                         Padding="20 10"
                         HorizontalAlignment="Stretch"
                         Background="White"/>
+                
+                <TextBlock Text="Предупреждения"
+                           TextWrapping="Wrap"
+                           FontSize="18"
+                           FontWeight="Bold"/>
+                <ScrollViewer>
+                    <ListBox MinHeight="280"
+                             MaxHeight="680"
+                             Background="AntiqueWhite">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate >
+                                <TextBlock Text="Ошибка валидации строка №55"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                        <ListBoxItem>
+                            <TextBlock  Padding="5 5 0 0" Foreground="Red" Text="1. Ошибка валидации строка №55"/>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <TextBlock  Padding="5 5 0 0"  Foreground="Red" Text="2. Ошибка валидации строка №55"/>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <TextBlock  Padding="5 5 0 0" Foreground="Red" Text="3. Ошибка валидации строка №55"/>
+                        </ListBoxItem>
+                    </ListBox>
+                </ScrollViewer>
+                </StackPanel>
+            </ScrollViewer>
 
-
-                <TextBlock Text="Дата грид или ItemSource в нем:"/>
-                <TextBlock Text="Галочка/Крестик - есть ли пациент в базе"/>
-                <TextBlock Text="ФИО"/>
-                <TextBlock Text="Дата снимка"/>
-                <TextBlock Text="Просмотр снимка"/>
-
-
-                <TextBlock Text="Кнопка добавить пациента в список"/>
-                <TextBlock Text="Зарегистрировать нового пациента(передача фио на форму)"/>
-                <TextBlock Text="Удалить из списка"/>
-                <TextBlock Text="Очистить список"/>
-            </StackPanel>
         </Grid>
         
         
@@ -101,8 +109,15 @@
                   SelectedItem="{Binding SelectedPatient}"
                   IsReadOnly="True"
                   >
-            
+
             <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Наличие в базе">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Width="100" Height="50"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="Фото">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -110,16 +125,25 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Пациент" Width="400">
+                <DataGridTemplateColumn Header="Пациент">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Content="{Binding FIO, Mode=TwoWay}"
+                                    Padding="50 0"
                                     Background="White"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Дата снимка" Binding="{Binding Date}"/>
-                <DataGridTemplateColumn x:Name="PhotoUrl" Header="Путь к снимку" Width="400">
+                <DataGridTemplateColumn Header="Дата" Width="*"> 
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding Date, Mode=TwoWay}"
+                                     TextAlignment="Center"
+                                     VerticalContentAlignment="Center"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn x:Name="PhotoUrl" Header="Путь к снимку">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBox TextWrapping="Wrap"
@@ -135,10 +159,11 @@
             
             <DataGrid.RowDetailsTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal" Margin="0 10" VerticalAlignment="Top">
-                        <Button Content="Изменить пациента" Margin="0 0 10 0" Height="50" Padding="10 5"/>
-                        <Button Content="Указать путь к снимку" Margin="10 0" Height="50"  Padding="10 5"/>
-                        <Button Content="Удалить" Margin="10 0" Padding="10 5" Height="50" />
+                    <StackPanel Orientation="Horizontal" Margin="10 0" VerticalAlignment="Top">
+                        <Button Content="Изменить пациента" Margin="10 0" Height="30" Padding="10 5"/>
+                        <Button Content="Просмотреть снимок" Margin="10 0" Height="30" Padding="10 5"/>
+                        <Button Content="Указать путь к снимку" Margin="10 0" Height="30"  Padding="10 5"/>
+                        <Button Content="Удалить" Margin="10 5" Padding="10 5" Height="30" />
                     </StackPanel>
                 </DataTemplate>
             </DataGrid.RowDetailsTemplate>

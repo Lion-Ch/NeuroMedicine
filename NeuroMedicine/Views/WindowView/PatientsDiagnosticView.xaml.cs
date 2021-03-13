@@ -41,6 +41,8 @@ namespace NeuroMedicine.Views.WindowView
                 new Patient(){FIO = "Иванов Иван Иванович", PhotoUrl="C:\\Users\\levac\\Downloads\\NORMAL2-IM-1440-0001.jpeg"},
                 new Patient(){FIO = "Петров Петр Петрович"}
             };
+
+
         }
 
         private void TextBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -71,32 +73,4 @@ namespace NeuroMedicine.Views.WindowView
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
-
-    public class Patient: INotifyPropertyChanged
-    {
-        public bool InBase { get; set; }
-        public string FIO { get; set; }
-        public string Date { get; set; }
-        public float Neuro { get; set; }
-        public float Doc { get; set; }
-        private string photoUrl;
-        public string PhotoUrl
-        {
-            get { return photoUrl; }
-            set
-            {
-                photoUrl = value;
-                OnPropertyChanged("PhotoUrl");
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
-        }
-    }
-
-    
 }

@@ -6,9 +6,6 @@
              xmlns:local="clr-namespace:NeuroMedicine.Views.WindowView"
              mc:Ignorable="d" 
              d:DesignHeight="768" d:DesignWidth="1266">
-    <UserControl.Resources>
-        <ResourceDictionary Source="/NeuroMedicine;component/Styles/StyleDictionary.xaml"/>
-    </UserControl.Resources>
     <Grid Background="Red">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.1*"/>
@@ -22,56 +19,65 @@
         </Grid.RowDefinitions>
 
 
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.9*"/>
+                <RowDefinition Height="0.1*"/>
+            </Grid.RowDefinitions>
+            
+            <DataGrid FontSize="16"
+                      IsReadOnly="True"
+                      ColumnHeaderStyle="{StaticResource DataGrid}">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Фото">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Width="100" Height="50" Source="{Binding PhotoUrl}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="ФИО" Binding="{Binding FIO}"/>
+                    <DataGridTextColumn Header="Дата снимка" Binding="{Binding Date}"/>
+                    <DataGridTemplateColumn Header="Вероятность заболевания">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid Background="Red">
+                                    <TextBlock Text="{Binding Neuro}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Заключение врача">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                    <TextBlock Text="Болен"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+                <DataGrid.Resources>
 
-        <DataGrid Grid.Column="1" Grid.Row="1" FontSize="16"
-                  ColumnHeaderStyle="{StaticResource DataGrid}">
+                </DataGrid.Resources>
+                <DataGrid.Items>
+                    <local:Patient InBase="True" FIO="Петров Петр Петрович" Neuro="98.7" Doc="57.9999" Date="28.02.2021"/>
+                    <local:Patient InBase="True" FIO="Петров Петр Петрович" Neuro="98.7" Doc="57.9999" Date="28.02.2021"/>
+                    <local:Patient InBase="False" FIO="Петров Петр Петрович" Neuro="98.7" Doc="57.9999" Date="28.02.2021"/>
+                </DataGrid.Items>
+                <DataGrid.RowDetailsTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="0 10">
+                            <Button Content="Поставить диагноз" Margin="0 0 10 0" Padding="10 5"/>
+                            <Button Content="Удалить" Margin="10 0" Padding="10 5"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </DataGrid.RowDetailsTemplate>
 
-            <DataGrid.Columns>
-                <DataGridCheckBoxColumn Header="Наличие в базе" Binding="{Binding InBase}"/>
+            </DataGrid>
 
-                <DataGridTextColumn Header="ФИО" Binding="{Binding FIO}"/>
-                <DataGridTextColumn Header="Дата снимка" Binding="{Binding Date}"/>
-                <DataGridTemplateColumn Header="Вероятность заболевания">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Grid Background="Red">
-                                <TextBlock Text="{Binding Neuro}"/>
-                            </Grid>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Заключение врача" >
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <!--<ComboBox Background="Red">-->
-                            <TextBlock Text="Есть заболевание"/>
-                            <!--<TextBlock Text="Повторное обследование"/>
-                                <TextBlock Text="Подозрение на заболевание"/>
-                                <TextBlock Text="Нет заболеваний"/>
-                                <TextBlock Text="Без заключения"/>
-                            </ComboBox>-->
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-            <DataGrid.Resources>
-
-            </DataGrid.Resources>
-            <DataGrid.Items>
-                <local:Patient InBase="True" FIO="Петров Петр Петрович" Neuro="98.7" Doc="57.9999" Date="28.02.2021"/>
-                <local:Patient InBase="True" FIO="Петров Петр Петрович" Neuro="98.7" Doc="57.9999" Date="28.02.2021"/>
-                <local:Patient InBase="False" FIO="Петров Петр Петрович" Neuro="98.7" Doc="57.9999" Date="28.02.2021"/>
-            </DataGrid.Items>
-            <DataGrid.RowDetailsTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal" Margin="0 10">
-                        <Button Content="Поставить диагноз" Margin="0 0 10 0" Padding="10 5"/>
-                        <Button Content="Просмотреть" Margin="10 0" Padding="10 5"/>
-                        <Button Content="Удалить" Margin="10 0" Padding="10 5"/>
-                    </StackPanel>
-                </DataTemplate>
-            </DataGrid.RowDetailsTemplate>
-
-        </DataGrid>
+            <Button Grid.Row="1" Margin="10" FontSize="24" Content="Сохранить и выйти"/>
+        </Grid>
+        
+        
+        
     </Grid>
 </UserControl>

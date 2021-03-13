@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="NeuroMedicine.Views.WindowView.DiagnosticsView"
+﻿<local:BaseView x:Class="NeuroMedicine.Views.WindowView.DiagnosticsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,64 +6,302 @@
              xmlns:local="clr-namespace:NeuroMedicine.Views.WindowView"
              mc:Ignorable="d" 
              d:DesignHeight="768" d:DesignWidth="1316">
-    <Grid Background="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
+    <TabControl SelectedIndex="{Binding CurrentPage}">
+        <TabItem IsEnabled="{Binding IsEndabledPages[0]}">
+            <TabItem.Header>
+                <TextBlock Text="Выбор типа диагностики"
+                           FontSize="18"
+                           Padding="10 5"/>
+            </TabItem.Header>
+            <Grid Background="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
 
-        <Grid Grid.Row="1" Grid.Column="1" 
-              Background="White">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition Height="0.5*"/>
-            </Grid.RowDefinitions>
+                <StackPanel Orientation="Vertical" 
+                    VerticalAlignment="Center"
+                    Grid.Column="1" 
+                    Background="White">
 
-            <TextBlock Grid.Row="0" Grid.Column="0"
-                       FontSize="18"
+                    <TextBlock Grid.Row="0" Grid.Column="0"
+                       FontSize="22"
                        FontWeight="Bold"
                        VerticalAlignment="Center"
                        Text="Вид диагностики"/>
-            <TextBlock Grid.Row="0" Grid.Column="1"
-                       FontSize="18"
-                       FontWeight="Bold"
-                       VerticalAlignment="Center"
-                       Text="Тип обследования"/>
+                    <ComboBox Grid.Row="1" Grid.Column="0"
+                              FontSize="16"
+                              Margin="0 10"
+                              VerticalAlignment="Center"
+                              Padding="10"
+                              ItemsSource="{Binding DiagnosticTypes}"
+                              DisplayMemberPath="Name"
+                              SelectedValue="{Binding SelectedDiagnosticType}"
+                              SelectedValuePath="Id"/>
+                    <Button Grid.Row="1" Grid.Column="2" 
+                            HorizontalAlignment="Stretch"
+                            FontWeight="Bold"
+                            FontSize="16"
+                            Margin="40 20 40 0"
+                            Padding="0 10"
+                            Content="Перейти к диагностике"
+                            Command="{Binding ProceedCommand}"/>
 
-            <ComboBox Grid.Row="1" Grid.Column="0"
-                      FontSize="16"
-                      VerticalAlignment="Center"
-                      Padding="10"
-                      Margin="0 0 20 0"
-                      SelectedIndex="0">
-                <TextBlock Text="Диагностика легких"/>
-                <TextBlock Width="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ComboBox}}}" 
-                           Text="Диагностика д ру гих ор ганов органоворг ановорган оворганово рганово ргановоргано ворганов" TextWrapping="Wrap"/>
-            </ComboBox>
-            <ComboBox Grid.Row="1" Grid.Column="1"
-                      FontSize="16"
-                      VerticalAlignment="Center"
-                      Padding="10"
-                      Margin="0 0 20 0"
-                      SelectedIndex="0">
-                <TextBlock Text="Индивидуальное"/>
-                <TextBlock Text="Групповое"/>
-            </ComboBox>
-            
-            <Button Grid.Row="1" Grid.Column="2" 
-                    Content="Перейти к диагностике"
-                    Margin="20 0"/>
-        </Grid>
-    </Grid>
-</UserControl>
+                </StackPanel>
+            </Grid>
+        </TabItem>
+        <TabItem IsEnabled="{Binding IsEndabledPages[1]}">
+            <TabItem.Header>
+                <TextBlock Text="Загрузка данных"
+                           FontSize="18"
+                           Padding="10 5"/>
+            </TabItem.Header>
+            <Grid Background="Red">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="0.2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.05*"/>
+                    <RowDefinition Height="0.8*"/>
+                    <RowDefinition Height="0.05*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Column="1" Grid.Row="1"
+              Background="Wheat">
+                    <ScrollViewer>
+                        <StackPanel Orientation="Vertical"
+                        Width="Auto"
+                        HorizontalAlignment="Stretch"
+                        Margin="40 20">
+
+                            <TextBlock Text="Найстройки"
+                           TextWrapping="Wrap"
+                           FontSize="18"
+                           FontWeight="Bold"
+                           FontFamily="{StaticResource MyFont}"/>
+
+                            <CheckBox Margin="0 10 0 -5"
+                          Content="Считывать дату из названия"/>
+                            <CheckBox Margin="0 10 0 -5"
+                          Content="Считывать пациента из названия"/>
+                            <Button Content="Загрузить снимки из директории" 
+                        Margin="0 10"
+                        Padding="20 10"
+                        Background="White"
+                        HorizontalAlignment="Stretch"/>
+                            <Button Content="Начать анализ" 
+                        Margin="0 10"
+                        Padding="20 10"
+                        HorizontalAlignment="Stretch"
+                        Background="White"/>
+
+                            <TextBlock Text="Управление списком пациентов"
+                           TextWrapping="Wrap"
+                           FontSize="18"
+                           FontWeight="Bold"/>
+
+                            <Button Content="Добавить пациента" 
+                        Margin="0 10"
+                        Padding="20 10"
+                        HorizontalAlignment="Stretch"
+                        Background="White"/>
+                            <Button Content="Очистить список" 
+                        Margin="0 10"
+                        Padding="20 10"
+                        HorizontalAlignment="Stretch"
+                        Background="White"/>
+                            <Button Content="Зарегистрировать нового пациента" 
+                        Margin="0 10"
+                        Padding="20 10"
+                        HorizontalAlignment="Stretch"
+                        Background="White"/>
+
+                            <TextBlock Text="Предупреждения"
+                           TextWrapping="Wrap"
+                           FontSize="18"
+                           FontWeight="Bold"/>
+                            <ScrollViewer>
+                                <ListBox MinHeight="280"
+                             MaxHeight="680"
+                             Background="AntiqueWhite">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate >
+                                            <TextBlock Text="Ошибка валидации строка №55"/>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                    <ListBoxItem>
+                                        <TextBlock  Padding="5 5 0 0" Foreground="Red" Text="1. Ошибка валидации строка №55"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem>
+                                        <TextBlock  Padding="5 5 0 0"  Foreground="Red" Text="2. Ошибка валидации строка №55"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem>
+                                        <TextBlock  Padding="5 5 0 0" Foreground="Red" Text="3. Ошибка валидации строка №55"/>
+                                    </ListBoxItem>
+                                </ListBox>
+                            </ScrollViewer>
+                        </StackPanel>
+                    </ScrollViewer>
+
+                </Grid>
+
+
+                <DataGrid Grid.Column="3" Grid.Row="1" FontSize="16"
+                  AutoGenerateColumns="False"
+                  ColumnHeaderStyle="{StaticResource DataGrid}"
+                  x:Name="PatientGrid"
+                  ItemsSource="{Binding Patients}"
+                  SelectedItem="{Binding SelectedPatient}"
+                  IsReadOnly="True"
+                  >
+
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Наличие в базе">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Width="100" Height="50"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Фото">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Width="100" Height="50" Source="{Binding PhotoUrl}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Пациент">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="{Binding FIO, Mode=TwoWay}"
+                                    Padding="50 0"
+                                    Background="White"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Дата" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding Date, Mode=TwoWay}"
+                                     TextAlignment="Center"
+                                     VerticalContentAlignment="Center"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn x:Name="PhotoUrl" Header="Путь к снимку">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox TextWrapping="Wrap"
+                                     MouseDoubleClick="TextBox_MouseDoubleClick"
+                                     Text="{Binding PhotoUrl, Mode=TwoWay}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                    <DataGrid.Resources>
+
+                    </DataGrid.Resources>
+
+                    <DataGrid.RowDetailsTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Margin="10 0" VerticalAlignment="Top">
+                                <Button Content="Изменить пациента" Margin="10 0" Height="30" Padding="10 5"/>
+                                <Button Content="Просмотреть снимок" Margin="10 0" Height="30" Padding="10 5"/>
+                                <Button Content="Указать путь к снимку" Margin="10 0" Height="30"  Padding="10 5"/>
+                                <Button Content="Удалить" Margin="10 5" Padding="10 5" Height="30" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGrid.RowDetailsTemplate>
+
+                </DataGrid>
+            </Grid>
+        </TabItem>
+        
+        <TabItem IsEnabled="{Binding IsEndabledPages[2]}">
+            <TabItem.Header>
+                <TextBlock Text="Результаты анализа"
+                           FontSize="18"
+                           Padding="10 5"/>
+            </TabItem.Header>
+            <Grid Background="Red">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition Width="0.8*"/>
+                    <ColumnDefinition Width="0.1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.05*"/>
+                    <RowDefinition Height="0.8*"/>
+                    <RowDefinition Height="0.05*"/>
+                </Grid.RowDefinitions>
+
+
+                <Grid Grid.Column="1" Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.9*"/>
+                        <RowDefinition Height="0.1*"/>
+                    </Grid.RowDefinitions>
+
+                    <DataGrid FontSize="16"
+                      IsReadOnly="True"
+                      ColumnHeaderStyle="{StaticResource DataGrid}">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="Фото">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Width="100" Height="50" Source="{Binding PhotoUrl}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="ФИО" Binding="{Binding FIO}"/>
+                            <DataGridTextColumn Header="Дата снимка" Binding="{Binding Date}"/>
+                            <DataGridTemplateColumn Header="Вероятность заболевания">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Grid Background="Red">
+                                            <TextBlock Text="{Binding Neuro}"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Заключение врача">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="Болен"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                        <DataGrid.Resources>
+
+                        </DataGrid.Resources>
+                        <DataGrid.Items>
+                            <local:Patient InBase="True" FIO="Петров Петр Петрович" Neuro="98.7" Doc="57.9999" Date="28.02.2021"/>
+                            <local:Patient InBase="True" FIO="Петров Петр Петрович" Neuro="98.7" Doc="57.9999" Date="28.02.2021"/>
+                            <local:Patient InBase="False" FIO="Петров Петр Петрович" Neuro="98.7" Doc="57.9999" Date="28.02.2021"/>
+                        </DataGrid.Items>
+                        <DataGrid.RowDetailsTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Margin="0 10">
+                                    <Button Content="Поставить диагноз" Margin="0 0 10 0" Padding="10 5"/>
+                                    <Button Content="Удалить" Margin="10 0" Padding="10 5"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGrid.RowDetailsTemplate>
+
+                    </DataGrid>
+
+                    <Button Grid.Row="1" Margin="10" FontSize="24" Content="Сохранить и выйти"/>
+                </Grid>
+
+
+
+            </Grid>
+        </TabItem>
+    </TabControl>
+</local:BaseView>

@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Windows;
+using NeuroMedicine.BusinessLayer;
+using NeuroMedicine.BusinessLayer.ViewModels;
+using NeuroMedicine.Views.ModalWindowView;
 using NeuroMedicine.Views.WindowView;
 
 namespace NeuroMedicine
@@ -9,14 +12,11 @@ namespace NeuroMedicine
     /// </summary>
     public partial class MainWindow : Window
     {
-        //BaseModel model;
+        private BussinesModel _bussinesModel;
         public MainWindow()
         {
             InitializeComponent();
-            MasterWindowView authorizationView = new MasterWindowView();
-            authorizationView.Show();
-            authorizationView.DataContext = new DiagnosticsView();
-            this.Close();
+            _bussinesModel = new BussinesModel(this);
             //model = Sequential.LoadModel(@"C:\Users\levac\OneDrive\Рабочий стол\Учеба\Диплом\Модель");
         }
 

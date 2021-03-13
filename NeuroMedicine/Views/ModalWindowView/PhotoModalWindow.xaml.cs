@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace NeuroMedicine.Views.WindowView
+namespace NeuroMedicine.Views.ModalWindowView
 {
     /// <summary>
-    /// Логика взаимодействия для MasterWindowView.xaml
+    /// Логика взаимодействия для PhotoModalWindow.xaml
     /// </summary>
-    public partial class MasterWindowView : UserControl
+    public partial class PhotoModalWindow : Window
     {
-        public MasterWindowView()
+        public PhotoModalWindow()
         {
             InitializeComponent();
         }

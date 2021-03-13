@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D0F0302A-5203-4B79-894F-108A4DC411EA}</ProjectGuid>
+    <ProjectGuid>{4A8EFACB-C5FD-4013-BDE7-21AF47AC2CF9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NeuroMedicine.DataLayer</RootNamespace>
-    <AssemblyName>NeuroMedicine.DataLayer</AssemblyName>
+    <RootNamespace>BusinessLayer</RootNamespace>
+    <AssemblyName>BusinessLayer</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -41,15 +41,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppContainer.cs" />
+    <Compile Include="Commands\DelegateCommand.cs" />
+    <Compile Include="Logic\Extensions\CollectionHelper.cs" />
+    <Compile Include="Logic\Factories\ListFactory.cs" />
+    <Compile Include="Logic\ViewNavigation\IViewNavigator.cs" />
+    <Compile Include="NotifyPropertyChanged\BaseNotifyPropertyChanged.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\AuthorizationVM.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\DiagnosticVM.cs" />
+    <Compile Include="ViewModels\MasterVM.cs" />
+    <Compile Include="ViewModels\PresentationVM\ListItem.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DataManagers\" />
-    <Folder Include="Factories\" />
-    <Folder Include="Models\Classes\" />
-    <Folder Include="Models\Enums\" />
-    <Folder Include="SqlServer\" />
-    <Folder Include="Tables\" />
+    <ProjectReference Include="..\NeuroMedicine.DataLayer\DataLayer.csproj">
+      <Project>{d0f0302a-5203-4b79-894f-108a4dc411ea}</Project>
+      <Name>DataLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
