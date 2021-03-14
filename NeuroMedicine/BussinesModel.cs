@@ -1,6 +1,6 @@
 ﻿using NeuroMedicine.BusinessLayer;
-using NeuroMedicine.Views.ViewNavigator;
 using NeuroMedicine.BusinessLayer.ViewModels;
+using NeuroMedicine.Views.ViewNavigator;
 using NeuroMedicine.Views.WindowView;
 
 namespace NeuroMedicine

@@ -1,11 +1,13 @@
-﻿using BusinessLayer.ViewModels.PresentationVM;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DataLayer.Models.Classes;
+using DataLayer.Models.PresentationVM;
 
-namespace BusinessLayer.Logic.Factories
+namespace DataLayer.DataManagers
 {
-    internal class ListFactory
+    /// <summary>
+    /// Класс для выбора данных из кода
+    /// </summary>
+    public class LocalDataManager
     {
         public List<ListItem> GetDiagnosticTypes()
         {

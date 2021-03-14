@@ -1,15 +1,14 @@
-﻿<Window x:Class="NeuroMedicine.MainWindow"
+﻿<Window x:Class="NeuroMedicine.Views.ModalWindowView.ModalWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:NeuroMedicine"
+        xmlns:local="clr-namespace:NeuroMedicine.Views.ModalWindowView"
         mc:Ignorable="d"
-        Title="MainWindow" Height="768" Width="1366">
+        SizeToContent="WidthAndHeight"
+        Title="ModalWindow" Loaded="Window_Loaded">
     <Window.Resources>
         <ResourceDictionary Source="/NeuroMedicine;component/Styles/StyleDictionary.xaml"/>
     </Window.Resources>
-    <ContentControl HorizontalAlignment="Stretch" 
-                    VerticalAlignment="Stretch" 
-                    Content="{Binding}"/>
+    <ContentControl Content="{Binding}"/>
 </Window>

@@ -7,7 +7,7 @@
     <ProjectGuid>{4A8EFACB-C5FD-4013-BDE7-21AF47AC2CF9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BusinessLayer</RootNamespace>
+    <RootNamespace>NeuroMedicine.BusinessLayer</RootNamespace>
     <AssemblyName>BusinessLayer</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -31,6 +31,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Keras, Version=3.8.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Keras.NET.3.8.5\lib\netstandard2.0\Keras.dll</HintPath>
+    </Reference>
+    <Reference Include="Numpy.Bare, Version=3.7.1.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Numpy.Bare.3.8.1.25\lib\netstandard2.0\Numpy.Bare.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Python.Runtime, Version=2.5.1.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\pythonnet_netstandard_py38_win.2.5.1\lib\netstandard2.0\Python.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,21 +54,33 @@
     <Compile Include="AppContainer.cs" />
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Logic\Extensions\CollectionHelper.cs" />
-    <Compile Include="Logic\Factories\ListFactory.cs" />
+    <Compile Include="Logic\NeuralNetwork.cs" />
+    <Compile Include="Logic\PhotoLoader\PhotoLoader.cs" />
     <Compile Include="Logic\ViewNavigation\IViewNavigator.cs" />
-    <Compile Include="NotifyPropertyChanged\BaseNotifyPropertyChanged.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AuthorizationVM.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\DiagnosticVM.cs" />
+    <Compile Include="ViewModels\ICloseWindow.cs" />
     <Compile Include="ViewModels\MasterVM.cs" />
-    <Compile Include="ViewModels\PresentationVM\ListItem.cs" />
+    <Compile Include="ViewModels\PhotoVM.cs" />
+    <Compile Include="ViewModels\SearchPatientVM.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Neuromedicine.Core\Neuromedicine.Core.csproj">
+      <Project>{00e350ee-a05e-4bb7-8b9a-87616b33299a}</Project>
+      <Name>Neuromedicine.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NeuroMedicine.DataLayer\DataLayer.csproj">
       <Project>{d0f0302a-5203-4b79-894f-108a4dc411ea}</Project>
       <Name>DataLayer</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Logic\Factories\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

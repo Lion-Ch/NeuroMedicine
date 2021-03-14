@@ -90,6 +90,7 @@
                             <CheckBox Margin="0 10 0 -5"
                           Content="Считывать пациента из названия"/>
                             <Button Content="Загрузить снимки из директории" 
+                                    Command="{Binding LoadPatinentFromPhotoCommand}"
                         Margin="0 10"
                         Padding="20 10"
                         Background="White"
@@ -106,20 +107,22 @@
                            FontWeight="Bold"/>
 
                             <Button Content="Добавить пациента" 
-                        Margin="0 10"
-                        Padding="20 10"
-                        HorizontalAlignment="Stretch"
-                        Background="White"/>
+                                    Command="{Binding AddPatientCommand}"
+                                    Margin="0 10"
+                                    Padding="20 10"
+                                    HorizontalAlignment="Stretch"
+                                    Background="White"/>
                             <Button Content="Очистить список" 
+                                    Command="{Binding ClearPatientListCommand}"
                         Margin="0 10"
                         Padding="20 10"
                         HorizontalAlignment="Stretch"
                         Background="White"/>
-                            <Button Content="Зарегистрировать нового пациента" 
-                        Margin="0 10"
-                        Padding="20 10"
-                        HorizontalAlignment="Stretch"
-                        Background="White"/>
+                            <!--<Button Content="Зарегистрировать нового пациента" 
+                                    Margin="0 10"
+                                    Padding="20 10"
+                                    HorizontalAlignment="Stretch"
+                                    Background="White"/>-->
 
                             <TextBlock Text="Предупреждения"
                            TextWrapping="Wrap"
@@ -157,7 +160,7 @@
                   x:Name="PatientGrid"
                   ItemsSource="{Binding Patients}"
                   SelectedItem="{Binding SelectedPatient}"
-                  IsReadOnly="True"
+                          CanUserAddRows="False"
                   >
 
                     <DataGrid.Columns>
@@ -171,25 +174,23 @@
                         <DataGridTemplateColumn Header="Фото">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Width="100" Height="50" Source="{Binding PhotoUrl}"/>
+                                    <Image Width="100" Height="50" Source="{Binding Object.PhotoUrl, Mode=TwoWay}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Пациент">
+                        <DataGridTemplateColumn Header="Пациент" MinWidth="300">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Content="{Binding FIO, Mode=TwoWay}"
-                                    Padding="50 0"
-                                    Background="White"/>
+                                    <TextBlock Text="{Binding Object.FullName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                Padding="5 5"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Дата" Width="*">
+                        <DataGridTemplateColumn Header="Дата" MinWidth="100">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding Date, Mode=TwoWay}"
-                                     TextAlignment="Center"
-                                     VerticalContentAlignment="Center"/>
+                                    <TextBox Text="{Binding Object.DateBirth, Mode=TwoWay}"
+                                     TextAlignment="Center"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -198,7 +199,7 @@
                                 <DataTemplate>
                                     <TextBox TextWrapping="Wrap"
                                      MouseDoubleClick="TextBox_MouseDoubleClick"
-                                     Text="{Binding PhotoUrl, Mode=TwoWay}"/>
+                                     Text="{Binding Object.PhotoUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -210,10 +211,15 @@
                     <DataGrid.RowDetailsTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" Margin="10 0" VerticalAlignment="Top">
-                                <Button Content="Изменить пациента" Margin="10 0" Height="30" Padding="10 5"/>
-                                <Button Content="Просмотреть снимок" Margin="10 0" Height="30" Padding="10 5"/>
-                                <Button Content="Указать путь к снимку" Margin="10 0" Height="30"  Padding="10 5"/>
-                                <Button Content="Удалить" Margin="10 5" Padding="10 5" Height="30" />
+                                <Button Content="Удалить" 
+                                        Command="{Binding Path=DataContext.DeletePatientCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}}"
+                                        Margin="10 5" Padding="10 5" Height="30" />
+                                <Button Content="Изменить пациента" Margin="10 0" Height="30" Padding="10 5"
+                                        Command="{Binding Path = DataContext.OpenFindPatientWindowCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}}"/>
+                                <Button Content="Просмотреть снимок" Margin="10 0" Height="30" Padding="10 5"
+                                        Command="{Binding Path=DataContext.ShowSnapshotCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}}"/>
+                                <Button Content="Указать путь к снимку" Margin="10 0" Height="30"  Padding="10 5"
+                                        Command="{Binding Path=DataContext.LoadPhotoUrlCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}}"/>
                             </StackPanel>
                         </DataTemplate>
                     </DataGrid.RowDetailsTemplate>
@@ -254,7 +260,7 @@
                             <DataGridTemplateColumn Header="Фото">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Image Width="100" Height="50" Source="{Binding PhotoUrl}"/>
+                                        <Image Width="100" Height="50" Source="{Binding PhotoUrl, Mode=TwoWay}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>

@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:v="clr-namespace:NeuroMedicine.Views.WindowView"
                     xmlns:vm="clr-namespace:NeuroMedicine.BusinessLayer.ViewModels;assembly=BusinessLayer"
+                    xmlns:vmModal="clr-namespace:NeuroMedicine.Views.ModalWindowView"
                     xmlns:local="clr-namespace:NeuroMedicine">
     <DataTemplate DataType="{x:Type vm:MasterVM}">
         <v:MasterWindowView/>
@@ -11,6 +12,12 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type vm:AuthorizationVM}">
         <v:AuthorizationView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:PhotoVM}">
+        <vmModal:PhotoModalWindow/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:SearchPatientVM}">
+        <vmModal:SearchPatientModalWindow/>
     </DataTemplate>
 
     <FontFamily x:Key="MyFont">/NeuroMedicine;component/Fonts/#Roboto Regular</FontFamily>

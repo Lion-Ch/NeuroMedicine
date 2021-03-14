@@ -1,12 +1,12 @@
-﻿using BusinessLayer.Logic.Factories;
-using BusinessLayer.ViewModels.PresentationVM;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using BusinessLayer.Logic.Extensions;
-using DataLayer.Models.Enums;
 using System.Windows.Input;
 using BusinessLayer.Commands;
 using System;
-using Common.NotifyPropertyChanged;
+using BusinessLayer.Logic.PhotoLoader;
+using DataLayer.Models.Classes;
+using DataLayer.Models.PresentationVM;
+using NeuroMedicine.BusinessLayer.Logic;
 
 namespace NeuroMedicine.BusinessLayer.ViewModels
 {
@@ -58,14 +58,36 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
             set { _selectedDiagnosticType = value; }
         }
 
+        private ObservableCollection<ListItem<Patient>> _patients;
+        public ObservableCollection<ListItem<Patient>> Patients
+        {
+            get { return _patients; }
+            set
+            {
+                _patients = value;
+                SendPropertyChanged(() => Patients);
+            }
+        }
+
+        private ListItem<Patient> _selectedPatient;
+        public ListItem<Patient> SelectedPatient
+        {
+            get { return _selectedPatient; }
+            set
+            {
+                _selectedPatient = value;
+                SendPropertyChanged(() => SelectedPatient);
+            }
+        }
         #endregion
 
         #region Команды
 
         private DelegateCommand _proceedCommand;
         public ICommand ProceedCommand { get { return _proceedCommand; } }
-        private DelegateCommand _loadPhotosCommand;
-        public ICommand LoadPhotosCommand { get { return _loadPhotosCommand; } }
+
+        private DelegateCommand _loadPatientsFromPhotoCommand;
+        public ICommand LoadPatinentFromPhotoCommand { get { return _loadPatientsFromPhotoCommand; } }
 
         private DelegateCommand _startAnalisisCommand;
         public ICommand StartAnalisisCommand { get { return _startAnalisisCommand; } }
@@ -73,12 +95,23 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
         private DelegateCommand _addPatientCommand;
         public ICommand AddPatientCommand { get { return _addPatientCommand; } }
 
+        private DelegateCommand _deletePatientCommand;
+        public ICommand DeletePatientCommand { get { return _deletePatientCommand; } }
+
         private DelegateCommand _clearPatientListCommand;
         public ICommand ClearPatientListCommand { get { return _clearPatientListCommand; } }
 
         private DelegateCommand _registerNewPatientCommand;
         public ICommand RegisterNewPatientCommand { get { return _registerNewPatientCommand; } }
 
+        private DelegateCommand _loadPhotoUrlCommand;
+        public ICommand LoadPhotoUrlCommand { get { return _loadPhotoUrlCommand; } }
+
+        private DelegateCommand _showSnapshotCommand;
+        public ICommand ShowSnapshotCommand { get { return _showSnapshotCommand; } }
+
+        private DelegateCommand _openFindPatientWindowCommand;
+        public ICommand OpenFindPatientWindowCommand { get { return _openFindPatientWindowCommand; } }
         #endregion
 
         #region Методы команд
@@ -95,7 +128,13 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
 
         private void AddPatient(object obj)
         {
-            throw new NotImplementedException();
+            Patients.Add(new ListItem<Patient>());
+        }
+
+        private void DeletePatient(object obj)
+        {
+            if (SelectedPatient != null)
+                Patients.Remove(SelectedPatient);
         }
 
         private void RegisterNewPatient(object obj)
@@ -105,14 +144,41 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
 
         private void ClearPatientList(object obj)
         {
-            throw new NotImplementedException();
+            Patients.Clear();
         }
 
-        private void LoadPhotos(object obj)
+        private void LoadPatientsFromPhoto(object obj)
         {
-            throw new NotImplementedException();
+            var a = new PhotoLoader().GetPathPhotos();
+            foreach (var photoUrl in a)
+            {
+                var patient = new Patient() { PhotoUrl = photoUrl };
+                Patients.Add(new ListItem<Patient> { Object = patient });
+            }
+        }
+        private void LoadPhotoUrl(object obj)
+        {
+            var path = new PhotoLoader().GetPathPhoto();
+            if (SelectedPatient != null && path != null)
+                SelectedPatient.Object.PhotoUrl = path;
         }
 
+        private void ShowSnapshot(object obj)
+        {
+            if (SelectedPatient != null && SelectedPatient.Object.PhotoUrl != null)
+                AppContainer.ViewNavigator.NavigateToView(new PhotoVM(SelectedPatient.Object.PhotoUrl), true);
+        }
+
+        private void OpenFindPatientWindow(object obj)
+        {
+            if(SelectedPatient != null)
+            {
+                var findWindow = new SearchPatientVM();
+                AppContainer.ViewNavigator.NavigateToView(findWindow, true);
+                if (findWindow.SelectedPatient != null)
+                    SelectedPatient.Object = findWindow.SelectedPatient;
+            }
+        }
         #endregion
 
         #region Публичные методы
@@ -132,6 +198,8 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
                     break;
                 case 1:
                     IsEndabledPages = new bool[3] { false, true, false };
+                    var a = new NeuralNetwork();
+                    a.Analis();
                     break;
                 case 2:
                     IsEndabledPages = new bool[3] { false, false, true };
@@ -144,15 +212,20 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
         public DiagnosticVM()
         {
             HeaderVM = "Диагностика пациентов";
-            DiagnosticTypes = new ListFactory().GetDiagnosticTypes().ToObservable();
+            DiagnosticTypes = AppContainer.LocalDataManager.GetDiagnosticTypes().ToObservable();
             _proceedCommand = new DelegateCommand(this.Proceed);
-            _loadPhotosCommand = new DelegateCommand(this.LoadPhotos);
+            _loadPatientsFromPhotoCommand = new DelegateCommand(this.LoadPatientsFromPhoto);
             _clearPatientListCommand = new DelegateCommand(this.ClearPatientList);
             _registerNewPatientCommand = new DelegateCommand(this.RegisterNewPatient);
             _addPatientCommand = new DelegateCommand(this.AddPatient);
             _startAnalisisCommand = new DelegateCommand(this.StartAnalisis);
+            _deletePatientCommand = new DelegateCommand(this.DeletePatient);
+            _loadPhotoUrlCommand = new DelegateCommand(this.LoadPhotoUrl);
+            _showSnapshotCommand = new DelegateCommand(this.ShowSnapshot);
+            _openFindPatientWindowCommand = new DelegateCommand(this.OpenFindPatientWindow);
             _currentPage = 0;
             _isEndabledPages = new bool[3] { true, false, false };
+            Patients = new ObservableCollection<ListItem<Patient>>();
         }
     }
 }

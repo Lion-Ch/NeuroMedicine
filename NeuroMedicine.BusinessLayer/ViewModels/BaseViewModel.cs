@@ -1,4 +1,4 @@
-﻿using BusinessLayer.NotifyPropertyChanged;
+﻿using Neuromedicine.Core.NotifyPropertyChanged;
 
 namespace NeuroMedicine.BusinessLayer.ViewModels
 {

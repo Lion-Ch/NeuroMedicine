@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows;
 using NeuroMedicine.BusinessLayer;
-using NeuroMedicine.BusinessLayer.ViewModels;
 using NeuroMedicine.Views.ModalWindowView;
 using NeuroMedicine.Views.WindowView;
 

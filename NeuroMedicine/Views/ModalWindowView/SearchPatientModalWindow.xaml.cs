@@ -1,5 +1,4 @@
-﻿using NeuroMedicine.Views.WindowView;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,17 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace NeuroMedicine.Views.ModalWindowView
 {
     /// <summary>
-    /// Логика взаимодействия для PhotoModalWindow.xaml
+    /// Логика взаимодействия для SearchPatientModalWindow.xaml
     /// </summary>
-    public partial class PhotoModalWindow : BaseView
+    public partial class SearchPatientModalWindow : UserControl
     {
-        public PhotoModalWindow()
+        public SearchPatientModalWindow()
         {
-            InitializeComponent();        }
+            InitializeComponent();
+        }
     }
 }
