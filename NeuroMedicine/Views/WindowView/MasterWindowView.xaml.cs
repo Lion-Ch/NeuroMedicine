@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NeuroMedicine.BusinessLayer.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,11 +18,32 @@ namespace NeuroMedicine.Views.WindowView
     /// <summary>
     /// Логика взаимодействия для MasterWindowView.xaml
     /// </summary>
-    public partial class MasterWindowView : UserControl
+    public partial class MasterWindowView
     {
         public MasterWindowView()
         {
             InitializeComponent();
+        }
+
+        private void Diagnostic_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            BussinesModel.ViewNavigator.NavigateToView(new DiagnosticVM());
+        }
+        private void History_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            BussinesModel.ViewNavigator.NavigateToView(new HistotyReceptionVM());
+        }
+        private void Patients_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            BussinesModel.ViewNavigator.NavigateToView(new PatientsVM());
+        }
+        private void PersonalCabinet_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            BussinesModel.ViewNavigator.NavigateToView(new PersonalCabinetVM());
+        }
+        private void Exit_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }

@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NeuroMedicine.Views.WindowView"
              mc:Ignorable="d" 
-             d:DesignHeight="768" d:DesignWidth="1316">
+             d:DesignHeight="768" d:DesignWidth="1366">
     <TabControl SelectedIndex="{Binding CurrentPage}">
         <TabItem IsEnabled="{Binding IsEndabledPages[0]}">
             <TabItem.Header>
@@ -72,85 +72,126 @@
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Column="1" Grid.Row="1"
-              Background="Wheat">
+                        Background="Wheat">       
                     <ScrollViewer>
-                        <StackPanel Orientation="Vertical"
-                        Width="Auto"
-                        HorizontalAlignment="Stretch"
-                        Margin="40 20">
+                        <Grid Margin="20 20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="0.05*"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Orientation="Vertical"
+                                        Width="Auto"
+                                        Grid.Row="0"
+                                        HorizontalAlignment="Stretch">
 
-                            <TextBlock Text="Найстройки"
-                           TextWrapping="Wrap"
-                           FontSize="18"
-                           FontWeight="Bold"
-                           FontFamily="{StaticResource MyFont}"/>
+                                <TextBlock Text="Найстройки"
+                                           TextWrapping="Wrap"
+                                           FontSize="18"
+                                           FontWeight="Bold"
+                                           FontFamily="{StaticResource RobotoBold}"/>
 
-                            <CheckBox Margin="0 10 0 -5"
-                          Content="Считывать дату из названия"/>
-                            <CheckBox Margin="0 10 0 -5"
-                          Content="Считывать пациента из названия"/>
-                            <Button Content="Загрузить снимки из директории" 
-                                    Command="{Binding LoadPatinentFromPhotoCommand}"
-                        Margin="0 10"
-                        Padding="20 10"
-                        Background="White"
-                        HorizontalAlignment="Stretch"/>
-                            <Button Content="Начать анализ" 
-                        Margin="0 10"
-                        Padding="20 10"
-                        HorizontalAlignment="Stretch"
-                        Background="White"/>
+                                <CheckBox Margin="0 10 0 -5"
+                                          IsTabStop="False"
+                                          IsChecked="{Binding IsReadDateFromNamePhoto}">
+                                    <CheckBox.Content>
+                                        <TextBlock Text="Считывать дату снимка из названия" TextWrapping="Wrap"
+                                                   TextAlignment="Left"/>
+                                    </CheckBox.Content>
+                                </CheckBox>
+                                <CheckBox Margin="0 15 0 -5"
+                                          IsTabStop="False"
+                                          IsChecked="{Binding IsReadFullNameFromNamePhoto}">
+                                    <CheckBox.Content>
+                                        <TextBlock Text="Считывать пациента из названия" TextWrapping="Wrap"
+                                                   TextAlignment="Left"/>
+                                    </CheckBox.Content>
+                                </CheckBox>
+                                <CheckBox Margin="0 15 0 0"
+                                          IsTabStop="False"
+                                          IsChecked="{Binding IsUseNeuralNetwork}">
+                                    <CheckBox.Content>
+                                        <TextBlock Text="Использовать нейросеть для анализа" TextWrapping="Wrap"
+                                                   TextAlignment="Left"/>
+                                    </CheckBox.Content>
+                                </CheckBox>
+                                <Button FontSize="16"
+                                        Command="{Binding LoadPatinentFromPhotoCommand}"
+                                        Margin="0 10"
+                                        Padding="20 10"
+                                        Background="White"
+                                        HorizontalAlignment="Stretch">
+                                    <Button.Content>
+                                        <TextBlock Text="Загрузить снимки из директории" TextWrapping="Wrap"
+                                                   TextAlignment="Center"/>
+                                    </Button.Content>
+                                </Button>
+                            
 
-                            <TextBlock Text="Управление списком пациентов"
-                           TextWrapping="Wrap"
-                           FontSize="18"
-                           FontWeight="Bold"/>
+                                <TextBlock Text="Управление списком пациентов"
+                                           TextWrapping="Wrap"
+                                           FontSize="18"
+                                           FontWeight="Bold"
+                                           FontFamily="{StaticResource RobotoBold}"/>
 
-                            <Button Content="Добавить пациента" 
-                                    Command="{Binding AddPatientCommand}"
-                                    Margin="0 10"
+                                <Button Content="Добавить пациента" 
+                                        Command="{Binding AddPatientCommand}"
+                                        Margin="0 10"
+                                        Padding="20 10"
+                                        HorizontalAlignment="Stretch"
+                                        Background="White"/>
+                                <Button Content="Очистить список" 
+                                        Command="{Binding ClearPatientListCommand}"
+                                        Margin="0 10"
+                                        Padding="20 10"
+                                        HorizontalAlignment="Stretch"
+                                        Background="White"/>
+                                <!--<Button Content="Зарегистрировать нового пациента" 
+                                        Margin="0 10"
+                                        Padding="20 10"
+                                        HorizontalAlignment="Stretch"
+                                        Background="White"/>-->
+
+                                <TextBlock Text="Предупреждения"
+                                           TextWrapping="Wrap"
+                                           FontSize="18"
+                                           FontWeight="Bold"
+                                           FontFamily="{StaticResource RobotoBold}"/>
+                                <ScrollViewer>
+                                    <ListBox MinHeight="280"
+                                             MaxHeight="680"
+                                             Background="AntiqueWhite">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate >
+                                                <TextBlock Text="Ошибка валидации строка №55"/>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                        <ListBoxItem>
+                                            <TextBlock  Padding="5 5 0 0" Foreground="Red" Text="1. Ошибка валидации строка №55"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem>
+                                            <TextBlock  Padding="5 5 0 0"  Foreground="Red" Text="2. Ошибка валидации строка №55"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem>
+                                            <TextBlock  Padding="5 5 0 0" Foreground="Red" Text="3. Ошибка валидации строка №55"/>
+                                        </ListBoxItem>
+                                    </ListBox>
+                                </ScrollViewer>
+                                </StackPanel>
+                            
+                            <Button FontSize="16"
+                                    Grid.Row="1"
+                                    Command="{Binding StartAnalisisCommand}"
                                     Padding="20 10"
                                     HorizontalAlignment="Stretch"
-                                    Background="White"/>
-                            <Button Content="Очистить список" 
-                                    Command="{Binding ClearPatientListCommand}"
-                        Margin="0 10"
-                        Padding="20 10"
-                        HorizontalAlignment="Stretch"
-                        Background="White"/>
-                            <!--<Button Content="Зарегистрировать нового пациента" 
-                                    Margin="0 10"
-                                    Padding="20 10"
-                                    HorizontalAlignment="Stretch"
-                                    Background="White"/>-->
-
-                            <TextBlock Text="Предупреждения"
-                           TextWrapping="Wrap"
-                           FontSize="18"
-                           FontWeight="Bold"/>
-                            <ScrollViewer>
-                                <ListBox MinHeight="280"
-                             MaxHeight="680"
-                             Background="AntiqueWhite">
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate >
-                                            <TextBlock Text="Ошибка валидации строка №55"/>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                    <ListBoxItem>
-                                        <TextBlock  Padding="5 5 0 0" Foreground="Red" Text="1. Ошибка валидации строка №55"/>
-                                    </ListBoxItem>
-                                    <ListBoxItem>
-                                        <TextBlock  Padding="5 5 0 0"  Foreground="Red" Text="2. Ошибка валидации строка №55"/>
-                                    </ListBoxItem>
-                                    <ListBoxItem>
-                                        <TextBlock  Padding="5 5 0 0" Foreground="Red" Text="3. Ошибка валидации строка №55"/>
-                                    </ListBoxItem>
-                                </ListBox>
-                            </ScrollViewer>
-                        </StackPanel>
+                                    Background="White">
+                                <Button.Content>
+                                    <TextBlock Text="Далее" TextWrapping="Wrap"
+                                               FontSize="18"
+                                               TextAlignment="Center" FontFamily="{StaticResource RobotoBlack}"/>
+                                </Button.Content>
+                            </Button>
+                        </Grid>
                     </ScrollViewer>
-
                 </Grid>
 
 
@@ -164,10 +205,11 @@
                   >
 
                     <DataGrid.Columns>
-                        <DataGridTemplateColumn Header="Наличие в базе">
+                        <DataGridTemplateColumn Header="Пациент" MinWidth="300">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Width="100" Height="50"/>
+                                    <TextBlock Text="{Binding Object.FullName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                Padding="5 5"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -175,14 +217,6 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Image Width="100" Height="50" Source="{Binding Object.PhotoUrl, Mode=TwoWay}"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Пациент" MinWidth="300">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Object.FullName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                Padding="5 5"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -255,22 +289,24 @@
 
                     <DataGrid FontSize="16"
                       IsReadOnly="True"
-                      ColumnHeaderStyle="{StaticResource DataGrid}">
+                      ColumnHeaderStyle="{StaticResource DataGrid}"
+                              ItemsSource="{Binding Patients}"
+                              AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn Header="Фото">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Image Width="100" Height="50" Source="{Binding PhotoUrl, Mode=TwoWay}"/>
+                                        <Image Width="100" Height="50" Source="{Binding Object.PhotoUrl, Mode=TwoWay}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTextColumn Header="ФИО" Binding="{Binding FIO}"/>
-                            <DataGridTextColumn Header="Дата снимка" Binding="{Binding Date}"/>
+                            <DataGridTextColumn Header="ФИО" Binding="{Binding Object.FullName}"/>
+                            <DataGridTextColumn Header="Дата снимка" Binding="{Binding Object.Date}"/>
                             <DataGridTemplateColumn Header="Вероятность заболевания">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Grid Background="Red">
-                                            <TextBlock Text="{Binding Neuro}"/>
+                                        <Grid>
+                                            <TextBlock Text="{Binding Object.ProbobilityDisease}"/>
                                         </Grid>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
@@ -286,11 +322,6 @@
                         <DataGrid.Resources>
 
                         </DataGrid.Resources>
-                        <DataGrid.Items>
-                            <local:Patient InBase="True" FIO="Петров Петр Петрович" Neuro="98.7" Doc="57.9999" Date="28.02.2021"/>
-                            <local:Patient InBase="True" FIO="Петров Петр Петрович" Neuro="98.7" Doc="57.9999" Date="28.02.2021"/>
-                            <local:Patient InBase="False" FIO="Петров Петр Петрович" Neuro="98.7" Doc="57.9999" Date="28.02.2021"/>
-                        </DataGrid.Items>
                         <DataGrid.RowDetailsTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" Margin="0 10">

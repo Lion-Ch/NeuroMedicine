@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="NeuroMedicine.Views.WindowView.MasterWindowView"
+﻿<local:BaseView x:Class="NeuroMedicine.Views.WindowView.MasterWindowView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -12,12 +12,73 @@
         <ResourceDictionary Source="/NeuroMedicine;component/Styles/StyleDictionary.xaml"/>
     </UserControl.Resources>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MinWidth="270" Width="0.2*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <Grid.Background>
             <ImageBrush ImageSource="/NeuroMedicine;component/Img/Background.jpg"/>
         </Grid.Background>
-
-
-        <Grid Margin="50 0 0 0" Background="AntiqueWhite">
+        <Border Background="#37648d"
+                Padding="0 10 0 0">
+            <StackPanel Background="#37648d"
+                        Orientation="Vertical">
+                <StackPanel Orientation="Horizontal"
+                            Margin="10 0"
+                            Style="{StaticResource MainMenuItem}"
+                            MouseDown="Diagnostic_MouseDown">
+                    <Image Margin="10" Source="/NeuroMedicine;component/Icons/analysis.png" Width="50"/>
+                    <TextBlock Text="Диагностика" 
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Stretch"
+                               Margin="10 0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            Margin="10 0"
+                            Style="{StaticResource MainMenuItem}"
+                            MouseDown="History_MouseDown">
+                    <Image Margin="10" Source="/NeuroMedicine;component/Icons/analytics.png" Width="50"/>
+                    <TextBlock Text="История обследований" 
+                               TextWrapping="Wrap"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Stretch"
+                               Margin="10 0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            Margin="10 0"
+                            Style="{StaticResource MainMenuItem}"
+                            MouseDown="Patients_MouseDown">
+                    <Image Margin="10" Source="/NeuroMedicine;component/Icons/hospitalisation.png" Width="50"/>
+                    <TextBlock Text="Пациенты" 
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Stretch"
+                               Margin="10 0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            Margin="10 0"
+                            Style="{StaticResource MainMenuItem}"
+                            MouseDown="PersonalCabinet_MouseDown">
+                    <Image Margin="10" Source="/NeuroMedicine;component/Icons/user.png" Width="50"/>
+                    <TextBlock Text="Личный кабинет" 
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Stretch"
+                               Margin="10 0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            Margin="10 0"
+                            Style="{StaticResource MainMenuItem}"
+                            MouseDown="Exit_MouseDown">
+                    <Image Margin="10" Source="/NeuroMedicine;component/Icons/logout.png" Width="50"/>
+                    <TextBlock Text="Выход" 
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Stretch"
+                               Margin="10 0"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+        
+        <Grid Background="AntiqueWhite"
+              Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="100"/>
                 <RowDefinition/>
@@ -36,20 +97,25 @@
         </Grid>
 
 
-        <hamburger:HamburgerMenu Background="#37648d"
+        <!--<hamburger:HamburgerMenu Background="#37648d"
                                  MenuIconColor="White" 
                                  SelectionIndicatorColor="White" 
                                  MenuItemForeground="White" 
                                  HorizontalAlignment="Left">
-            <hamburger:HamburgerMenuItem Text="Диагностика" Icon="/NeuroMedicine;component/Icons/analysis.png"/>
-            <hamburger:HamburgerMenuItem Text="История обследований" Icon="/NeuroMedicine;component/Icons/analytics.png"/>
-            <hamburger:HamburgerMenuItem Text="База пациентов" Icon="/NeuroMedicine;component/Icons/hospitalisation.png"/>
-            <hamburger:HamburgerMenuItem Text="Личный кабинет" Icon="/NeuroMedicine;component/Icons/user.png"/>
-            <hamburger:HamburgerMenuItem VerticalAlignment="Bottom" Text="Выход" Icon="/NeuroMedicine;component/Icons/logout.png"/>
-        </hamburger:HamburgerMenu>
+            <hamburger:HamburgerMenuItem Text="Диагностика" Icon="/NeuroMedicine;component/Icons/analysis.png"
+                                         MouseDown="Diagnostic_MouseDown"/>
+            <hamburger:HamburgerMenuItem Text="История обследований" Icon="/NeuroMedicine;component/Icons/analytics.png"
+                                         MouseDown="History_MouseDown"/>
+            <hamburger:HamburgerMenuItem Text="База пациентов" Icon="/NeuroMedicine;component/Icons/hospitalisation.png"
+                                         MouseDown="Patients_MouseDown"/>
+            <hamburger:HamburgerMenuItem Text="Личный кабинет" Icon="/NeuroMedicine;component/Icons/user.png"
+                                         MouseDoubleClick="PersonalCabinet_MouseDown"/>
+            <hamburger:HamburgerMenuItem VerticalAlignment="Bottom" Text="Выход" Icon="/NeuroMedicine;component/Icons/logout.png"
+                                         MouseDown="Exit_MouseDown"/>
+        </hamburger:HamburgerMenu>-->
 
         <!--<Canvas Background="Black" Opacity="0.5" Margin="300 0 0 0">
             
         </Canvas>-->
     </Grid>
-</UserControl>
+</local:BaseView>

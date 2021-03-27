@@ -16,9 +16,12 @@ using System.Windows.Shapes;
 
 namespace NeuroMedicine.Views.WindowView
 {
-    public partial class PersonalCabinet
+    /// <summary>
+    /// Логика взаимодействия для HistoryReceptionView.xaml
+    /// </summary>
+    public partial class HistoryReceptionView
     {
-        private PersonalCabinetVM _viewModel;
+        private HistotyReceptionVM _viewModel;
         public override BaseViewModel ViewModel
         {
             get
@@ -27,12 +30,11 @@ namespace NeuroMedicine.Views.WindowView
             }
             set
             {
-                _viewModel = (PersonalCabinetVM)value;
+                _viewModel = (HistotyReceptionVM)value;
                 this.DataContext = _viewModel;
             }
         }
-
-        public PersonalCabinet()
+        public HistoryReceptionView()
         {
             InitializeComponent();
         }

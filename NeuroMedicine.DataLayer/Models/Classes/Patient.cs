@@ -37,5 +37,15 @@ namespace DataLayer.Models.Classes
                 SendPropertyChanged(() => PhotoUrl);
             }
         }
+        private double _probobilityDisease;
+        public double ProbobilityDisease
+        {
+            get { return _probobilityDisease; }
+            set
+            {
+                _probobilityDisease = value;
+                SendPropertyChanged(() => _probobilityDisease);
+            }
+        }
     }
 }

@@ -36,6 +36,38 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
             }
         }
 
+        private bool _isReadDateFromNamePhoto;
+        public bool IsReadDateFromNamePhoto
+        {
+            get { return _isReadDateFromNamePhoto; }
+            set
+            {
+                _isReadDateFromNamePhoto = value;
+                SendPropertyChanged(() => IsReadDateFromNamePhoto);
+            }
+        }
+
+        private bool _isReadFullNameFromNamePhoto;
+        public bool IsReadFullNameFromNamePhoto
+        {
+            get { return _isReadFullNameFromNamePhoto; }
+            set
+            {
+                _isReadFullNameFromNamePhoto = value;
+                SendPropertyChanged(() => IsReadFullNameFromNamePhoto);
+            }
+        }
+
+        private bool _isUseNeuralNetwork;
+        public bool IsUseNeuralNetwork
+        {
+            get { return _isUseNeuralNetwork; }
+            set
+            {
+                _isUseNeuralNetwork = value;
+                SendPropertyChanged(() => IsUseNeuralNetwork);
+            }
+        }
         #endregion
 
         #region Поля изменения
@@ -123,12 +155,17 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
 
         private void StartAnalisis(object obj)
         {
-            throw new NotImplementedException();
+            var neuro = new NeuralNetwork();
+            foreach (var item in Patients)
+            {
+                neuro.Analis(item.Object);
+            }
+            NextPage();
         }
 
         private void AddPatient(object obj)
         {
-            Patients.Add(new ListItem<Patient>());
+            Patients.Add(new ListItem<Patient>() { Object = new Patient()});
         }
 
         private void DeletePatient(object obj)
@@ -150,10 +187,13 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
         private void LoadPatientsFromPhoto(object obj)
         {
             var a = new PhotoLoader().GetPathPhotos();
-            foreach (var photoUrl in a)
+            if (a != null)
             {
-                var patient = new Patient() { PhotoUrl = photoUrl };
-                Patients.Add(new ListItem<Patient> { Object = patient });
+                foreach (var photoUrl in a)
+                {
+                    var patient = new Patient() { PhotoUrl = photoUrl };
+                    Patients.Add(new ListItem<Patient> { Object = patient });
+                }
             }
         }
         private void LoadPhotoUrl(object obj)
@@ -166,7 +206,7 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
         private void ShowSnapshot(object obj)
         {
             if (SelectedPatient != null && SelectedPatient.Object.PhotoUrl != null)
-                AppContainer.ViewNavigator.NavigateToView(new PhotoVM(SelectedPatient.Object.PhotoUrl), true);
+                AppContainer.Instance.ViewNavigator.NavigateToView(new PhotoVM(SelectedPatient.Object.PhotoUrl), true);
         }
 
         private void OpenFindPatientWindow(object obj)
@@ -174,7 +214,7 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
             if(SelectedPatient != null)
             {
                 var findWindow = new SearchPatientVM();
-                AppContainer.ViewNavigator.NavigateToView(findWindow, true);
+                AppContainer.Instance.ViewNavigator.NavigateToView(findWindow, true);
                 if (findWindow.SelectedPatient != null)
                     SelectedPatient.Object = findWindow.SelectedPatient;
             }
@@ -198,8 +238,6 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
                     break;
                 case 1:
                     IsEndabledPages = new bool[3] { false, true, false };
-                    var a = new NeuralNetwork();
-                    a.Analis();
                     break;
                 case 2:
                     IsEndabledPages = new bool[3] { false, false, true };
@@ -212,7 +250,7 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
         public DiagnosticVM()
         {
             HeaderVM = "Диагностика пациентов";
-            DiagnosticTypes = AppContainer.LocalDataManager.GetDiagnosticTypes().ToObservable();
+            DiagnosticTypes = AppContainer.Instance.LocalDataManager.GetDiagnosticTypes().ToObservable();
             _proceedCommand = new DelegateCommand(this.Proceed);
             _loadPatientsFromPhotoCommand = new DelegateCommand(this.LoadPatientsFromPhoto);
             _clearPatientListCommand = new DelegateCommand(this.ClearPatientList);

@@ -58,7 +58,7 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
             //TODO: Сделать обращение к БД поиск по ФИО
             if(!String.IsNullOrEmpty(SearchText))
             {
-                Patients = AppContainer.SQLDataManager.FindPatients(SearchText).ToObservable();
+                Patients = AppContainer.Instance.SQLDataManager.FindPatients(SearchText).ToObservable();
             }
         }
         private void SelectPatient(object obj)

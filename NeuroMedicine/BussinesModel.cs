@@ -10,15 +10,18 @@ namespace NeuroMedicine
     /// </summary>
     internal class BussinesModel
     {
+        public static ViewNavigator ViewNavigator;
         public BussinesModel(MainWindow mw)
         {
+            ViewNavigator = new ViewNavigator(mw);
             //Инициализация + передача в бизнес
-            AppContainer.ViewNavigator = new ViewNavigator(mw);
+            AppContainer.Instance.ViewNavigator = ViewNavigator;
 
             //Загрузка начальной страницы
-            AuthorizationVM _startWindow = new AuthorizationVM();
-            mw.DataContext = _startWindow;
-            _startWindow.Test();
+            ViewNavigator.NavigateToView(new AuthorizationVM(),false,false);
+            //AuthorizationVM _startWindow = new AuthorizationVM();
+            //mw.DataContext = _startWindow;
+            //_startWindow.Test();
 
         }
     }

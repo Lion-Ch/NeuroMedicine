@@ -60,9 +60,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AuthorizationVM.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\ConfirmationModalVM.cs" />
     <Compile Include="ViewModels\DiagnosticVM.cs" />
+    <Compile Include="ViewModels\HistotyReceptionVM.cs" />
     <Compile Include="ViewModels\ICloseWindow.cs" />
     <Compile Include="ViewModels\MasterVM.cs" />
+    <Compile Include="ViewModels\PatientsVM.cs" />
+    <Compile Include="ViewModels\PersonalCabinetVM.cs" />
     <Compile Include="ViewModels\PhotoVM.cs" />
     <Compile Include="ViewModels\SearchPatientVM.cs" />
   </ItemGroup>
@@ -78,6 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Logic\Factories\" />
+    <Folder Include="Logic\Security\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

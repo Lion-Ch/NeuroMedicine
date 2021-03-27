@@ -108,6 +108,9 @@
     </ApplicationDefinition>
     <Compile Include="BussinesModel.cs" />
     <Compile Include="Converters\DateTimeToDateConverter.cs" />
+    <Compile Include="Views\ModalWindowView\ConfirmModalWindow.xaml.cs">
+      <DependentUpon>ConfirmModalWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ModalWindowView\ModalWindow.xaml.cs">
       <DependentUpon>ModalWindow.xaml</DependentUpon>
     </Compile>
@@ -124,6 +127,9 @@
     <Compile Include="Views\WindowView\BaseView.cs" />
     <Compile Include="Views\WindowView\DiagnosticsView.xaml.cs">
       <DependentUpon>DiagnosticsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WindowView\HistoryReceptionView.xaml.cs">
+      <DependentUpon>HistoryReceptionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WindowView\MasterWindowView.xaml.cs">
       <DependentUpon>MasterWindowView.xaml</DependentUpon>
@@ -159,6 +165,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ModalWindowView\ConfirmModalWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ModalWindowView\ModalWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -176,6 +186,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\WindowView\DiagnosticsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WindowView\HistoryReceptionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

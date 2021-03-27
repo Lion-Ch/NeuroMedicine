@@ -1,14 +1,31 @@
 ﻿using BusinessLayer.Logic.ViewNavigation;
 using DataLayer.DataManagers;
+using DataLayer.Models.Classes;
 
 namespace NeuroMedicine.BusinessLayer
 {
-    public static class AppContainer
+    public class AppContainer
     {
-        public static IViewNavigator ViewNavigator { get; set; }
+        private static AppContainer _instance;
+        public User CurrentUser { get; set; }
 
-        private static LocalDataManager _localDataManager;
-        public static LocalDataManager LocalDataManager
+        public static AppContainer Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new AppContainer();
+                }
+
+                return _instance;
+            }
+        }
+
+        public IViewNavigator ViewNavigator { get; set; }
+
+        private LocalDataManager _localDataManager;
+        public LocalDataManager LocalDataManager
         {
             get
             {
@@ -18,8 +35,8 @@ namespace NeuroMedicine.BusinessLayer
                 return _localDataManager;
             }
         }
-        private static SQLDataManager _sqlDataManager;
-        public static SQLDataManager SQLDataManager
+        private SQLDataManager _sqlDataManager;
+        public SQLDataManager SQLDataManager
         {
             get
             {
