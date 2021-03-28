@@ -60,7 +60,6 @@
             <DataGrid FontSize="16"
                       IsReadOnly="True"
                       ColumnHeaderStyle="{StaticResource DataGrid}"
-                              ItemsSource="{Binding Patients}"
                               AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Пациент" MinWidth="250"  Binding="{Binding Object.FullName}"/>

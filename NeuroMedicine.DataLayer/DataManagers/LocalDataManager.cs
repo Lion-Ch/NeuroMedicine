@@ -20,6 +20,16 @@ namespace DataLayer.DataManagers
 
             return list;
         }
+        public List<ListItem> GetDagnosysTypes()
+        {
+            var dictionary = new DiagnosysTypeDictionary().Dictionary;
+            List<ListItem> list = new List<ListItem>();
+            foreach (var item in dictionary)
+            {
+                list.Add(new ListItem { Id = (int)item.Key, Name = item.Value });
+            }
 
+            return list;
+        }
     }
 }

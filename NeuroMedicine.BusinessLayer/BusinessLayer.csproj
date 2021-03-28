@@ -62,6 +62,7 @@
     <Compile Include="ViewModels\AuthorizationVM.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\ConfirmationModalVM.cs" />
+    <Compile Include="ViewModels\DiagnosisVM.cs" />
     <Compile Include="ViewModels\DiagnosticVM.cs" />
     <Compile Include="ViewModels\HistotyReceptionVM.cs" />
     <Compile Include="ViewModels\ICloseWindow.cs" />

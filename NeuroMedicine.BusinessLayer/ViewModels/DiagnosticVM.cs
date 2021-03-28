@@ -213,6 +213,8 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
 
         private DelegateCommand _openFindPatientWindowCommand;
         public ICommand OpenFindPatientWindowCommand { get { return _openFindPatientWindowCommand; } }
+        private DelegateCommand _setDiagnosisCommand;
+        public ICommand SetDiagnosisCommand { get { return _setDiagnosisCommand; } }
         #endregion
 
         #region Методы команд
@@ -258,7 +260,7 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
 
         private void AddPatient(object obj)
         {
-            Patients.Add(new PatientPVM() { NumRow = _patientNumerator++ });
+            Patients.Add(new PatientPVM() { NumRow = _patientNumerator++, DatePhoto=DateTime.Now });
         }
 
         private void DeletePatient(object obj)
@@ -285,6 +287,9 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
                 foreach (var photoUrl in a)
                 {
                     var patient = new PatientPVM() { PhotoUrl = photoUrl, NumRow = _patientNumerator++ };
+                    if (!IsReadDateFromNamePhoto)
+                        patient.DatePhoto = DateTime.Now;
+                    patient.Patient = new Patient();
                     Patients.Add(patient);
                 }
             }
@@ -299,7 +304,7 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
         private void ShowSnapshot(object obj)
         {
             if (SelectedPatient != null && SelectedPatient.PhotoUrl != null)
-                AppContainer.Instance.ViewNavigator.NavigateToView(new PhotoVM(SelectedPatient.PhotoUrl), true);
+                AppContainer.Instance.ViewNavigator.NavigateToModal(new PhotoVM(SelectedPatient.PhotoUrl));
         }
 
         private void OpenFindPatientWindow(object obj)
@@ -307,10 +312,15 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
             if(SelectedPatient != null)
             {
                 var findWindow = new SearchPatientVM();
-                AppContainer.Instance.ViewNavigator.NavigateToView(findWindow, true);
+                AppContainer.Instance.ViewNavigator.NavigateToModal(findWindow);
                 if (findWindow.SelectedPatient != null)
                     SelectedPatient.Patient = findWindow.SelectedPatient;
             }
+        }
+        private void SetDiagnosis(object obj)
+        {
+            if(SelectedPatient != null)
+                AppContainer.Instance.ViewNavigator.NavigateToModal(new DiagnosisVM(SelectedPatient), true);
         }
         #endregion
 
@@ -416,6 +426,7 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
             _loadPhotoUrlCommand = new DelegateCommand(this.LoadPhotoUrl);
             _showSnapshotCommand = new DelegateCommand(this.ShowSnapshot);
             _openFindPatientWindowCommand = new DelegateCommand(this.OpenFindPatientWindow);
+            _setDiagnosisCommand = new DelegateCommand(this.SetDiagnosis);
             _currentPage = 0;
             _isEndabledPages = new bool[3] { true, false, false };
             Patients = new ObservableCollection<PatientPVM>();

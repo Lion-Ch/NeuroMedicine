@@ -15,6 +15,7 @@ namespace NeuroMedicine
         public MainWindow()
         {
             InitializeComponent();
+            this.WindowState = WindowState.Maximized;
             _bussinesModel = new BussinesModel(this);
             //model = Sequential.LoadModel(@"C:\Users\levac\OneDrive\Рабочий стол\Учеба\Диплом\Модель");
         }

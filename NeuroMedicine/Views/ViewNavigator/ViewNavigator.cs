@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace NeuroMedicine.Views.ViewNavigator
 {
-    public class ViewNavigator: IViewNavigator
+    public class ViewNavigator : IViewNavigator
     {
         private MainWindow _mainWindow;
         private MasterWindowView _masterWindow;
@@ -29,6 +29,7 @@ namespace NeuroMedicine.Views.ViewNavigator
             _viewModelToViewMap.Add(typeof(PhotoVM), typeof(PhotoModalWindow));
             _viewModelToViewMap.Add(typeof(SearchPatientVM), typeof(SearchPatientModalWindow));
             _viewModelToViewMap.Add(typeof(ConfirmationModalVM), typeof(ConfirmModalWindow));
+            _viewModelToViewMap.Add(typeof(DiagnosisVM), typeof(DiagnosisModalWindow));
         }
         //Перемещение по самому приложению
         public void NavigateToWindow(BaseViewModel newView)
@@ -39,7 +40,7 @@ namespace NeuroMedicine.Views.ViewNavigator
         /// Перемещение по MasterVM
         /// </summary>
         /// <param name="newView"></param>
-        public void NavigateToView(BaseViewModel newView, bool inNewWindow = false, bool inMasterWindow = true)
+        public void NavigateToView(BaseViewModel newView, bool inMasterWindow = true)
         {
             //var control = new DiagnosticsView();
             Type viewControlType;
@@ -47,42 +48,51 @@ namespace NeuroMedicine.Views.ViewNavigator
             if (_viewModelToViewMap.TryGetValue(newView.GetType(), out viewControlType))
             {
 
-                if (inNewWindow)
-                {
-                    var control = Activator.CreateInstance(viewControlType) as BaseView;
+                //_masterWindow.DataContext = control;
+                //control.ViewModel = newView;
 
-                    if (null == control) return;
+                //if (_mainWindow.DataContext != _masterWindow)
+                //    _mainWindow.DataContext = _masterWindow;
 
-                    control.ViewModel = newView;
-
-                    var window = new ModalWindow();
-                    window.Title = newView.HeaderVM;
-                    window.Content = control;
-                    window.DataContext = newView;
-                    window.Owner = _mainWindow;
-                    window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-                    window.ShowDialog();
-                }
+                var control = Activator.CreateInstance(viewControlType) as BaseView;
+                if (inMasterWindow)
+                    _masterWindow.DataContext = control;
                 else
-                {
-                    //_masterWindow.DataContext = control;
-                    //control.ViewModel = newView;
+                    _mainWindow.DataContext = control;
+                control.ViewModel = newView;
 
-                    //if (_mainWindow.DataContext != _masterWindow)
-                    //    _mainWindow.DataContext = _masterWindow;
-                    
-                        var control = Activator.CreateInstance(viewControlType) as BaseView;
-                        if (inMasterWindow)
-                            _masterWindow.DataContext = control;
-                        else
-                            _mainWindow.DataContext = control;
-                        control.ViewModel = newView;
-
-                        if (_mainWindow.DataContext != _masterWindow && inMasterWindow)
-                            _mainWindow.DataContext = _masterWindow;
-                }
+                if (_mainWindow.DataContext != _masterWindow && inMasterWindow)
+                    _mainWindow.DataContext = _masterWindow;
             }
         }
+        public void NavigateToModal(BaseViewModel newView, bool isMaximazed = false)
+        {
+            //var control = new DiagnosticsView();
+            Type viewControlType;
 
+            if (_viewModelToViewMap.TryGetValue(newView.GetType(), out viewControlType))
+            {
+                var control = Activator.CreateInstance(viewControlType) as BaseView;
+
+                if (null == control) return;
+
+                control.ViewModel = newView;
+
+                var window = new ModalWindow();
+                window.Title = newView.HeaderVM;
+                window.Content = control;
+                window.DataContext = newView;
+                window.Owner = _mainWindow;
+                window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                if (isMaximazed)
+                {
+                    control.Width = SystemParameters.PrimaryScreenWidth;
+                    control.Height = SystemParameters.PrimaryScreenHeight;
+                    window.WindowState = WindowState.Maximized;
+                }
+                window.ShowDialog();
+
+            }
+        }
     }
 }

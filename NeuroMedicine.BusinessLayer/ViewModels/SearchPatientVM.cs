@@ -15,7 +15,6 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
 {
     public class SearchPatientVM: BaseViewModel, ICloseWindow
     {
-        public Action Close { get; set; }
 
         private string _searchText;
         public string SearchText

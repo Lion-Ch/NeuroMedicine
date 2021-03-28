@@ -109,8 +109,12 @@
     <Compile Include="BussinesModel.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\DateTimeToDateConverter.cs" />
+    <Compile Include="Converters\NullImageConverter.cs" />
     <Compile Include="Views\ModalWindowView\ConfirmModalWindow.xaml.cs">
       <DependentUpon>ConfirmModalWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ModalWindowView\DiagnosisModalWindow.xaml.cs">
+      <DependentUpon>DiagnosisModalWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ModalWindowView\ModalWindow.xaml.cs">
       <DependentUpon>ModalWindow.xaml</DependentUpon>
@@ -167,6 +171,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ModalWindowView\ConfirmModalWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ModalWindowView\DiagnosisModalWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

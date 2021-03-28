@@ -51,5 +51,14 @@ namespace DataLayer.DataManagers
 				return user;
 			}
 		}
+
+		public void AddNewDiagnosis(PatientDiagnosis diagnosis)
+		{
+			using (var dataContext = GetNewDataContext())
+			{
+				dataContext.RefPatientDiagnoses.Add(PatientDiagnosisFactory.Create(diagnosis));
+				dataContext.SaveChanges();
+			}
+		}
 	}
 }

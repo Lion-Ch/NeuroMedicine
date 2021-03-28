@@ -18,7 +18,7 @@ namespace NeuroMedicine
             AppContainer.Instance.ViewNavigator = ViewNavigator;
 
             //Загрузка начальной страницы
-            ViewNavigator.NavigateToView(new DiagnosticVM(),false,true);
+            ViewNavigator.NavigateToView(new DiagnosticVM(),true);
             //AuthorizationVM _startWindow = new AuthorizationVM();
             //mw.DataContext = _startWindow;
             //_startWindow.Test();

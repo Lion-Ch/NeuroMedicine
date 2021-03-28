@@ -25,6 +25,8 @@
     <FontFamily x:Key="RobotoBold">/NeuroMedicine;component/Fonts/#Roboto Bold</FontFamily>
     <FontFamily x:Key="RobotoBlack">/NeuroMedicine;component/Fonts/#Roboto Black</FontFamily>
     
+    <SolidColorBrush x:Key="Blue" Color="#1687a7"/>
+
     <Style x:Key="DataGrid" TargetType="{x:Type DataGridColumnHeader}">
         <Setter Property="FontFamily" Value="{StaticResource MyFont}"/>
         <Setter Property="Foreground" Value="White" />

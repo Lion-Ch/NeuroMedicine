@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NeuroMedicine"
         mc:Ignorable="d"
-        Title="MainWindow" Height="768" Width="1366">
+        Title="MainWindow">
     <Window.Resources>
         <ResourceDictionary Source="/NeuroMedicine;component/Styles/StyleDictionary.xaml"/>
     </Window.Resources>

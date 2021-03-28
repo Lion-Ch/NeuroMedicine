@@ -65,13 +65,25 @@
     <Compile Include="Migrations\202103271311337_UpdateUserAccount.designer.cs">
       <DependentUpon>202103271311337_UpdateUserAccount.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103282027219_AddRefPatientDiagnosis.cs" />
+    <Compile Include="Migrations\202103282027219_AddRefPatientDiagnosis.designer.cs">
+      <DependentUpon>202103282027219_AddRefPatientDiagnosis.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103282038424_AddDiagnosysTypeInRefPatientDiagnosis.cs" />
+    <Compile Include="Migrations\202103282038424_AddDiagnosysTypeInRefPatientDiagnosis.designer.cs">
+      <DependentUpon>202103282038424_AddDiagnosysTypeInRefPatientDiagnosis.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Classes\DiagnosticTypeDictionary.cs" />
+    <Compile Include="Models\Classes\DiagnosysTypeDictionary.cs" />
     <Compile Include="Models\Classes\Patient.cs" />
+    <Compile Include="Models\Classes\PatientDiagnosis.cs" />
     <Compile Include="Models\Classes\User.cs" />
     <Compile Include="Models\Classes\UserTypeDictionary.cs" />
     <Compile Include="Models\Enums\DiagnosticType.cs" />
+    <Compile Include="Models\Enums\DiagnosysType.cs" />
     <Compile Include="Models\Enums\UserType.cs" />
+    <Compile Include="Models\Factories\PatientDiagnosisFactory.cs" />
     <Compile Include="Models\Factories\PatientFactory.cs" />
     <Compile Include="Models\Factories\UserFactory.cs" />
     <Compile Include="Models\PresentationVM\ListItem.cs" />
@@ -79,6 +91,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlServer\DBContext.cs" />
     <Compile Include="SqlServer\Tables\RefPatient.cs" />
+    <Compile Include="SqlServer\Tables\RefPatientDiagnosis.cs" />
     <Compile Include="SqlServer\Tables\RefUser.cs" />
     <Compile Include="SqlServer\Tables\RefUserAccount.cs" />
   </ItemGroup>
@@ -91,6 +104,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103271311337_UpdateUserAccount.resx">
       <DependentUpon>202103271311337_UpdateUserAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103282027219_AddRefPatientDiagnosis.resx">
+      <DependentUpon>202103282027219_AddRefPatientDiagnosis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103282038424_AddDiagnosysTypeInRefPatientDiagnosis.resx">
+      <DependentUpon>202103282038424_AddDiagnosysTypeInRefPatientDiagnosis.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,5 @@
 ﻿using DataLayer.Models.Classes;
+using DataLayer.Models.Enums;
 using Neuromedicine.Core.NotifyPropertyChanged;
 using System;
 using System.Collections.Generic;
@@ -50,7 +51,47 @@ namespace DataLayer.Models.PresentationVM
             set
             {
                 _probobilityDisease = value;
-                SendPropertyChanged(() => _probobilityDisease);
+                SendPropertyChanged(() => ProbobilityDisease);
+            }
+        }
+        private DiagnosticType _diagnosticType;
+        public DiagnosticType DiagnosticType
+        {
+            get { return _diagnosticType; }
+            set
+            {
+                _diagnosticType = value;
+                SendPropertyChanged(() => DiagnosticType);
+            }
+        }
+        private DiagnosysType _diagnosysType;
+        public DiagnosysType DiagnosysType
+        {
+            get { return _diagnosysType; }
+            set
+            {
+                _diagnosysType = value;
+                SendPropertyChanged(() => DiagnosysType);
+            }
+        }
+        private string _conclusion;
+        public string Conclusion
+        {
+            get { return _conclusion; }
+            set
+            {
+                _conclusion = value;
+                SendPropertyChanged(() => Conclusion);
+            }
+        }
+        private DateTime _date;
+        public DateTime Date
+        {
+            get { return _date; }
+            set
+            {
+                _date = value;
+                SendPropertyChanged(() => Date);
             }
         }
     }
