@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataLayer.SqlServer.Tables
 {
-    internal class RefUserAccount
+    public class RefUserAccount
     {
         [Key]
         [ForeignKey("RefUser")]

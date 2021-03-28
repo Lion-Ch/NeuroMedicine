@@ -18,7 +18,7 @@ namespace NeuroMedicine.Views.ModalWindowView
     /// <summary>
     /// Логика взаимодействия для SearchPatientModalWindow.xaml
     /// </summary>
-    public partial class SearchPatientModalWindow : UserControl
+    public partial class SearchPatientModalWindow
     {
         public SearchPatientModalWindow()
         {

@@ -1,10 +1,14 @@
 ﻿using BusinessLayer.Commands;
 using BusinessLayer.Logic.Extensions;
 using DataLayer.Models.Classes;
+using DataLayer.Models.Factories;
+using DataLayer.Models.PresentationVM;
 using NeuroMedicine.BusinessLayer;
 using NeuroMedicine.BusinessLayer.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 
 namespace NeuroMedicine.BusinessLayer.ViewModels
@@ -58,7 +62,8 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
             //TODO: Сделать обращение к БД поиск по ФИО
             if(!String.IsNullOrEmpty(SearchText))
             {
-                Patients = AppContainer.Instance.SQLDataManager.FindPatients(SearchText).ToObservable();
+                Patients = AppContainer.Instance.SQLDataManager.FindPatients(SearchText)
+                    .ToObservable();
             }
         }
         private void SelectPatient(object obj)

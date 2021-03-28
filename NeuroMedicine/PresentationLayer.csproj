@@ -107,6 +107,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BussinesModel.cs" />
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\DateTimeToDateConverter.cs" />
     <Compile Include="Views\ModalWindowView\ConfirmModalWindow.xaml.cs">
       <DependentUpon>ConfirmModalWindow.xaml</DependentUpon>

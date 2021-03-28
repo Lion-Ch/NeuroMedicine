@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataLayer.SqlServer.Tables
 {
-    internal class RefPatient
+    public class RefPatient
     {
         public int Id { get; set; }
         [StringLength(60)]

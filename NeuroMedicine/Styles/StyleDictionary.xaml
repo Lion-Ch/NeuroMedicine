@@ -7,17 +7,9 @@
     <DataTemplate DataType="{x:Type vm:MasterVM}">
         <v:MasterWindowView/>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type vm:DiagnosticVM}">
-        <v:DiagnosticsView/>
-    </DataTemplate>
+    
     <DataTemplate DataType="{x:Type vm:AuthorizationVM}">
         <v:AuthorizationView/>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type vm:PhotoVM}">
-        <vmModal:PhotoModalWindow/>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type vm:SearchPatientVM}">
-        <vmModal:SearchPatientModalWindow/>
     </DataTemplate>
     <DataTemplate DataType="{x:Type vm:HistotyReceptionVM}">
         <v:HistoryReceptionView/>
@@ -27,9 +19,6 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type vm:PersonalCabinetVM}">
         <v:PersonalCabinet/>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type vm:ConfirmationModalVM}">
-        <vmModal:ConfirmModalWindow/>
     </DataTemplate>
     
     <FontFamily x:Key="MyFont">/NeuroMedicine;component/Fonts/#Roboto Regular</FontFamily>
@@ -60,14 +49,14 @@
     <Style x:Key="MainMenuItem" TargetType="{x:Type StackPanel}">
         <Style.Setters>
             <Setter Property="TextBlock.Foreground" Value="White"/>
-            <Setter Property="TextBlock.FontSize" Value="14"/>
+            <Setter Property="TextBlock.FontSize" Value="12"/>
             <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
         </Style.Setters>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="White"/>
                 <Setter Property="TextBlock.Foreground" Value="#37648d"/>
-                <Setter Property="TextBlock.FontSize" Value="18"/>
+                <Setter Property="TextBlock.FontSize" Value="14"/>
             </Trigger>
         </Style.Triggers>
     </Style>

@@ -27,7 +27,7 @@
                             Margin="10 0"
                             Style="{StaticResource MainMenuItem}"
                             MouseDown="Diagnostic_MouseDown">
-                    <Image Margin="10" Source="/NeuroMedicine;component/Icons/analysis.png" Width="50"/>
+                    <Image Margin="10" Source="/NeuroMedicine;component/Icons/analysis.png" Width="30"/>
                     <TextBlock Text="Диагностика" 
                                VerticalAlignment="Center"
                                HorizontalAlignment="Stretch"
@@ -37,7 +37,7 @@
                             Margin="10 0"
                             Style="{StaticResource MainMenuItem}"
                             MouseDown="History_MouseDown">
-                    <Image Margin="10" Source="/NeuroMedicine;component/Icons/analytics.png" Width="50"/>
+                    <Image Margin="10" Source="/NeuroMedicine;component/Icons/analytics.png" Width="30"/>
                     <TextBlock Text="История обследований" 
                                TextWrapping="Wrap"
                                VerticalAlignment="Center"
@@ -48,7 +48,7 @@
                             Margin="10 0"
                             Style="{StaticResource MainMenuItem}"
                             MouseDown="Patients_MouseDown">
-                    <Image Margin="10" Source="/NeuroMedicine;component/Icons/hospitalisation.png" Width="50"/>
+                    <Image Margin="10" Source="/NeuroMedicine;component/Icons/hospitalisation.png" Width="30"/>
                     <TextBlock Text="Пациенты" 
                                VerticalAlignment="Center"
                                HorizontalAlignment="Stretch"
@@ -58,7 +58,7 @@
                             Margin="10 0"
                             Style="{StaticResource MainMenuItem}"
                             MouseDown="PersonalCabinet_MouseDown">
-                    <Image Margin="10" Source="/NeuroMedicine;component/Icons/user.png" Width="50"/>
+                    <Image Margin="10" Source="/NeuroMedicine;component/Icons/user.png" Width="30"/>
                     <TextBlock Text="Личный кабинет" 
                                VerticalAlignment="Center"
                                HorizontalAlignment="Stretch"
@@ -68,7 +68,7 @@
                             Margin="10 0"
                             Style="{StaticResource MainMenuItem}"
                             MouseDown="Exit_MouseDown">
-                    <Image Margin="10" Source="/NeuroMedicine;component/Icons/logout.png" Width="50"/>
+                    <Image Margin="10" Source="/NeuroMedicine;component/Icons/logout.png" Width="30"/>
                     <TextBlock Text="Выход" 
                                VerticalAlignment="Center"
                                HorizontalAlignment="Stretch"

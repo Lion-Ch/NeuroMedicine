@@ -3,7 +3,7 @@ using System;
 
 namespace DataLayer.SqlServer.Tables
 {
-    internal class RefUser
+    public class RefUser
     {
         public int Id { get; set; }
         public string FullName { get; set; }

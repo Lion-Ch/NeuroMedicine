@@ -1,4 +1,5 @@
 ﻿using DataLayer.Models.Classes;
+using DataLayer.Models.PresentationVM;
 using Keras.Models;
 using Keras.PreProcessing.Image;
 using Numpy;
@@ -20,7 +21,7 @@ namespace NeuroMedicine.BusinessLayer.Logic
             _model = Sequential.LoadModel(@"C:\Users\levac\OneDrive\Рабочий стол\Учеба\Диплом\Модель");
         }
 
-        public void Analis(Patient patients)
+        public void Analis(PatientPVM patients)
         {
             //var model = Sequential.LoadModel(@"C:\Users\levac\OneDrive\Рабочий стол\Учеба\Диплом\Модель");
             //var datagen = new ImageDataGenerator(rescale: 1.0f / 255);

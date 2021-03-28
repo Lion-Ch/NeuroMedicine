@@ -1,9 +1,10 @@
 ﻿using DataLayer.Models.Classes;
+using DataLayer.Models.PresentationVM;
 using DataLayer.SqlServer.Tables;
 
 namespace DataLayer.Models.Factories
 {
-    internal static class PatientFactory
+    public static class PatientFactory
     {
         public static RefPatient Create(Patient patient)
         {
@@ -25,6 +26,15 @@ namespace DataLayer.Models.Factories
             newPatient.Id = patient.Id;
             newPatient.FullName = patient.FullName;
             newPatient.DateBirth = patient.DateBirth;
+
+            return newPatient;
+        }
+        public static PatientPVM CreatePVM(Patient patient)
+        {
+            if (patient == null) return null;
+
+            var newPatient = new PatientPVM();
+            newPatient.Patient = patient;
 
             return newPatient;
         }

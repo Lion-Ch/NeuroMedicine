@@ -7,11 +7,18 @@ using BusinessLayer.Logic.PhotoLoader;
 using DataLayer.Models.Classes;
 using DataLayer.Models.PresentationVM;
 using NeuroMedicine.BusinessLayer.Logic;
+using System.Collections.Generic;
+using System.IO;
+using System.ComponentModel;
+using System.Windows.Data;
 
 namespace NeuroMedicine.BusinessLayer.ViewModels
 {
     public class DiagnosticVM : BaseViewModel
     {
+        #region Приватные поля
+        private int _patientNumerator = 1;
+        #endregion
         #region Поля класса
 
         private int _currentPage;
@@ -68,6 +75,31 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
                 SendPropertyChanged(() => IsUseNeuralNetwork);
             }
         }
+
+        private List<string> _notifications;
+
+        public List<string> Notifications
+        {
+            get { return _notifications; }
+            set 
+            { 
+                _notifications = value;
+                SendPropertyChanged(() => Notifications);
+            }
+        }
+
+        private List<Tuple<string, string>> _statisticNeuro;
+
+        public List<Tuple<string, string>> StatisticNeuro
+        {
+            get { return _statisticNeuro; }
+            set
+            {
+                _statisticNeuro = value;
+                SendPropertyChanged(() => StatisticNeuro);
+            }
+        }
+
         #endregion
 
         #region Поля изменения
@@ -90,8 +122,8 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
             set { _selectedDiagnosticType = value; }
         }
 
-        private ObservableCollection<ListItem<Patient>> _patients;
-        public ObservableCollection<ListItem<Patient>> Patients
+        private ObservableCollection<PatientPVM> _patients;
+        public ObservableCollection<PatientPVM> Patients
         {
             get { return _patients; }
             set
@@ -101,14 +133,54 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
             }
         }
 
-        private ListItem<Patient> _selectedPatient;
-        public ListItem<Patient> SelectedPatient
+        public ICollectionView ResultPatients
+        {
+            get
+            {
+                return CollectionViewSource.GetDefaultView(Patients);
+            }
+        }
+
+        private PatientPVM _selectedPatient;
+        public PatientPVM SelectedPatient
         {
             get { return _selectedPatient; }
             set
             {
                 _selectedPatient = value;
                 SendPropertyChanged(() => SelectedPatient);
+            }
+        }
+        private byte? _minProbobility;
+        public byte? MinProbobility
+        {
+            get { return _minProbobility; }
+            set
+            {
+                if(_minProbobility.HasValue && value >= 0 && value <= 100)
+                {
+                    _minProbobility = value;
+                }
+                else
+                    _minProbobility = 0;
+                SendPropertyChanged(() => MinProbobility);
+                ResultPatients.Refresh();
+            }
+        }
+        private byte? _maxProbobility;
+        public byte? MaxProbobility
+        {
+            get { return _maxProbobility; }
+            set
+            {
+                if (_maxProbobility.HasValue && value >= 0 && value <= 100)
+                {
+                    _maxProbobility = value;
+                }
+                else
+                    _maxProbobility = 100;
+                SendPropertyChanged(() => MaxProbobility);
+                ResultPatients.Refresh();
             }
         }
         #endregion
@@ -120,9 +192,6 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
 
         private DelegateCommand _loadPatientsFromPhotoCommand;
         public ICommand LoadPatinentFromPhotoCommand { get { return _loadPatientsFromPhotoCommand; } }
-
-        private DelegateCommand _startAnalisisCommand;
-        public ICommand StartAnalisisCommand { get { return _startAnalisisCommand; } }
 
         private DelegateCommand _addPatientCommand;
         public ICommand AddPatientCommand { get { return _addPatientCommand; } }
@@ -150,22 +219,46 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
 
         private void Proceed(object parameter)
         {
-            NextPage();
+            switch (_currentPage)
+            {
+                case 0:
+                        NextPage();
+                    break;
+                case 1:
+                    {
+                        CheckValidPatients();
+                        if (Notifications.Count == 0)
+                        {
+                            StartAnalisis();
+                            CalculateStatistic();
+                            NextPage();
+                        }
+                    }
+                    break;
+                case 2:
+                    {
+                        if (Notifications.Count == 0)
+                            NextPage();
+                    }
+                    break;
+            }
         }
 
-        private void StartAnalisis(object obj)
+        private void StartAnalisis()
         {
-            var neuro = new NeuralNetwork();
-            foreach (var item in Patients)
+            if(IsUseNeuralNetwork)
             {
-                neuro.Analis(item.Object);
+                var neuro = new NeuralNetwork();
+                foreach (var item in Patients)
+                {
+                    neuro.Analis(item);
+                }
             }
-            NextPage();
         }
 
         private void AddPatient(object obj)
         {
-            Patients.Add(new ListItem<Patient>() { Object = new Patient()});
+            Patients.Add(new PatientPVM() { NumRow = _patientNumerator++ });
         }
 
         private void DeletePatient(object obj)
@@ -191,8 +284,8 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
             {
                 foreach (var photoUrl in a)
                 {
-                    var patient = new Patient() { PhotoUrl = photoUrl };
-                    Patients.Add(new ListItem<Patient> { Object = patient });
+                    var patient = new PatientPVM() { PhotoUrl = photoUrl, NumRow = _patientNumerator++ };
+                    Patients.Add(patient);
                 }
             }
         }
@@ -200,13 +293,13 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
         {
             var path = new PhotoLoader().GetPathPhoto();
             if (SelectedPatient != null && path != null)
-                SelectedPatient.Object.PhotoUrl = path;
+                SelectedPatient.PhotoUrl = path;
         }
 
         private void ShowSnapshot(object obj)
         {
-            if (SelectedPatient != null && SelectedPatient.Object.PhotoUrl != null)
-                AppContainer.Instance.ViewNavigator.NavigateToView(new PhotoVM(SelectedPatient.Object.PhotoUrl), true);
+            if (SelectedPatient != null && SelectedPatient.PhotoUrl != null)
+                AppContainer.Instance.ViewNavigator.NavigateToView(new PhotoVM(SelectedPatient.PhotoUrl), true);
         }
 
         private void OpenFindPatientWindow(object obj)
@@ -216,7 +309,7 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
                 var findWindow = new SearchPatientVM();
                 AppContainer.Instance.ViewNavigator.NavigateToView(findWindow, true);
                 if (findWindow.SelectedPatient != null)
-                    SelectedPatient.Object = findWindow.SelectedPatient;
+                    SelectedPatient.Patient = findWindow.SelectedPatient;
             }
         }
         #endregion
@@ -228,6 +321,27 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
 
         #region Приватные методы
 
+        private void CalculateStatistic()
+        {
+            int[] numPat = new int[4];
+            foreach(var p in Patients)
+            {
+                if (p.ProbobilityDisease >= 85.0)
+                    numPat[0]++;
+                else if (p.ProbobilityDisease >= 50.0 && p.ProbobilityDisease < 85.0)
+                    numPat[1]++;
+                else if (p.ProbobilityDisease >= 25.0 && p.ProbobilityDisease < 50.0)
+                    numPat[2]++;
+                else
+                    numPat[3]++;
+            }
+
+            StatisticNeuro.Add(("Вероятность", "Пациентов").ToTuple());
+            StatisticNeuro.Add(("85 - 100 %", numPat[0].ToString()).ToTuple());
+            StatisticNeuro.Add(("50 - 85 %", numPat[1].ToString()).ToTuple());
+            StatisticNeuro.Add(("25 - 50 %", numPat[2].ToString()).ToTuple());
+            StatisticNeuro.Add(("0 - 0 %", numPat[3].ToString()).ToTuple());
+        }
         private void NextPage()
         {
             CurrentPage++;
@@ -244,7 +358,49 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
                     break;
             }
         }
+        private void CheckValidPatients()
+        {
+            List<string> err = new List<string>();
+            foreach (var p in Patients)
+            {
+                if (p.Patient == null)
+                {
+                    err.Add($"Строка {p.NumRow}. Не выбран пациент!");
+                }
+                else
+                {
+                    if (String.IsNullOrEmpty(p.PhotoUrl))
+                    {
+                        err.Add($"Строка {p.NumRow}. Не указан путь к снимку!");
+                    }
+                    else if (!File.Exists(p.PhotoUrl))
+                    {
+                        err.Add($"Строка {p.NumRow}. Не найден снимок по данному пути!");
+                    }
+                    if (p.DatePhoto == null)
+                    {
+                        err.Add($"Строка {p.NumRow}. Не указана дата снимка!");
+                    }
+                    else if (p.DatePhoto.Year < 2000)
+                    {
+                        err.Add($"Строка {p.NumRow}. Дата снимка меньше 2000 года!");
+                    }
+                }
+            }
 
+            Notifications = err;
+        }
+
+        private bool FilterPartner(object parameter)
+        {
+            var patient = parameter as PatientPVM;
+
+            if (patient.ProbobilityDisease >= MinProbobility && patient.ProbobilityDisease <= MaxProbobility)
+                return true;
+
+            return false;
+
+        }
         #endregion
 
         public DiagnosticVM()
@@ -256,14 +412,19 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
             _clearPatientListCommand = new DelegateCommand(this.ClearPatientList);
             _registerNewPatientCommand = new DelegateCommand(this.RegisterNewPatient);
             _addPatientCommand = new DelegateCommand(this.AddPatient);
-            _startAnalisisCommand = new DelegateCommand(this.StartAnalisis);
             _deletePatientCommand = new DelegateCommand(this.DeletePatient);
             _loadPhotoUrlCommand = new DelegateCommand(this.LoadPhotoUrl);
             _showSnapshotCommand = new DelegateCommand(this.ShowSnapshot);
             _openFindPatientWindowCommand = new DelegateCommand(this.OpenFindPatientWindow);
             _currentPage = 0;
             _isEndabledPages = new bool[3] { true, false, false };
-            Patients = new ObservableCollection<ListItem<Patient>>();
+            Patients = new ObservableCollection<PatientPVM>();
+            Notifications = new List<string>();
+            StatisticNeuro = new List<Tuple<string, string>>();
+            ResultPatients.Filter = this.FilterPartner;
+            MaxProbobility = 100;
+            MinProbobility = 0;
+            IsUseNeuralNetwork = true;
         }
     }
 }

@@ -24,25 +24,18 @@ namespace NeuroMedicine.Views.WindowView
     /// </summary>
     public partial class PatientsDiagnosticView : UserControl, INotifyPropertyChanged
     {
-        private Patient _selectedPatient;
+        //private Patient _selectedPatient;
 
-        public Patient SelectedPatient
-        {
-            get { return _selectedPatient; }
-            set { _selectedPatient = value; }
-        }
+        //public Patient SelectedPatient
+        //{
+        //    get { return _selectedPatient; }
+        //    set { _selectedPatient = value; }
+        //}
 
-        public ObservableCollection<Patient> Patients { get; set; }
+        //public ObservableCollection<Patient> Patients { get; set; }
         public PatientsDiagnosticView()
         {
             InitializeComponent();
-            Patients = new ObservableCollection<Patient>()
-            {
-                new Patient(){FIO = "Иванов Иван Иванович", PhotoUrl="C:\\Users\\levac\\Downloads\\NORMAL2-IM-1440-0001.jpeg"},
-                new Patient(){FIO = "Петров Петр Петрович"}
-            };
-
-
         }
 
         private void TextBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -61,7 +54,7 @@ namespace NeuroMedicine.Views.WindowView
             // Get the selected file name and display in a TextBox 
             if (result == true)
             {
-                SelectedPatient.PhotoUrl = dlg.FileName;
+                //SelectedPatient.PhotoUrl = dlg.FileName;
                 OnPropertyChanged("Patients");
             }
         }

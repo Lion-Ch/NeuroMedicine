@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataLayer.Models.Factories
 {
-    internal static class UserFactory
+    public static class UserFactory
     {
         public static RefUser Create(User oldObj)
         {

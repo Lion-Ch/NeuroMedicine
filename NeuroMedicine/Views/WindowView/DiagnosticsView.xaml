@@ -4,8 +4,18 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NeuroMedicine.Views.WindowView"
+             xmlns:vm="clr-namespace:NeuroMedicine.BusinessLayer.ViewModels;assembly=BusinessLayer"
+             xmlns:conv="clr-namespace:NeuroMedicine.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="768" d:DesignWidth="1366">
+    <local:BaseView.Resources>
+        <conv:DateTimeToDateConverter x:Key="dateTimeToDateConverter"/>
+        <conv:BoolToVisibilityConverter x:Key="boolToVisibilityConverter"/>
+    </local:BaseView.Resources>
+    <local:BaseView.DataContext>
+        <vm:DiagnosticVM/>
+    </local:BaseView.DataContext>
+    
     <TabControl SelectedIndex="{Binding CurrentPage}">
         <TabItem IsEnabled="{Binding IsEndabledPages[0]}">
             <TabItem.Header>
@@ -59,16 +69,16 @@
             </TabItem.Header>
             <Grid Background="Red">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="0.05*"/>
                     <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition Width="0.05*"/>
                     <ColumnDefinition Width="3*"/>
-                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="0.05*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="0.05*"/>
-                    <RowDefinition Height="0.8*"/>
-                    <RowDefinition Height="0.05*"/>
+                    <RowDefinition Height="0.01*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="0.01*"/>
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Column="1" Grid.Row="1"
@@ -83,7 +93,24 @@
                                         Width="Auto"
                                         Grid.Row="0"
                                         HorizontalAlignment="Stretch">
-
+                                <TextBlock Text="Анализ"
+                                           TextWrapping="Wrap"
+                                           FontSize="18"
+                                           FontWeight="Bold"
+                                           FontFamily="{StaticResource RobotoBold}"/>
+                                <Button FontSize="16"
+                                    Grid.Row="1"
+                                    Command="{Binding ProceedCommand}"
+                                        Margin="0 10 0 10"
+                                    Padding="10 5"
+                                    HorizontalAlignment="Stretch"
+                                    Background="White">
+                                    <Button.Content>
+                                        <TextBlock Text="Далее" TextWrapping="Wrap"
+                                               FontSize="18"
+                                               TextAlignment="Center" FontFamily="{StaticResource RobotoBlack}"/>
+                                    </Button.Content>
+                                </Button>
                                 <TextBlock Text="Найстройки"
                                            TextWrapping="Wrap"
                                            FontSize="18"
@@ -108,7 +135,7 @@
                                 </CheckBox>
                                 <CheckBox Margin="0 15 0 0"
                                           IsTabStop="False"
-                                          IsChecked="{Binding IsUseNeuralNetwork}">
+                                          IsChecked="{Binding IsUseNeuralNetwork, Mode=TwoWay}">
                                     <CheckBox.Content>
                                         <TextBlock Text="Использовать нейросеть для анализа" TextWrapping="Wrap"
                                                    TextAlignment="Left"/>
@@ -117,7 +144,7 @@
                                 <Button FontSize="16"
                                         Command="{Binding LoadPatinentFromPhotoCommand}"
                                         Margin="0 10"
-                                        Padding="20 10"
+                                        Padding="10 5"
                                         Background="White"
                                         HorizontalAlignment="Stretch">
                                     <Button.Content>
@@ -136,13 +163,13 @@
                                 <Button Content="Добавить пациента" 
                                         Command="{Binding AddPatientCommand}"
                                         Margin="0 10"
-                                        Padding="20 10"
+                                        Padding="10"
                                         HorizontalAlignment="Stretch"
                                         Background="White"/>
                                 <Button Content="Очистить список" 
                                         Command="{Binding ClearPatientListCommand}"
                                         Margin="0 10"
-                                        Padding="20 10"
+                                        Padding="10"
                                         HorizontalAlignment="Stretch"
                                         Background="White"/>
                                 <!--<Button Content="Зарегистрировать нового пациента" 
@@ -156,59 +183,41 @@
                                            FontSize="18"
                                            FontWeight="Bold"
                                            FontFamily="{StaticResource RobotoBold}"/>
-                                <ScrollViewer>
-                                    <ListBox MinHeight="280"
+                                <ListBox MinHeight="150"
+                                             Margin="0 10 0 0"
                                              MaxHeight="680"
-                                             Background="AntiqueWhite">
+                                             Background="AntiqueWhite"
+                                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                             ItemsSource="{Binding Notifications}">
                                         <ListBox.ItemTemplate>
                                             <DataTemplate >
-                                                <TextBlock Text="Ошибка валидации строка №55"/>
+                                                <TextBlock Padding="5 5 0 0" Foreground="Red" Text="{Binding}" 
+                                                           MaxWidth="{Binding Path=ActualWidth,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBox}}}" TextWrapping="Wrap"/>
                                             </DataTemplate>
                                         </ListBox.ItemTemplate>
-                                        <ListBoxItem>
-                                            <TextBlock  Padding="5 5 0 0" Foreground="Red" Text="1. Ошибка валидации строка №55"/>
-                                        </ListBoxItem>
-                                        <ListBoxItem>
-                                            <TextBlock  Padding="5 5 0 0"  Foreground="Red" Text="2. Ошибка валидации строка №55"/>
-                                        </ListBoxItem>
-                                        <ListBoxItem>
-                                            <TextBlock  Padding="5 5 0 0" Foreground="Red" Text="3. Ошибка валидации строка №55"/>
-                                        </ListBoxItem>
                                     </ListBox>
-                                </ScrollViewer>
                                 </StackPanel>
                             
-                            <Button FontSize="16"
-                                    Grid.Row="1"
-                                    Command="{Binding StartAnalisisCommand}"
-                                    Padding="20 10"
-                                    HorizontalAlignment="Stretch"
-                                    Background="White">
-                                <Button.Content>
-                                    <TextBlock Text="Далее" TextWrapping="Wrap"
-                                               FontSize="18"
-                                               TextAlignment="Center" FontFamily="{StaticResource RobotoBlack}"/>
-                                </Button.Content>
-                            </Button>
                         </Grid>
                     </ScrollViewer>
                 </Grid>
 
 
                 <DataGrid Grid.Column="3" Grid.Row="1" FontSize="16"
-                  AutoGenerateColumns="False"
-                  ColumnHeaderStyle="{StaticResource DataGrid}"
-                  x:Name="PatientGrid"
-                  ItemsSource="{Binding Patients}"
-                  SelectedItem="{Binding SelectedPatient}"
-                          CanUserAddRows="False"
-                  >
+                          AutoGenerateColumns="False"
+                          ColumnHeaderStyle="{StaticResource DataGrid}"
+                          x:Name="PatientGrid"
+                          ItemsSource="{Binding Patients}"
+                          SelectedItem="{Binding SelectedPatient}"
+                                  CanUserAddRows="False"
+                          >
 
                     <DataGrid.Columns>
+                        <DataGridTextColumn Header="№" Binding="{Binding Path=NumRow}"/>
                         <DataGridTemplateColumn Header="Пациент" MinWidth="300">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Object.FullName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    <TextBlock Text="{Binding Path=Patient.FullName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                 Padding="5 5"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -216,24 +225,24 @@
                         <DataGridTemplateColumn Header="Фото">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Width="100" Height="50" Source="{Binding Object.PhotoUrl, Mode=TwoWay}"/>
+                                    <Image Width="100" Height="50" Source="{Binding PhotoUrl, Mode=TwoWay}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <DataGridTemplateColumn Header="Дата" MinWidth="100">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding Object.DateBirth, Mode=TwoWay}"
-                                     TextAlignment="Center"/>
+                                    <TextBox Text="{Binding DatePhoto, Mode=TwoWay, Converter={StaticResource dateTimeToDateConverter}}"
+                                             TextAlignment="Center"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn x:Name="PhotoUrl" Header="Путь к снимку">
+                        <DataGridTemplateColumn x:Name="PhotoUrl" Header="Путь к снимку" MaxWidth="250">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBox TextWrapping="Wrap"
                                      MouseDoubleClick="TextBox_MouseDoubleClick"
-                                     Text="{Binding Object.PhotoUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                     Text="{Binding PhotoUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -270,74 +279,169 @@
             </TabItem.Header>
             <Grid Background="Red">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.1*"/>
-                    <ColumnDefinition Width="0.8*"/>
-                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition Width="0.05*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="0.05*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="0.05*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="0.05*"/>
-                    <RowDefinition Height="0.8*"/>
-                    <RowDefinition Height="0.05*"/>
+                    <RowDefinition Height="0.01*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="0.01*"/>
                 </Grid.RowDefinitions>
 
-
-                <Grid Grid.Column="1" Grid.Row="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="0.9*"/>
-                        <RowDefinition Height="0.1*"/>
-                    </Grid.RowDefinitions>
-
-                    <DataGrid FontSize="16"
-                      IsReadOnly="True"
-                      ColumnHeaderStyle="{StaticResource DataGrid}"
-                              ItemsSource="{Binding Patients}"
-                              AutoGenerateColumns="False">
-                        <DataGrid.Columns>
-                            <DataGridTemplateColumn Header="Фото">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Image Width="100" Height="50" Source="{Binding Object.PhotoUrl, Mode=TwoWay}"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTextColumn Header="ФИО" Binding="{Binding Object.FullName}"/>
-                            <DataGridTextColumn Header="Дата снимка" Binding="{Binding Object.Date}"/>
-                            <DataGridTemplateColumn Header="Вероятность заболевания">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Grid>
-                                            <TextBlock Text="{Binding Object.ProbobilityDisease}"/>
-                                        </Grid>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTemplateColumn Header="Заключение врача">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="Болен"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
-                        <DataGrid.Resources>
-
-                        </DataGrid.Resources>
-                        <DataGrid.RowDetailsTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal" Margin="0 10">
-                                    <Button Content="Поставить диагноз" Margin="0 0 10 0" Padding="10 5"/>
-                                    <Button Content="Удалить" Margin="10 0" Padding="10 5"/>
+                <Grid Grid.Column="1" Grid.Row="1"
+                        Background="Wheat">
+                    <ScrollViewer>
+                        <Grid Margin="20 20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="0.05*"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Orientation="Vertical"
+                                        Width="Auto"
+                                        Grid.Row="0"
+                                        HorizontalAlignment="Stretch">
+                                <TextBlock Text="Анализ"
+                                           TextWrapping="Wrap"
+                                           FontSize="18"
+                                           FontWeight="Bold"
+                                           FontFamily="{StaticResource RobotoBold}"/>
+                                <Button FontSize="16"
+                                    Grid.Row="1"
+                                    Command="{Binding ProceedCommand}"
+                                        Margin="0 10 0 10"
+                                    Padding="10 5"
+                                    HorizontalAlignment="Stretch"
+                                    Background="White">
+                                    <Button.Content>
+                                        <TextBlock Text="Сохранить и выйти" TextWrapping="Wrap"
+                                               FontSize="18"
+                                               TextAlignment="Center" FontFamily="{StaticResource RobotoBlack}"/>
+                                    </Button.Content>
+                                </Button>
+                                
+                                <TextBlock Text="Статистика анализа нейросетью"
+                                           Visibility="{Binding IsUseNeuralNetwork, Converter={StaticResource boolToVisibilityConverter}}" 
+                                           TextWrapping="Wrap"
+                                           FontSize="18"
+                                           FontWeight="Bold"
+                                           FontFamily="{StaticResource RobotoBold}"/>
+                                <StackPanel Orientation="Horizontal"
+                                           Visibility="{Binding IsUseNeuralNetwork, Converter={StaticResource boolToVisibilityConverter}}"
+                                            HorizontalAlignment="Stretch"
+                                            Margin="0 10 0 10">
+                                    <ItemsControl ItemsSource="{Binding StatisticNeuro}"
+                                                   Margin="0 0 20 0">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Path=Item1}"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                    <ItemsControl ItemsSource="{Binding StatisticNeuro}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Path=Item2}"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
                                 </StackPanel>
-                            </DataTemplate>
-                        </DataGrid.RowDetailsTemplate>
 
-                    </DataGrid>
+                                <TextBlock Text="Сортировка по вероятности"
+                                           Visibility="{Binding IsUseNeuralNetwork, Converter={StaticResource boolToVisibilityConverter}}"
+                                           TextWrapping="Wrap"
+                                           FontSize="18"
+                                           FontWeight="Bold"
+                                           FontFamily="{StaticResource RobotoBold}"/>
+                                <StackPanel Orientation="Horizontal"
+                                           Visibility="{Binding IsUseNeuralNetwork, Converter={StaticResource boolToVisibilityConverter}}"
+                                            VerticalAlignment="Bottom"
+                                            Margin="0 5 0 0">
+                                    <TextBlock Padding="5" Text="от"/>
+                                    <TextBox Padding="5" MinWidth="30" MaxLength="3"
+                                             Text="{Binding MinProbobility, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <TextBlock Padding="5" Text="до"/>
+                                    <TextBox Padding="5" MinWidth="30" MaxLength="3"
+                                             Text="{Binding MaxProbobility, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <TextBlock Padding="5" Text="%"/>
+                                </StackPanel>
+                                
+                                <TextBlock Text="Предупреждения"
+                                           TextWrapping="Wrap"
+                                           Margin="0 10 0 0"
+                                           FontSize="18"
+                                           FontWeight="Bold"
+                                           FontFamily="{StaticResource RobotoBold}"/>
+                                <ListBox MinHeight="150"
+                                             Margin="0 10 0 0"
+                                             MaxHeight="20"
+                                             Background="AntiqueWhite"
+                                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                             ItemsSource="{Binding Notifications}">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate >
+                                            <TextBlock Padding="5 5 0 0" Foreground="Red" Text="{Binding}" 
+                                                           MaxWidth="{Binding Path=ActualWidth,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBox}}}" TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </StackPanel>
 
-                    <Button Grid.Row="1" Margin="10" FontSize="24" Content="Сохранить и выйти"/>
+                        </Grid>
+                    </ScrollViewer>
                 </Grid>
 
 
+                <DataGrid Grid.Column="3" Grid.Row="1" FontSize="16"
+                          AutoGenerateColumns="False"
+                          ColumnHeaderStyle="{StaticResource DataGrid}"
+                          ItemsSource="{Binding ResultPatients}"
+                          SelectedItem="{Binding SelectedPatient}"
+                          CanUserAddRows="False"
+                          >
 
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="№" Binding="{Binding Path=NumRow}"/>
+                        <DataGridTemplateColumn Header="Пациент" MinWidth="300">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=Patient.FullName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                Padding="5 5"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Фото">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Width="100" Height="50" Source="{Binding PhotoUrl, Mode=TwoWay}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="Результат нейросети"
+                                            MinWidth="100"
+                                            Visibility="{Binding IsUseNeuralNetwork, Converter={StaticResource boolToVisibilityConverter}}" 
+                                            Binding="{Binding ProbobilityDisease}"/>
+                        <DataGridTextColumn Header="Заключение"
+                                            MinWidth="200"/>
+                    </DataGrid.Columns>
+                    <DataGrid.Resources>
+
+                    </DataGrid.Resources>
+
+                    <DataGrid.RowDetailsTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Margin="10 0" VerticalAlignment="Top">
+                                <Button Content="Просмотреть снимок" Margin="10 5" Height="30" Padding="10 5"
+                                        Command="{Binding Path=DataContext.ShowSnapshotCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}}"/>
+                                <Button Content="Поставить диагноз" Margin="10 0" Height="30"  Padding="10 5"
+                                        Command="{Binding Path=DataContext.LoadPhotoUrlCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGrid.RowDetailsTemplate>
+
+                </DataGrid>
             </Grid>
         </TabItem>
     </TabControl>
