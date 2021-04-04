@@ -315,7 +315,7 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
         {
             if(SelectedPatient != null)
             {
-                var findWindow = new SearchPatientVM();
+                var findWindow = new SearchPatientVM(true);
                 AppContainer.Instance.ViewNavigator.NavigateToModal(findWindow);
                 if (findWindow.SelectedPatient != null)
                     SelectedPatient.Patient = findWindow.SelectedPatient;

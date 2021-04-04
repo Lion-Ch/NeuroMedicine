@@ -1,4 +1,5 @@
 ﻿using DataLayer.Models.Enums;
+using DataLayer.SqlServer.Tables;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,12 @@ namespace DataLayer.Models.Classes
         /// Врач, поставивший диагноз
         /// </summary>
         public User RefUser { get; set; }
+
+        public int? RefReceptionId { get; set; }
+        /// <summary>
+        /// Запись на прием
+        /// </summary>
+        public Reception RefReception { get; set; }
 
         /// <summary>
         /// Дата

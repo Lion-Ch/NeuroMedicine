@@ -1,0 +1,81 @@
+﻿<local:BaseView x:Class="NeuroMedicine.Views.WindowView.RegistryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NeuroMedicine.Views.WindowView"
+             xmlns:vm="clr-namespace:NeuroMedicine.BusinessLayer.ViewModels;assembly=BusinessLayer"
+             mc:Ignorable="d" 
+             d:DesignHeight="768" d:DesignWidth="1366">
+    <local:BaseView.DataContext>
+        <vm:RegistryVM/>
+    </local:BaseView.DataContext>
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Background="White"
+                    Grid.Column="1" Grid.Row="1">
+
+            <StackPanel Orientation="Vertical" 
+                    VerticalAlignment="Center"
+                    Grid.Column="1" 
+                    Background="White">
+                <TextBlock FontSize="22"
+                           FontWeight="Bold"
+                           VerticalAlignment="Center"
+                           Text="Пациент"/>
+                <Border BorderBrush="{StaticResource Blue}" BorderThickness="2"
+                            Padding="10" 
+                            Margin="0 10">
+                    <TextBlock FontSize="16"
+                               Text="{Binding SelectedPatient.FullName}" 
+                               VerticalAlignment="Center"/>
+                </Border>
+                <Button HorizontalAlignment="Left"
+                        FontWeight="Bold"
+                        FontSize="16"
+                        Margin="0 5 0 10"
+                        Padding="20 10"
+                        Content="Выбрать пациента"
+                        Style="{StaticResource ButtonHover}"
+                        Command="{Binding SearchPatientCommand}"/>
+                <TextBlock FontSize="22"
+                           FontWeight="Bold"
+                           VerticalAlignment="Center"
+                           Text="Услуга"/>
+                <ComboBox FontSize="16"
+                        Margin="0 10"
+                        VerticalAlignment="Center"
+                        Padding="10"
+                        ItemsSource="{Binding DiagnosticTypes}"
+                        DisplayMemberPath="Name"
+                        SelectedValue="{Binding SelectedDiagnosticType}"
+                        SelectedValuePath="Id"/>
+                <TextBlock FontSize="18"
+                           Margin="0 20 0 0"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center"
+                           Text="{Binding Result}"
+                           Foreground="{Binding ColorMessage}"/>
+                <Button HorizontalAlignment="Stretch"
+                        FontWeight="Bold"
+                        FontSize="18"
+                        Margin="40 20 40 0"
+                        Padding="0 10"
+                        Content="Записать"
+                        Style="{StaticResource ButtonHover}"
+                        Command="{Binding WriteSeansCommand}"/>
+
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+    
+</local:BaseView>

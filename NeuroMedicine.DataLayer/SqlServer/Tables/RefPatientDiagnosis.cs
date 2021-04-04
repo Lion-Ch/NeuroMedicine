@@ -27,6 +27,8 @@ namespace DataLayer.SqlServer.Tables
         /// </summary>
         public RefUser RefUser { get; set; }
 
+        public int? RefReceptionId { get; set; }
+        public RefReception RefReception { get; set; }
         /// <summary>
         /// Дата обследования
         /// </summary>

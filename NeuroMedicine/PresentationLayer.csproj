@@ -155,6 +155,9 @@
     <Compile Include="Views\WindowView\PersonalResultView.xaml.cs">
       <DependentUpon>PersonalResultView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\WindowView\RegistryView.xaml.cs">
+      <DependentUpon>RegistryView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\WindowView\ResultsDiagnosticsView.xaml.cs">
       <DependentUpon>ResultsDiagnosticsView.xaml</DependentUpon>
     </Compile>
@@ -223,6 +226,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\WindowView\PersonalResultView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WindowView\RegistryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

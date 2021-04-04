@@ -93,12 +93,25 @@
     <Compile Include="Migrations\202104041618126_ChangeLengthFullNameRefPatient.designer.cs">
       <DependentUpon>202104041618126_ChangeLengthFullNameRefPatient.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202104041946163_AddTableRefReception.cs" />
+    <Compile Include="Migrations\202104041946163_AddTableRefReception.designer.cs">
+      <DependentUpon>202104041946163_AddTableRefReception.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104041953306_AddNewFieldRefPatientDiagnosis.cs" />
+    <Compile Include="Migrations\202104041953306_AddNewFieldRefPatientDiagnosis.designer.cs">
+      <DependentUpon>202104041953306_AddNewFieldRefPatientDiagnosis.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104042051411_NullableIdReception.cs" />
+    <Compile Include="Migrations\202104042051411_NullableIdReception.designer.cs">
+      <DependentUpon>202104042051411_NullableIdReception.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Classes\DiagnosticTypeDictionary.cs" />
     <Compile Include="Models\Classes\GenderTypeDictionary.cs" />
     <Compile Include="Models\Classes\DiagnosysTypeDictionary.cs" />
     <Compile Include="Models\Classes\Patient.cs" />
     <Compile Include="Models\Classes\PatientDiagnosis.cs" />
+    <Compile Include="Models\Classes\Reception.cs" />
     <Compile Include="Models\Classes\User.cs" />
     <Compile Include="Models\Classes\UserTypeDictionary.cs" />
     <Compile Include="Models\Enums\DiagnosticType.cs" />
@@ -107,6 +120,7 @@
     <Compile Include="Models\Enums\UserType.cs" />
     <Compile Include="Models\Factories\PatientDiagnosisFactory.cs" />
     <Compile Include="Models\Factories\PatientFactory.cs" />
+    <Compile Include="Models\Factories\ReceptionFactory.cs" />
     <Compile Include="Models\Factories\UserFactory.cs" />
     <Compile Include="Models\PresentationVM\ListItem.cs" />
     <Compile Include="Models\PresentationVM\NewPatientPVM.cs" />
@@ -116,6 +130,7 @@
     <Compile Include="SqlServer\DBContext.cs" />
     <Compile Include="SqlServer\Tables\RefPatient.cs" />
     <Compile Include="SqlServer\Tables\RefPatientDiagnosis.cs" />
+    <Compile Include="SqlServer\Tables\RefReception.cs" />
     <Compile Include="SqlServer\Tables\RefUser.cs" />
     <Compile Include="SqlServer\Tables\RefUserAccount.cs" />
   </ItemGroup>
@@ -149,6 +164,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202104041618126_ChangeLengthFullNameRefPatient.resx">
       <DependentUpon>202104041618126_ChangeLengthFullNameRefPatient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104041946163_AddTableRefReception.resx">
+      <DependentUpon>202104041946163_AddTableRefReception.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104041953306_AddNewFieldRefPatientDiagnosis.resx">
+      <DependentUpon>202104041953306_AddNewFieldRefPatientDiagnosis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104042051411_NullableIdReception.resx">
+      <DependentUpon>202104042051411_NullableIdReception.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

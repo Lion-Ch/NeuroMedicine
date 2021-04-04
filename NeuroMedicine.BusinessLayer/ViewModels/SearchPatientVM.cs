@@ -15,6 +15,7 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
 {
     public class SearchPatientVM: BaseViewModel, ICloseWindow
     {
+        private bool _isSearchByReception = false;
 
         private string _searchText;
         public string SearchText
@@ -61,8 +62,16 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
             //TODO: Сделать обращение к БД поиск по ФИО
             if(!String.IsNullOrEmpty(SearchText))
             {
-                Patients = AppContainer.Instance.SQLDataManager.FindPatients(SearchText)
-                    .ToObservable();
+                if(!_isSearchByReception)
+                {
+                    Patients = AppContainer.Instance.SQLDataManager.FindPatients(SearchText)
+                        .ToObservable();
+                }
+                else
+                {
+                    Patients = AppContainer.Instance.SQLDataManager.FindPatientsByReception(SearchText)
+                           .ToObservable();
+                }
             }
         }
         private void SelectPatient(object obj)
@@ -71,9 +80,11 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
             Close?.Invoke();
         }
 
-        public SearchPatientVM()
+        public SearchPatientVM(bool isSearchByReception = false)
         {
             HeaderVM = "Поиск в базе";
+            _isSearchByReception = isSearchByReception;
+
             _searchCommand = new DelegateCommand(this.Search);
             _selectPatientCommand = new DelegateCommand(this.SelectPatient);
         }

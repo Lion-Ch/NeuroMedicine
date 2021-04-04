@@ -70,6 +70,7 @@
     <Compile Include="ViewModels\PatientsVM.cs" />
     <Compile Include="ViewModels\PersonalCabinetVM.cs" />
     <Compile Include="ViewModels\PhotoVM.cs" />
+    <Compile Include="ViewModels\RegistryVM.cs" />
     <Compile Include="ViewModels\SearchPatientVM.cs" />
   </ItemGroup>
   <ItemGroup>

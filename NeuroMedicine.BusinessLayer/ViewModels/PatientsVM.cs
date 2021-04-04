@@ -25,7 +25,6 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
 
 
         private string _colorMessage;
-
         public string ColorMessage
         {
             get { return _colorMessage; }
@@ -90,8 +89,8 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
             {
                 Errors = "Пациент успешно добавлен в систему!";
                 ColorMessage = "Green";
-                Patient = new NewPatientPVM() { DateBirth = DateTime.Now };
                 AppContainer.Instance.SQLDataManager.AddNewPatient(Patient);
+                Patient = new NewPatientPVM() { DateBirth = DateTime.Now };
             }
             else
             {

@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NeuroMedicine.Views.ModalWindowView"
              xmlns:b="clr-namespace:NeuroMedicine.Views.WindowView"
-             MaxWidth="1366"
-             MaxHeight="768">
+             MaxWidth="1000"
+             MaxHeight="500">
         <Grid>
                 <Image Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Canvas}}, Path=ActualWidth}"
                        Height="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Canvas}}, Path=ActualWidth}"

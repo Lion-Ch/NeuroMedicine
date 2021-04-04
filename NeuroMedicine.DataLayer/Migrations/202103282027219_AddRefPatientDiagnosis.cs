@@ -21,7 +21,7 @@
                         PhotoUrl = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.RefPatients", t => t.RefPatientId, cascadeDelete: true)
+                .ForeignKey("dbo.RefPatients", t => t.RefPatientId, cascadeDelete: false)
                 .ForeignKey("dbo.RefUsers", t => t.RefUserId, cascadeDelete: true)
                 .Index(t => t.RefPatientId)
                 .Index(t => t.RefUserId);

@@ -30,6 +30,7 @@ namespace NeuroMedicine.Views.ViewNavigator
             _viewModelToViewMap.Add(typeof(SearchPatientVM), typeof(SearchPatientModalWindow));
             _viewModelToViewMap.Add(typeof(ConfirmationModalVM), typeof(ConfirmModalWindow));
             _viewModelToViewMap.Add(typeof(DiagnosisVM), typeof(DiagnosisModalWindow));
+            _viewModelToViewMap.Add(typeof(RegistryVM), typeof(RegistryView));
         }
         //Перемещение по самому приложению
         public void NavigateToWindow(BaseViewModel newView)

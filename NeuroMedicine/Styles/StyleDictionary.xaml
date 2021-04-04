@@ -74,15 +74,13 @@
         <Style.Setters>
             <Setter Property="Background" Value="{StaticResource Blue}"/>
             <Setter Property="Foreground" Value="White"/>
-            <Setter Property="BorderBrush" Value="{StaticResource Blue}"/>
             <Setter Property="TextElement.FontSize" Value="16"/>
             <Setter Property="Padding" Value="10"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border Background="{TemplateBinding Background}" 
-                                Padding="{TemplateBinding Padding}"
-                                BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                Padding="{TemplateBinding Padding}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
@@ -93,8 +91,7 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="BorderBrush" Value="{StaticResource Blue}"/>
                 <Setter Property="BorderThickness" Value="2"/>
-                <Setter Property="Button.Background" Value="White"/>
-                <Setter Property="Button.Foreground" Value="{StaticResource Blue}"/>
+                <Setter Property="Button.Background" Value="#30577b"/>
                 <Setter Property="FontFamily" Value="{StaticResource RobotoBlack}"/>
                 <Setter Property="TextElement.FontSize" Value="18"/>
             </Trigger>

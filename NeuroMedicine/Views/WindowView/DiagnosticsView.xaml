@@ -237,7 +237,8 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <DatePicker Text="{Binding DatePhoto, Mode=TwoWay, Converter={StaticResource dateTimeToDateConverter}}"
-                                                MinHeight="50"/>
+                                                MinHeight="50"
+                                                Padding="5"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -245,8 +246,9 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBox TextWrapping="Wrap"
-                                     MouseDoubleClick="TextBox_MouseDoubleClick"
-                                     Text="{Binding PhotoUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                             MouseDoubleClick="TextBox_MouseDoubleClick"
+                                             Text="{Binding PhotoUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                               Padding="5"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -259,13 +261,17 @@
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" Margin="10 0" VerticalAlignment="Top">
                                 <Button Content="Удалить" 
+                                        Style="{StaticResource ButtonHover}"
                                         Command="{Binding Path=DataContext.DeletePatientCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}}"
                                         Margin="10 5" Padding="10 5" Height="30" />
                                 <Button Content="Изменить пациента" Margin="10 0" Height="30" Padding="10 5"
+                                        Style="{StaticResource ButtonHover}"
                                         Command="{Binding Path = DataContext.OpenFindPatientWindowCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}}"/>
                                 <Button Content="Просмотреть снимок" Margin="10 0" Height="30" Padding="10 5"
+                                        Style="{StaticResource ButtonHover}"
                                         Command="{Binding Path=DataContext.ShowSnapshotCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}}"/>
                                 <Button Content="Указать путь к снимку" Margin="10 0" Height="30"  Padding="10 5"
+                                        Style="{StaticResource ButtonHover}"
                                         Command="{Binding Path=DataContext.LoadPhotoUrlCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}}"/>
                             </StackPanel>
                         </DataTemplate>
@@ -373,25 +379,6 @@
                                     <TextBlock Padding="5" Text="%"/>
                                 </StackPanel>
                                 
-                                <TextBlock Text="Предупреждения"
-                                           TextWrapping="Wrap"
-                                           Margin="0 10 0 0"
-                                           FontSize="18"
-                                           FontWeight="Bold"
-                                           FontFamily="{StaticResource RobotoBold}"/>
-                                <ListBox MinHeight="150"
-                                             Margin="0 10 0 0"
-                                             MaxHeight="20"
-                                             Background="AntiqueWhite"
-                                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                             ItemsSource="{Binding Notifications}">
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate >
-                                            <TextBlock Padding="5 5 0 0" Foreground="Red" Text="{Binding}" 
-                                                           MaxWidth="{Binding Path=ActualWidth,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBox}}}" TextWrapping="Wrap"/>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
                             </StackPanel>
 
                         </Grid>
@@ -440,9 +427,12 @@
                     <DataGrid.RowDetailsTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" Margin="10 0" VerticalAlignment="Top">
-                                <Button Content="Просмотреть снимок" Margin="10 5" Height="30" Padding="10 5"
+                                <Button Content="Просмотреть снимок" Margin="10 5" Style="{StaticResource ButtonHover}"
+                                        FontSize="14"
                                         Command="{Binding Path=DataContext.ShowSnapshotCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}}"/>
-                                <Button Content="Поставить диагноз" Margin="10 0" Height="30"  Padding="10 5"
+                                <Button Content="Поставить диагноз" Margin="10 5"
+                                        Style="{StaticResource ButtonHover}"
+                                        FontSize="14"
                                         Command="{Binding Path=DataContext.SetDiagnosisCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}}"/>
                             </StackPanel>
                         </DataTemplate>

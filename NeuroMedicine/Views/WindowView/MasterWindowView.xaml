@@ -69,7 +69,7 @@
                             Style="{StaticResource MainMenuItem}"
                             MouseDown="Patients_MouseDown">
                     <Image Margin="10" Source="/NeuroMedicine;component/Icons/hospitalisation.png" Width="30"/>
-                    <TextBlock Text="Пациенты" 
+                    <TextBlock Text="Добавление нового пациента" 
                                VerticalAlignment="Center"
                                HorizontalAlignment="Stretch"
                                Margin="10 0"/>
@@ -90,12 +90,13 @@
         <Grid Background="AntiqueWhite"
               Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="100"/>
+                <RowDefinition Height="60"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="0" Grid.Column="1" 
                        Text="{Binding DataContext.HeaderVM}"
+                       Foreground="#37648d"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        FontSize="32"

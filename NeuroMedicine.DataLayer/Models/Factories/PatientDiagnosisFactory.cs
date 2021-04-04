@@ -26,6 +26,7 @@ namespace DataLayer.Models.Factories
             newOb.Date = oldObj.Date;
             newOb.DatePhoto = oldObj.DatePhoto;
             newOb.PhotoUrl = oldObj.PhotoUrl;
+            newOb.RefReceptionId = oldObj.RefReceptionId;
 
             return newOb;
         }
@@ -44,6 +45,8 @@ namespace DataLayer.Models.Factories
             newOb.ResultNeuralNetwork = oldObj.ResultNeuralNetwork;
             newOb.Date = oldObj.Date;
             newOb.RefPatient = PatientFactory.Create(oldObj.RefPatient);
+            newOb.RefUser = UserFactory.Create(oldObj.RefUser);
+            newOb.RefReception = ReceptionFactory.Create(oldObj.RefReception);
 
             return newOb;
         }

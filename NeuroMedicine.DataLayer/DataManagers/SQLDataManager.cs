@@ -23,30 +23,38 @@ namespace DataLayer.DataManagers
 			return dataContext;
 		}
 
+		/// <summary>
+		/// Ищет пациента по ФИО, который записан на прием
+		/// </summary>
+		public List<Patient> FindPatientsByReception(string fullname)
+		{
+			Encryption encryption = new Encryption();
+			using (var dataContext = GetNewDataContext())
+			{
+				var str = "%" + fullname + "%";
+
+				return dataContext.RefReceptions.Include(x=>x.RefPatient)
+					.Where(x => DbFunctions.Like(x.RefPatient.FullName, str)
+						&& x.IsActive)
+					.ToList()
+					.Select(x => PatientFactory.Create(x.RefPatient)).ToList();
+			}
+		}
+		public void WriteSeans(Reception reception)
+		{
+			using (var context = GetNewDataContext())
+			{
+				context.RefReceptions.Add(ReceptionFactory.Create(reception));
+				context.SaveChanges();
+			}
+		}
 		public void AddNewPatient(NewPatientPVM patient)
 		{
-			try
+			using (var context = GetNewDataContext())
 			{
-				using (var context = GetNewDataContext())
-				{
-					var pat = PatientFactory.Create(patient);
-					context.RefPatients.Add(pat);
-					context.SaveChanges();
-				}
-			}
-			catch (DbEntityValidationException e)
-			{
-				foreach (var eve in e.EntityValidationErrors)
-				{
-					Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-						eve.Entry.Entity.GetType().Name, eve.Entry.State);
-					foreach (var ve in eve.ValidationErrors)
-					{
-						Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-							ve.PropertyName, ve.ErrorMessage);
-					}
-				}
-				throw;
+				var pat = PatientFactory.Create(patient);
+				context.RefPatients.Add(pat);
+				context.SaveChanges();
 			}
 		}
 		public void SaveDiagnosis(PatientPVM patient)
@@ -123,6 +131,17 @@ namespace DataLayer.DataManagers
 				int i = 0;
 				foreach(var pD in patientDiagnoses)
 				{
+					var listReception = dataContext.RefReceptions
+						.Where(x => x.RefPatientId == pD.Patient.Id
+							&& x.DiagnosticType == pD.DiagnosticType)
+						.ToList();
+					foreach(var reception in listReception)
+                    {
+						reception.IsActive = false;
+						dataContext.RefReceptions.Attach(reception);
+						dataContext.Entry(reception).State = EntityState.Modified;
+                    }
+					var c = PatientDiagnosisFactory.Create(pD);
 					dataContext.RefPatientDiagnoses.Add(PatientDiagnosisFactory.Create(pD));
 
 					if(++i == _numSaveRecord)
