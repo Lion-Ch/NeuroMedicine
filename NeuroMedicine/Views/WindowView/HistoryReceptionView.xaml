@@ -4,8 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NeuroMedicine.Views.WindowView"
+             xmlns:conv="clr-namespace:NeuroMedicine.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="768" d:DesignWidth="1366">
+    <local:BaseView.Resources>
+        <conv:DateTimeToDateTimeConverter x:Key="dateTimeToDateConverter"/>
+        <conv:BoolToVisibilityConverter x:Key="boolToVisibilityConverter"/>
+        <conv:NullImageConverter x:Key="nullImageConverter"/>
+        <conv:DiagnosisTypeConverter x:Key="diagnosisTypeConverter"/>
+    </local:BaseView.Resources>
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*"/>
@@ -25,7 +32,7 @@
                         Margin="20 0"
                         Grid.Row="0">
                 <TextBlock Text="Поиск пациента"
-                           FontWeight="Bold"
+                           FontFamily="{StaticResource RobotoBlack}"
                            FontSize="18"/>
                 <TextBox Margin="0 5"
                          Padding="5" 
@@ -47,11 +54,34 @@
         <StackPanel Grid.Row="1"
                     Orientation="Horizontal"
                     Margin="20 0">
-            <Button Visibility="{Binding}" Padding="10 5" VerticalAlignment="Center" Content="1" />
-            <Button Visibility="{Binding}" Margin="10 0 0 0" Padding="20 5" VerticalAlignment="Center" Content="Назад" />
-            <Button Visibility="{Binding}" Margin="10 0 0 0" Padding="20 5" VerticalAlignment="Center" Content="4" />
-            <Button Visibility="{Binding}" Margin="10 0 0 0" Padding="20 5" VerticalAlignment="Center" Content="Вперед" />
-            <Button Visibility="{Binding}" Margin="10 0 0 0" Padding="20 5" VerticalAlignment="Center" Content="10" />
+            <Button Visibility="{Binding VisibleFirstButton, Converter={StaticResource boolToVisibilityConverter}}" Padding="10 5" VerticalAlignment="Center" Content="1"
+                    Background="{StaticResource Blue}" Foreground="White" FontSize="14"
+                    Command="{Binding FirstPageCommand}" />
+            <Button Visibility="{Binding VisibleBackButton, Converter={StaticResource boolToVisibilityConverter}}" Margin="10 0 0 0" Padding="20 5" VerticalAlignment="Center" Content="Назад"
+                    Background="{StaticResource Blue}" Foreground="White" FontSize="14"
+                    Command="{Binding BackPageCommand}"/>
+            <Border BorderBrush="{StaticResource Blue}"  Margin="10 0 0 0" Padding="20 5" VerticalAlignment="Center" BorderThickness="4">
+                        <TextBlock Visibility="{Binding}" 
+                           Text="{Binding CurrPage}"
+                           FontFamily="{StaticResource RobotoBlack}"
+                           Foreground="{StaticResource Blue}"/>
+            </Border>
+            <Button Visibility="{Binding VisibleNextButton, Converter={StaticResource boolToVisibilityConverter}}" 
+                    Margin="10 0 0 0" Padding="20 5" VerticalAlignment="Center" Content="Вперед"
+                    Background="{StaticResource Blue}" Foreground="White" FontSize="14"
+                    Command="{Binding NextPageCommand}" />
+            <Button Visibility="{Binding VisibleLastButton, Converter={StaticResource boolToVisibilityConverter}}" Margin="10 0 0 0" Padding="20 5" VerticalAlignment="Center" Content="{Binding MaxPage}"
+                    Background="{StaticResource Blue}" Foreground="White" FontSize="14"
+                    Command="{Binding LastPageCommand}" />
+
+            <TextBlock Margin="50 0 0 0" Text="Дата от" VerticalAlignment="Center"
+                       FontSize="16"/>
+            <DatePicker Margin="10 0 0 0" VerticalAlignment="Center" SelectedDate="{Binding MinDate, UpdateSourceTrigger=PropertyChanged}" 
+                        BorderBrush="{StaticResource Blue}" BorderThickness="2"/>
+            <TextBlock Margin="10 0 0 0" Text="до" VerticalAlignment="Center"
+                       FontSize="16"/>
+            <DatePicker Margin="10 0 0 0" VerticalAlignment="Center" SelectedDate="{Binding MaxDate, UpdateSourceTrigger=PropertyChanged}"
+                        BorderBrush="{StaticResource Blue}" BorderThickness="2"/>
         </StackPanel>
         
         <Grid Grid.Row="2"
@@ -60,24 +90,55 @@
             <DataGrid FontSize="16"
                       IsReadOnly="True"
                       ColumnHeaderStyle="{StaticResource DataGrid}"
-                              AutoGenerateColumns="False">
+                      AutoGenerateColumns="False"
+                      ItemsSource="{Binding Patients}"
+                      SelectedItem="{Binding SelectedPatient}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Пациент" MinWidth="250"  Binding="{Binding Object.FullName}"/>
-                    <DataGridTextColumn Header="Дата обследования" MinWidth="250" Binding="{Binding Object.Date}"/>
-                    <DataGridTemplateColumn Header="Результат анализа нейросети" MinWidth="250">
+                    <DataGridTemplateColumn Header="Пациент">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Grid>
-                                    <TextBlock Text="{Binding Object.ProbobilityDisease}"/>
-                                </Grid>
+                            <TextBlock Text="{Binding Path=Patient.FullName}"
+                                       MinWidth="250"
+                                       Padding="5"/>
+                        </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Дата обследования" MaxWidth="150">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Date, Converter={StaticResource dateTimeToDateConverter}}"
+                                           TextAlignment="Center"
+                                           Padding="5"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="Доткор" MinWidth="250"  Binding="{Binding Object.FullName}"/>
-                    <DataGridTemplateColumn Header="Заключение" MinWidth="250">
+                    <DataGridTemplateColumn Header="Результат анализа нейросети"
+                                            MaxWidth="100">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="Болен"/>
+                                <TextBlock Text="{Binding ProbobilityDisease,StringFormat=\{0:0.00\}}"
+                                           Padding="5"
+                                           TextAlignment="Center"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Доктор" MinWidth="250">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding User.FullName}"
+                                           Padding="5"
+                                           TextAlignment="Center"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Заключение" 
+                                            MinWidth="100">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=DiagnosysType, Converter={StaticResource diagnosisTypeConverter}}"
+                                           Padding="5"
+                                           FontFamily="{StaticResource RobotoBlack}"
+                                           TextAlignment="Center"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -88,7 +149,8 @@
                 <DataGrid.RowDetailsTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal" Margin="0 10">
-                            <Button Content="Изменить диагноз" Margin="0 0 10 0" Padding="10 5"/>
+                            <Button Content="Изменить диагноз" Margin="0 0 10 0" Padding="10 5"
+                                    Command="{Binding Path=DataContext.SetDiagnosisCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}}"/>
                         </StackPanel>
                     </DataTemplate>
                 </DataGrid.RowDetailsTemplate>

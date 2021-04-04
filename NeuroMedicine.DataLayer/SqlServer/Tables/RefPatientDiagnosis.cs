@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace DataLayer.SqlServer.Tables
 {
+    /// <summary>
+    /// Диагнозы пациента
+    /// </summary>
     public class RefPatientDiagnosis
     {
         public int Id { get; set; }
@@ -25,9 +28,14 @@ namespace DataLayer.SqlServer.Tables
         public RefUser RefUser { get; set; }
 
         /// <summary>
-        /// Дата
+        /// Дата обследования
         /// </summary>
         public DateTime Date { get; set; }
+
+        /// <summary>
+        /// Дата обследования
+        /// </summary>
+        public DateTime DatePhoto { get; set; }
 
         /// <summary>
         /// Тип диагностики

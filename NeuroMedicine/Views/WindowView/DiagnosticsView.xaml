@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:local="clr-namespace:NeuroMedicine.Views.WindowView"
              xmlns:vm="clr-namespace:NeuroMedicine.BusinessLayer.ViewModels;assembly=BusinessLayer"
              xmlns:conv="clr-namespace:NeuroMedicine.Converters"
@@ -12,6 +13,7 @@
         <conv:DateTimeToDateConverter x:Key="dateTimeToDateConverter"/>
         <conv:BoolToVisibilityConverter x:Key="boolToVisibilityConverter"/>
         <conv:NullImageConverter x:Key="nullImageConverter"/>
+        <conv:DiagnosisTypeConverter x:Key="diagnosisTypeConverter"/>
     </local:BaseView.Resources>
     <local:BaseView.DataContext>
         <vm:DiagnosticVM/>
@@ -358,6 +360,7 @@
                                            FontWeight="Bold"
                                            FontFamily="{StaticResource RobotoBold}"/>
                                 <StackPanel Orientation="Horizontal"
+                                            Name="FilterStackPanel"
                                            Visibility="{Binding IsUseNeuralNetwork, Converter={StaticResource boolToVisibilityConverter}}"
                                             VerticalAlignment="Bottom"
                                             Margin="0 5 0 0">
@@ -423,10 +426,12 @@
                         </DataGridTemplateColumn>
                         <DataGridTextColumn Header="Результат нейросети"
                                             MinWidth="100"
-                                            Visibility="{Binding IsUseNeuralNetwork, Converter={StaticResource boolToVisibilityConverter}}" 
-                                            Binding="{Binding ProbobilityDisease,StringFormat=\{0:0.00\}}"/>
+                                            Visibility="{Binding Path=DataContext.IsUseNeuralNetwork, Source={x:Reference Name=dummyElement}}" 
+                                            Binding="{Binding ProbobilityDisease,StringFormat=\{0:0.00\}, TargetNullValue={x:Static sys:String.Empty}}"/>
                         <DataGridTextColumn Header="Заключение"
-                                            MinWidth="200"/>
+                                            MinWidth="200"
+                                            FontFamily="{StaticResource RobotoBlack}"
+                                            Binding="{Binding Path=DiagnosysType, Converter={StaticResource diagnosisTypeConverter}}"/>
                     </DataGrid.Columns>
                     <DataGrid.Resources>
 
@@ -444,6 +449,7 @@
                     </DataGrid.RowDetailsTemplate>
 
                 </DataGrid>
+                <FrameworkElement x:Name="dummyElement" Visibility="Collapsed"/>
             </Grid>
         </TabItem>
     </TabControl>

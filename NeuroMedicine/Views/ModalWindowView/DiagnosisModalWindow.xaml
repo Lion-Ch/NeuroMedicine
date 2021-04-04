@@ -12,6 +12,7 @@
     <b:BaseView.Resources>
         <conv:DateTimeToDateConverter x:Key="dateConv"/>
         <conv:NullImageConverter x:Key="imgConv"/>
+        <conv:DateBirthConverter x:Key="dateBirthConv"/>
     </b:BaseView.Resources>
             <Grid Background="White">
         <Grid.ColumnDefinitions>
@@ -53,7 +54,7 @@
                        FontSize="18"
                        Foreground="{StaticResource Blue}"
                        FontFamily="{StaticResource RobotoBlack}"/>
-                <TextBlock Text="78"
+                <TextBlock Text="{Binding Path=PatientPVM.Patient.DateBirth,Converter={StaticResource dateBirthConv}}"
                            Margin="10 0"
                            FontSize="18"
                            Foreground="{StaticResource Blue}"
@@ -107,12 +108,11 @@
             <Button FontSize="16"
                     HorizontalAlignment="Left"
                     Content="Сохранить"
+                    Style="{StaticResource ButtonHover}"
                     Grid.Row="1"
                     Command="{Binding SaveCommand}"
-                    Margin="0 20 0 0"
-                    Padding="40 10"
-                    Background="White">
-            </Button>
+                    Padding="60 10"
+                    Margin="0 10 0 0"/>
         </StackPanel>
     </Grid>
 </b:BaseView>

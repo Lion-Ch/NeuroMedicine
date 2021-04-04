@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.ComponentModel;
 using System.Windows.Data;
+using System.Linq;
 
 namespace NeuroMedicine.BusinessLayer.ViewModels
 {
@@ -213,6 +214,7 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
 
         private DelegateCommand _openFindPatientWindowCommand;
         public ICommand OpenFindPatientWindowCommand { get { return _openFindPatientWindowCommand; } }
+
         private DelegateCommand _setDiagnosisCommand;
         public ICommand SetDiagnosisCommand { get { return _setDiagnosisCommand; } }
         #endregion
@@ -240,7 +242,10 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
                 case 2:
                     {
                         if (Notifications.Count == 0)
-                            NextPage();
+                        {
+                            SaveDiagnosesPatients();
+                            AppContainer.Instance.ViewNavigator.NavigateToView(new PersonalCabinetVM());
+                        }
                     }
                     break;
             }
@@ -260,7 +265,7 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
 
         private void AddPatient(object obj)
         {
-            Patients.Add(new PatientPVM() { NumRow = _patientNumerator++, DatePhoto=DateTime.Now });
+            Patients.Add(CreatePatientPVM());
         }
 
         private void DeletePatient(object obj)
@@ -271,7 +276,6 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
 
         private void RegisterNewPatient(object obj)
         {
-            throw new NotImplementedException();
         }
 
         private void ClearPatientList(object obj)
@@ -286,10 +290,10 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
             {
                 foreach (var photoUrl in a)
                 {
-                    var patient = new PatientPVM() { PhotoUrl = photoUrl, NumRow = _patientNumerator++ };
+                    var patient = CreatePatientPVM(photoUrl);
                     if (!IsReadDateFromNamePhoto)
                         patient.DatePhoto = DateTime.Now;
-                    patient.Patient = new Patient();
+                    patient.Patient = AppContainer.Instance.SQLDataManager.FindPatients("ел").FirstOrDefault();
                     Patients.Add(patient);
                 }
             }
@@ -322,6 +326,19 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
             if(SelectedPatient != null)
                 AppContainer.Instance.ViewNavigator.NavigateToModal(new DiagnosisVM(SelectedPatient), true);
         }
+
+        private PatientPVM CreatePatientPVM(string photoUrl = null)
+        {
+            return new PatientPVM()
+            {
+                NumRow = _patientNumerator++,
+                DatePhoto = DateTime.Now,
+                DiagnosticType = (DataLayer.Models.Enums.DiagnosticType)SelectedDiagnosticType,
+                Date = DateTime.Now,
+                User = AppContainer.Instance.CurrentUser,
+                PhotoUrl = photoUrl
+            };
+        }
         #endregion
 
         #region Публичные методы
@@ -331,6 +348,10 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
 
         #region Приватные методы
 
+        private void SaveDiagnosesPatients()
+        {
+            AppContainer.Instance.SQLDataManager.AddPatientDiagnoses(Patients.ToList());
+        }
         private void CalculateStatistic()
         {
             int[] numPat = new int[4];
@@ -350,7 +371,7 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
             StatisticNeuro.Add(("85 - 100 %", numPat[0].ToString()).ToTuple());
             StatisticNeuro.Add(("50 - 85 %", numPat[1].ToString()).ToTuple());
             StatisticNeuro.Add(("25 - 50 %", numPat[2].ToString()).ToTuple());
-            StatisticNeuro.Add(("0 - 0 %", numPat[3].ToString()).ToTuple());
+            StatisticNeuro.Add(("0 - 25 %", numPat[3].ToString()).ToTuple());
         }
         private void NextPage()
         {

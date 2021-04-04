@@ -17,7 +17,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.Background>
-            <ImageBrush ImageSource="/NeuroMedicine;component/Img/Background.jpg"/>
+            <ImageBrush ImageSource="/NeuroMedicine;component/Img/Background.png"/>
         </Grid.Background>
         <Border Background="#37648d"
                 Padding="0 10 0 0">
@@ -47,9 +47,9 @@
                 <StackPanel Orientation="Horizontal"
                             Margin="10 0"
                             Style="{StaticResource MainMenuItem}"
-                            MouseDown="Patients_MouseDown">
-                    <Image Margin="10" Source="/NeuroMedicine;component/Icons/hospitalisation.png" Width="30"/>
-                    <TextBlock Text="Пациенты" 
+                            MouseDown="PersonalCabinet_MouseDown">
+                    <Image Margin="10" Source="/NeuroMedicine;component/Icons/user.png" Width="30"/>
+                    <TextBlock Text="Личный кабинет врача" 
                                VerticalAlignment="Center"
                                HorizontalAlignment="Stretch"
                                Margin="10 0"/>
@@ -57,9 +57,19 @@
                 <StackPanel Orientation="Horizontal"
                             Margin="10 0"
                             Style="{StaticResource MainMenuItem}"
-                            MouseDown="PersonalCabinet_MouseDown">
+                            MouseDown="Registratur_MouseDown">
                     <Image Margin="10" Source="/NeuroMedicine;component/Icons/user.png" Width="30"/>
-                    <TextBlock Text="Личный кабинет" 
+                    <TextBlock Text="Регистратура" 
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Stretch"
+                               Margin="10 0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            Margin="10 0"
+                            Style="{StaticResource MainMenuItem}"
+                            MouseDown="Patients_MouseDown">
+                    <Image Margin="10" Source="/NeuroMedicine;component/Icons/hospitalisation.png" Width="30"/>
+                    <TextBlock Text="Пациенты" 
                                VerticalAlignment="Center"
                                HorizontalAlignment="Stretch"
                                Margin="10 0"/>

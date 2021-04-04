@@ -29,9 +29,15 @@ namespace DataLayer.Models.Classes
         public DateTime Date { get; set; }
 
         /// <summary>
+        /// Дата снимка
+        /// </summary>
+        public DateTime DatePhoto { get; set; }
+
+        /// <summary>
         /// Тип диагностики
         /// </summary>
         public DiagnosticType DiagnosticType { get; set; }
+
         public DiagnosysType DiagnosysType { get; set; }
 
         /// <summary>

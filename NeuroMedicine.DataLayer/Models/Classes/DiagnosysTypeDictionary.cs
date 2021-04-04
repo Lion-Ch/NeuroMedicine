@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataLayer.Models.Classes
 {
-    internal class DiagnosysTypeDictionary
+    public class DiagnosysTypeDictionary
     {
         public Dictionary<DiagnosysType, string> Dictionary;
 

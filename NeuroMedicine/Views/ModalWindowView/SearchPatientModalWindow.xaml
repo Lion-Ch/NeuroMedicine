@@ -13,6 +13,7 @@
              Height="400">
     <UserControl.Resources>
         <conv:DateTimeToDateConverter x:Key="dateTimeToDateConverter"/>
+        <conv:GenderTypeToStringConverter x:Key="genderToStringConverter"/>
     </UserControl.Resources>
     <Grid Background="White">
         <Grid.RowDefinitions>
@@ -52,7 +53,7 @@
             </DataGrid.InputBindings>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ФИО" Binding="{Binding FullName}"/>
-                <DataGridTextColumn Header="Пол" Binding="{Binding Sex}"/>
+                <DataGridTextColumn Header="Пол" Binding="{Binding Gender, Converter={StaticResource genderToStringConverter}}"/>
                 <DataGridTextColumn Header="Дата рождения" Binding="{Binding DateBirth, Converter={StaticResource ResourceKey=dateTimeToDateConverter}}"/>
             </DataGrid.Columns>
         </DataGrid>

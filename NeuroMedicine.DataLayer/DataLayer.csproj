@@ -73,8 +73,29 @@
     <Compile Include="Migrations\202103282038424_AddDiagnosysTypeInRefPatientDiagnosis.designer.cs">
       <DependentUpon>202103282038424_AddDiagnosysTypeInRefPatientDiagnosis.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103311918566_AddDatePhotoPatientDiagnosis.cs" />
+    <Compile Include="Migrations\202103311918566_AddDatePhotoPatientDiagnosis.designer.cs">
+      <DependentUpon>202103311918566_AddDatePhotoPatientDiagnosis.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103311950336_AddNullablePatientDiagnosis.cs" />
+    <Compile Include="Migrations\202103311950336_AddNullablePatientDiagnosis.designer.cs">
+      <DependentUpon>202103311950336_AddNullablePatientDiagnosis.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103312001241_AddNullablePatientDiagnosis1.cs" />
+    <Compile Include="Migrations\202103312001241_AddNullablePatientDiagnosis1.designer.cs">
+      <DependentUpon>202103312001241_AddNullablePatientDiagnosis1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104041157324_AddNewFieldRefPatient.cs" />
+    <Compile Include="Migrations\202104041157324_AddNewFieldRefPatient.designer.cs">
+      <DependentUpon>202104041157324_AddNewFieldRefPatient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104041618126_ChangeLengthFullNameRefPatient.cs" />
+    <Compile Include="Migrations\202104041618126_ChangeLengthFullNameRefPatient.designer.cs">
+      <DependentUpon>202104041618126_ChangeLengthFullNameRefPatient.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Classes\DiagnosticTypeDictionary.cs" />
+    <Compile Include="Models\Classes\GenderTypeDictionary.cs" />
     <Compile Include="Models\Classes\DiagnosysTypeDictionary.cs" />
     <Compile Include="Models\Classes\Patient.cs" />
     <Compile Include="Models\Classes\PatientDiagnosis.cs" />
@@ -82,13 +103,16 @@
     <Compile Include="Models\Classes\UserTypeDictionary.cs" />
     <Compile Include="Models\Enums\DiagnosticType.cs" />
     <Compile Include="Models\Enums\DiagnosysType.cs" />
+    <Compile Include="Models\Enums\GenderType.cs" />
     <Compile Include="Models\Enums\UserType.cs" />
     <Compile Include="Models\Factories\PatientDiagnosisFactory.cs" />
     <Compile Include="Models\Factories\PatientFactory.cs" />
     <Compile Include="Models\Factories\UserFactory.cs" />
     <Compile Include="Models\PresentationVM\ListItem.cs" />
+    <Compile Include="Models\PresentationVM\NewPatientPVM.cs" />
     <Compile Include="Models\PresentationVM\PatientPVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\Encryption.cs" />
     <Compile Include="SqlServer\DBContext.cs" />
     <Compile Include="SqlServer\Tables\RefPatient.cs" />
     <Compile Include="SqlServer\Tables\RefPatientDiagnosis.cs" />
@@ -110,6 +134,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103282038424_AddDiagnosysTypeInRefPatientDiagnosis.resx">
       <DependentUpon>202103282038424_AddDiagnosysTypeInRefPatientDiagnosis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103311918566_AddDatePhotoPatientDiagnosis.resx">
+      <DependentUpon>202103311918566_AddDatePhotoPatientDiagnosis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103311950336_AddNullablePatientDiagnosis.resx">
+      <DependentUpon>202103311950336_AddNullablePatientDiagnosis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103312001241_AddNullablePatientDiagnosis1.resx">
+      <DependentUpon>202103312001241_AddNullablePatientDiagnosis1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104041157324_AddNewFieldRefPatient.resx">
+      <DependentUpon>202104041157324_AddNewFieldRefPatient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104041618126_ChangeLengthFullNameRefPatient.resx">
+      <DependentUpon>202104041618126_ChangeLengthFullNameRefPatient.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

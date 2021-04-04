@@ -8,7 +8,7 @@
     <Grid HorizontalAlignment="Stretch"
           VerticalAlignment="Stretch">
         <Grid.Background>
-            <ImageBrush ImageSource="/NeuroMedicine;component/Img/Background.jpg"/>
+            <ImageBrush ImageSource="/NeuroMedicine;component/Img/Background.png"/>
         </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>

@@ -108,7 +108,11 @@
     </ApplicationDefinition>
     <Compile Include="BussinesModel.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\DateBirthConverter.cs" />
+    <Compile Include="Converters\DateTimeToDateTimeConverter.cs" />
     <Compile Include="Converters\DateTimeToDateConverter.cs" />
+    <Compile Include="Converters\DiagnosisTypeConverter.cs" />
+    <Compile Include="Converters\GenderTypeToStringConverter.cs" />
     <Compile Include="Converters\NullImageConverter.cs" />
     <Compile Include="Views\ModalWindowView\ConfirmModalWindow.xaml.cs">
       <DependentUpon>ConfirmModalWindow.xaml</DependentUpon>
@@ -275,9 +279,13 @@
       <Project>{00e350ee-a05e-4bb7-8b9a-87616b33299a}</Project>
       <Name>Neuromedicine.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NeuroMedicine.DataLayer\DataLayer.csproj">
+      <Project>{d0f0302a-5203-4b79-894f-108a4dc411ea}</Project>
+      <Name>DataLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Img\Background.jpg" />
+    <Resource Include="Img\Background12.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\analysis.png" />
@@ -290,6 +298,9 @@
     <Resource Include="Icons\hospitalisation.png" />
     <Resource Include="Icons\logout.png" />
     <Resource Include="Icons\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Img\Background.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -36,6 +36,12 @@ namespace NeuroMedicine.BusinessLayer
             }
         }
         private SQLDataManager _sqlDataManager;
+
+        public AppContainer()
+        {
+            SQLDataManager.CheckConnect();
+        }
+
         public SQLDataManager SQLDataManager
         {
             get

@@ -45,5 +45,10 @@ namespace NeuroMedicine.Views.WindowView
         {
 
         }
+
+        private void Registratur_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

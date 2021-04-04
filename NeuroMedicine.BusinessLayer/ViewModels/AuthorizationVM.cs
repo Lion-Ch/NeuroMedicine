@@ -30,7 +30,7 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
                 if (user != null)
                 {
                     AppContainer.Instance.CurrentUser = user;
-                    AppContainer.Instance.ViewNavigator.NavigateToView(new HistotyReceptionVM());
+                    AppContainer.Instance.ViewNavigator.NavigateToView(new DiagnosticVM());
                 }
             }
             

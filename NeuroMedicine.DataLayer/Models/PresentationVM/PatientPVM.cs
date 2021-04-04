@@ -24,6 +24,16 @@ namespace DataLayer.Models.PresentationVM
                 SendPropertyChanged(() => Patient);
             }
         }
+        private User _user;
+        public User User
+        {
+            get { return _user; }
+            set
+            {
+                _user = value;
+                SendPropertyChanged(() => User);
+            }
+        }
         private DateTime _datePhoto;
         public DateTime DatePhoto
         {

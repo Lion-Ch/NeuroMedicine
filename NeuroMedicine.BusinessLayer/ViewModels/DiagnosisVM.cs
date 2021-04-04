@@ -14,6 +14,9 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
 {
     public class DiagnosisVM: BaseViewModel, ICloseWindow
     {
+        //Изменяем существующую запись
+        private bool _isChanged = false;
+
         private PatientPVM _patientPVM;
         public PatientPVM PatientPVM
         {
@@ -59,14 +62,18 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
 
         private void Save(object obj)
         {
-            PatientPVM.Date = DateTime.Now;
+            if(_isChanged)
+            {
+                AppContainer.Instance.SQLDataManager.SaveDiagnosis(PatientPVM);
+            }
             Close?.Invoke();
         }
 
-        public DiagnosisVM(PatientPVM patientPVM)
+        public DiagnosisVM(PatientPVM patientPVM, bool isChanged = false)
         {
             PatientPVM = patientPVM;
             HeaderVM = "Обследование пациента: " + patientPVM.Patient.FullName;
+            _isChanged = isChanged;
             DiagnosysTypes = AppContainer.Instance.LocalDataManager.GetDagnosysTypes().ToObservable();
             _saveCommand = new DelegateCommand(this.Save);
             SelectedDiagnosysType = (int)patientPVM.DiagnosysType;
