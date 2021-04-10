@@ -108,51 +108,39 @@ namespace DataLayer.DataManagers
 			}
 			return result;
 		}
-
-		public void CheckConnect()
-		{
-			using (var dataContext = GetNewDataContext())
-			{
-				var a = new RefUserAccount() { Login = "admin".GetHashCode(), Password = "admin".GetHashCode() };
-				dataContext.RefUsers.Add(new SqlServer.Tables.RefUser() { FullName = "Петров Петр Петрович", UserType = Models.Enums.UserType.Doctor, RefUserAccount = a });
-				dataContext.RefPatients.Add(
-					new RefPatient() { FullName = "Елисеев", DateBirth = DateTime.Now });
-				dataContext.SaveChanges();
-			}
-		}
 		/// <summary>
 		/// Сохраняет в базу результаты обследования
 		/// </summary>
 		/// <param name="patientDiagnoses">Список пациентов</param>
 		public void AddPatientDiagnoses(List<PatientPVM> patientDiagnoses)
 		{
-			using (var dataContext = GetNewDataContext())
-			{
-				int i = 0;
-				foreach(var pD in patientDiagnoses)
-				{
-					var listReception = dataContext.RefReceptions
-						.Where(x => x.RefPatientId == pD.Patient.Id
-							&& x.DiagnosticType == pD.DiagnosticType)
-						.ToList();
-					foreach(var reception in listReception)
+            using (var dataContext = GetNewDataContext())
+            {
+                int i = 0;
+                foreach (var pD in patientDiagnoses)
+                {
+                    var listReception = dataContext.RefReceptions
+                        .Where(x => x.RefPatientId == pD.Patient.Id
+                            && x.RefServiceId == pD.Service.Id)
+                        .ToList();
+                    foreach (var reception in listReception)
                     {
-						reception.IsActive = false;
-						dataContext.RefReceptions.Attach(reception);
-						dataContext.Entry(reception).State = EntityState.Modified;
+                        reception.IsActive = false;
+                        dataContext.RefReceptions.Attach(reception);
+                        dataContext.Entry(reception).State = EntityState.Modified;
                     }
-					var c = PatientDiagnosisFactory.Create(pD);
-					dataContext.RefPatientDiagnoses.Add(PatientDiagnosisFactory.Create(pD));
+                    var c = PatientDiagnosisFactory.Create(pD);
+                    dataContext.RefPatientDiagnoses.Add(PatientDiagnosisFactory.Create(pD));
 
-					if(++i == _numSaveRecord)
+                    if (++i == _numSaveRecord)
                     {
-						dataContext.SaveChanges();
-						i = 0;
+                        dataContext.SaveChanges();
+                        i = 0;
                     }
-				}
-				dataContext.SaveChanges();
-			}
-		}
+                }
+                dataContext.SaveChanges();
+            }
+        }
 
 		/// <summary>
 		/// Ищет пациента по ФИО
@@ -185,6 +173,66 @@ namespace DataLayer.DataManagers
 					.FirstOrDefault();
 
 				return user;
+			}
+		}
+		public List<User> GetDoctorByService(int idService)
+        {
+			using (var dataContext = GetNewDataContext())
+			{
+				var services = dataContext.RefDoctorServices
+					.Include(x=>x.RefUser)
+					.Where(x => x.RefServiceId == idService)
+					.ToList()
+					.Select(x => UserFactory.Create(x.RefUser))
+					.ToList();
+
+				return services;
+			}
+		}
+		public List<Diagnosis> GetDiagnoses()
+        {
+			using (var dataContext = GetNewDataContext())
+			{
+				var diag = dataContext.RefDiagnoses
+					.ToList()
+					.Select(x => DiagnosisFactory.Create(x))
+					.ToList();
+
+				return diag;
+			}
+		}
+		/// <summary>
+		/// Услуги использующие нейронную сеть
+		/// </summary>
+		public List<Service> GetServicesNeuro()
+        {
+			using (var dataContext = GetNewDataContext())
+			{
+				var services = dataContext.RefServices
+					.Where(x=>x.IsUseNeuralNetwork)
+					.ToList()
+					.Select(x => ServiceFactory.Create(x))
+					.ToList();
+
+				return services;
+			}
+		}
+		/// <summary>
+		/// Возвращает список услуг
+		/// </summary>
+		public List<Service> GetServices()
+        {
+			using (var dataContext = GetNewDataContext())
+			{
+				var services = dataContext.RefServices.ToList().Select(x => ServiceFactory.Create(x)).ToList();
+
+				return services;
+			}
+		}
+		public void CheckConnect()
+		{
+			using (var dataContext = GetNewDataContext())
+			{
 			}
 		}
 	}

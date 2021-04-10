@@ -35,21 +35,44 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
                 SendPropertyChanged(() => ColorMessage);
             }
         }
-        private int _selectedDiagnosticType;
-        public int SelectedDiagnosticType
+        private Service _selectedDiagnosticType;
+        public Service SelectedDiagnosticType
         {
             get { return _selectedDiagnosticType; }
-            set { _selectedDiagnosticType = value; }
+            set 
+            { 
+                _selectedDiagnosticType = value;
+                Doctors = AppContainer.Instance.SQLDataManager.GetDoctorByService(value.Id).ToObservable();
+            }
         }
-
-        private ObservableCollection<ListItem> _diagnosticTypes;
-        public ObservableCollection<ListItem> DiagnosticTypes
+        private ObservableCollection<Service> _diagnosticTypes;
+        public ObservableCollection<Service> DiagnosticTypes
         {
             get { return _diagnosticTypes; }
             set
             {
                 _diagnosticTypes = value;
                 SendPropertyChanged(() => _diagnosticTypes);
+            }
+        }
+        private Service _selectedDoctor;
+        public Service SelectedDoctor
+        {
+            get { return _selectedDoctor; }
+            set
+            {
+                _selectedDoctor = value;
+            }
+        }
+
+        private ObservableCollection<User> _doctors;
+        public ObservableCollection<User> Doctors
+        {
+            get { return _doctors; }
+            set
+            {
+                _doctors = value;
+                SendPropertyChanged(() => Doctors);
             }
         }
         private Patient _selectedPatient;
@@ -84,8 +107,7 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
                     new Reception()
                     {
                         DateRecording = DateTime.Now,
-                        RefPatient = SelectedPatient,
-                        DiagnosticType = (DiagnosticType)SelectedDiagnosticType,
+                        RefServiceId = SelectedDiagnosticType.Id,
                         RefPatientId = SelectedPatient.Id,
                         IsActive = true
                     });
@@ -103,7 +125,7 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
         public RegistryVM()
         {
             HeaderVM = "Запись на прием";
-            DiagnosticTypes = AppContainer.Instance.LocalDataManager.GetDiagnosticTypes().ToObservable();
+            DiagnosticTypes = AppContainer.Instance.SQLDataManager.GetServices().ToObservable(); 
 
             _writeSeansCommand = new DelegateCommand(this.WriteSeans);
             _searchPatientCommand = new DelegateCommand(this.SearchPatient);

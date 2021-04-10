@@ -18,7 +18,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition Height="3*"/>
+            <RowDefinition Height="5*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel Background="White"
@@ -52,13 +52,28 @@
                            VerticalAlignment="Center"
                            Text="Услуга"/>
                 <ComboBox FontSize="16"
-                        Margin="0 10"
-                        VerticalAlignment="Center"
-                        Padding="10"
-                        ItemsSource="{Binding DiagnosticTypes}"
-                        DisplayMemberPath="Name"
-                        SelectedValue="{Binding SelectedDiagnosticType}"
-                        SelectedValuePath="Id"/>
+                          IsEditable="True"
+                          Margin="0 10"
+                          IsTextSearchEnabled="True"
+                            VerticalAlignment="Center"
+                            Padding="10"
+                            ItemsSource="{Binding DiagnosticTypes}"
+                            DisplayMemberPath="Name"
+                            SelectedItem="{Binding SelectedDiagnosticType}"/>
+                <TextBlock FontSize="22"
+                           FontWeight="Bold"
+                           VerticalAlignment="Center"
+                           Text="Доктор"/>
+                <ComboBox FontSize="16"
+                          IsEditable="True"
+                          Margin="0 10"
+                          IsTextSearchEnabled="True"
+                            VerticalAlignment="Center"
+                            Padding="10"
+                            ItemsSource="{Binding Doctors}"
+                            DisplayMemberPath="FullName"
+                            SelectedItem="{Binding SelectedDoctor, Mode=OneWay}"/>
+                
                 <TextBlock FontSize="18"
                            Margin="0 20 0 0"
                            FontWeight="Bold"

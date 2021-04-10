@@ -48,10 +48,10 @@
                               Margin="0 10"
                               VerticalAlignment="Center"
                               Padding="10"
+                              SelectedIndex="0"
                               ItemsSource="{Binding DiagnosticTypes}"
                               DisplayMemberPath="Name"
-                              SelectedValue="{Binding SelectedDiagnosticType}"
-                              SelectedValuePath="Id"/>
+                              SelectedValue="{Binding SelectedDiagnosticType}"/>
                     <Button Grid.Row="1" Grid.Column="2" 
                             HorizontalAlignment="Stretch"
                             FontWeight="Bold"

@@ -1,4 +1,5 @@
 ﻿using DataLayer.Models.Enums;
+using DataLayer.SqlServer.Tables;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,8 @@ namespace DataLayer.Models.Classes
         public int RefPatientId { get; set; }
         public Patient RefPatient { get; set; }
         public bool IsActive { get; set; }
-        public DiagnosticType DiagnosticType { get; set; }
+        public int RefServiceId { get; set; }
+        public Service RefService { get; set; }
         public DateTime DateRecording { get; set; }
     }
 }

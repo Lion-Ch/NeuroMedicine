@@ -43,9 +43,11 @@ namespace DataLayer.Models.Classes
         /// <summary>
         /// Тип диагностики
         /// </summary>
-        public DiagnosticType DiagnosticType { get; set; }
+        public int ServiceId { get; set; }
+        public Service Service { get; set; }
 
-        public DiagnosysType DiagnosysType { get; set; }
+        public int DiagnosisId { get; set; }
+        public Diagnosis Diagnosis { get; set; }
 
         /// <summary>
         /// Заключение врача

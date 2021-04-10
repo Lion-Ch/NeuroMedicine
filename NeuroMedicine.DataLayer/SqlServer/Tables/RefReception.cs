@@ -14,7 +14,8 @@ namespace DataLayer.SqlServer.Tables
         public int RefPatientId { get; set; }
         public RefPatient RefPatient { get; set; }
         public bool IsActive { get; set; }
-        public DiagnosticType DiagnosticType { get; set; }
+        public int RefServiceId { get; set; }
+        public RefService RefService { get; set; }
         public DateTime DateRecording { get; set; }
     }
 }

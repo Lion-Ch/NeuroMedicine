@@ -102,8 +102,7 @@
                       FontSize="16"
                       ItemsSource="{Binding DiagnosysTypes}"
                       DisplayMemberPath="Name"
-                      SelectedValue="{Binding SelectedDiagnosysType}"
-                      SelectedValuePath="Id"
+                      SelectedItem="{Binding SelectedDiagnosysType}"
                       Padding="10"/>
             <Button FontSize="16"
                     HorizontalAlignment="Left"

@@ -42,12 +42,14 @@ namespace DataLayer.SqlServer.Tables
         /// <summary>
         /// Тип диагностики
         /// </summary>
-        public DiagnosticType DiagnosticType { get; set; }
+        public int RefServiceId { get; set; }
+        public RefService RefService { get; set; }
 
         /// <summary>
         /// Диагноз врача
         /// </summary>
-        public DiagnosysType DiagnosysType { get; set; }
+        public int RefDiagnosisId { get; set; }
+        public RefDiagnosis RefDiagnosis { get; set; }
 
         /// <summary>
         /// Заключение врача

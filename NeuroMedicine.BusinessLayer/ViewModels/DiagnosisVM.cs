@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Commands;
 using BusinessLayer.Logic.Extensions;
+using DataLayer.Models.Classes;
 using DataLayer.Models.Enums;
 using DataLayer.Models.PresentationVM;
 using System;
@@ -24,29 +25,29 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
             set
             {
                 _patientPVM = value;
-                SendPropertyChanged(() => _patientPVM);
+                SendPropertyChanged(() => PatientPVM);
             }
         }
 
-        private ObservableCollection<ListItem> _diagnosysTypes;
-        public ObservableCollection<ListItem> DiagnosysTypes
+        private ObservableCollection<Diagnosis> _diagnosysTypes;
+        public ObservableCollection<Diagnosis> DiagnosysTypes
         {
             get { return _diagnosysTypes; }
             set
             {
                 _diagnosysTypes = value;
-                SendPropertyChanged(() => _diagnosysTypes);
+                SendPropertyChanged(() => DiagnosysTypes);
             }
         }
 
-        private int _selectedDiagnosysType;
-        public int SelectedDiagnosysType
+        private Diagnosis _selectedDiagnosysType;
+        public Diagnosis SelectedDiagnosysType
         {
             get { return _selectedDiagnosysType; }
             set 
             { 
                 _selectedDiagnosysType = value;
-                PatientPVM.DiagnosysType = (DiagnosysType)value;
+                PatientPVM.Diagnosis = value;
             }
         }
 
@@ -74,9 +75,10 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
             PatientPVM = patientPVM;
             HeaderVM = "Обследование пациента: " + patientPVM.Patient.FullName;
             _isChanged = isChanged;
-            DiagnosysTypes = AppContainer.Instance.LocalDataManager.GetDagnosysTypes().ToObservable();
+            DiagnosysTypes = AppContainer.Instance.SQLDataManager.GetDiagnoses().ToObservable();
+            SelectedDiagnosysType = patientPVM.Diagnosis;
+            //AppContainer.Instance.LocalDataManager.GetDagnosysTypes().ToObservable();
             _saveCommand = new DelegateCommand(this.Save);
-            SelectedDiagnosysType = (int)patientPVM.DiagnosysType;
         }
 
     }

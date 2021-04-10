@@ -10,10 +10,15 @@ namespace DataLayer.SqlServer
         public DbSet<RefUserAccount> RefUserAccounts { get; set; }
         public DbSet<RefPatientDiagnosis> RefPatientDiagnoses { get; set; }
         public DbSet<RefReception> RefReceptions { get; set; }
+        public DbSet<RefDiagnosis> RefDiagnoses { get; set; }
+        public DbSet<RefDoctorSchedule> RefDoctorSchedules { get; set; }
+        public DbSet<RefDoctorServices> RefDoctorServices { get; set; }
+        public DbSet<RefService> RefServices { get; set; }
 
         public DBContext()
             : base("DefaultConnection")
         {
+            Database.SetInitializer<DBContext>(new DBInitializer());
         }
     }
 }

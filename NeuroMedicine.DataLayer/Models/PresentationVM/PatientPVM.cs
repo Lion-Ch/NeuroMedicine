@@ -64,24 +64,24 @@ namespace DataLayer.Models.PresentationVM
                 SendPropertyChanged(() => ProbobilityDisease);
             }
         }
-        private DiagnosticType _diagnosticType;
-        public DiagnosticType DiagnosticType
+        private Service _service;
+        public Service Service
         {
-            get { return _diagnosticType; }
+            get { return _service; }
             set
             {
-                _diagnosticType = value;
-                SendPropertyChanged(() => DiagnosticType);
+                _service = value;
+                SendPropertyChanged(() => Service);
             }
         }
-        private DiagnosysType _diagnosysType;
-        public DiagnosysType DiagnosysType
+        private Diagnosis _diagnosis;
+        public Diagnosis Diagnosis
         {
-            get { return _diagnosysType; }
+            get { return _diagnosis; }
             set
             {
-                _diagnosysType = value;
-                SendPropertyChanged(() => DiagnosysType);
+                _diagnosis = value;
+                SendPropertyChanged(() => Diagnosis);
             }
         }
         private string _conclusion;

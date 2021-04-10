@@ -105,19 +105,21 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
 
         #region Поля изменения
 
-        private ObservableCollection<ListItem> _diagnosticTypes;
-        public ObservableCollection<ListItem> DiagnosticTypes
+        private ObservableCollection<Service> _diagnosticTypes;
+        public ObservableCollection<Service> DiagnosticTypes
         {
             get { return _diagnosticTypes; }
             set
             {
                 _diagnosticTypes = value;
+                if (DiagnosticTypes.Count > 0)
+                    SelectedDiagnosticType = DiagnosticTypes[0];
                 SendPropertyChanged(() => _diagnosticTypes);
             }
         }
 
-        private int _selectedDiagnosticType;
-        public int SelectedDiagnosticType
+        private Service _selectedDiagnosticType;
+        public Service SelectedDiagnosticType
         {
             get { return _selectedDiagnosticType; }
             set { _selectedDiagnosticType = value; }
@@ -329,12 +331,14 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
 
         private PatientPVM CreatePatientPVM(string photoUrl = null)
         {
+            var diag = AppContainer.Instance.SQLDataManager.GetDiagnoses().FirstOrDefault();
             return new PatientPVM()
             {
                 NumRow = _patientNumerator++,
                 DatePhoto = DateTime.Now,
-                DiagnosticType = (DataLayer.Models.Enums.DiagnosticType)SelectedDiagnosticType,
+                Service = SelectedDiagnosticType,
                 Date = DateTime.Now,
+                Diagnosis = diag,
                 User = AppContainer.Instance.CurrentUser,
                 PhotoUrl = photoUrl
             };
@@ -437,7 +441,8 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
         public DiagnosticVM()
         {
             HeaderVM = "Диагностика пациентов";
-            DiagnosticTypes = AppContainer.Instance.LocalDataManager.GetDiagnosticTypes().ToObservable();
+            DiagnosticTypes = AppContainer.Instance.SQLDataManager.GetServicesNeuro().ToObservable();
+                //AppContainer.Instance.LocalDataManager.GetDiagnosticTypes().ToObservable();
             _proceedCommand = new DelegateCommand(this.Proceed);
             _loadPatientsFromPhotoCommand = new DelegateCommand(this.LoadPatientsFromPhoto);
             _clearPatientListCommand = new DelegateCommand(this.ClearPatientList);
