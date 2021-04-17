@@ -3,6 +3,7 @@
                     xmlns:v="clr-namespace:NeuroMedicine.Views.WindowView"
                     xmlns:vm="clr-namespace:NeuroMedicine.BusinessLayer.ViewModels;assembly=BusinessLayer"
                     xmlns:vmModal="clr-namespace:NeuroMedicine.Views.ModalWindowView"
+                    xmlns:conv="clr-namespace:NeuroMedicine.Converters"
                     xmlns:local="clr-namespace:NeuroMedicine">
     <DataTemplate DataType="{x:Type vm:MasterVM}">
         <v:MasterWindowView/>
@@ -20,7 +21,10 @@
     <DataTemplate DataType="{x:Type vm:PersonalCabinetVM}">
         <v:PersonalCabinet/>
     </DataTemplate>
-    
+
+    <conv:DateTimeToDateConverter x:Key="dateTimeToDateConv"/>
+    <conv:DateTimeToTimeConverter x:Key="dateTimeToTimeConv"/>
+
     <FontFamily x:Key="MyFont">/NeuroMedicine;component/Fonts/#Roboto Regular</FontFamily>
     <FontFamily x:Key="RobotoBold">/NeuroMedicine;component/Fonts/#Roboto Bold</FontFamily>
     <FontFamily x:Key="RobotoBlack">/NeuroMedicine;component/Fonts/#Roboto Black</FontFamily>

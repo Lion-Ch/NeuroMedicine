@@ -20,6 +20,7 @@ namespace DataLayer.Models.Factories
             newOb.DateRecording = oldObj.DateRecording;
             newOb.IsActive = oldObj.IsActive;
             newOb.RefServiceId = oldObj.RefServiceId;
+            newOb.RefUserId = oldObj.RefUserId;
             //newOb.DiagnosticType = oldObj.DiagnosticType;
 
             return newOb;
@@ -34,6 +35,7 @@ namespace DataLayer.Models.Factories
             newOb.IsActive = oldObj.IsActive;
             newOb.RefPatientId = oldObj.RefPatientId;
             newOb.DateRecording = oldObj.DateRecording;
+            newOb.RefUserId = oldObj.RefUserId;
             //newOb.DiagnosticType = oldObj.DiagnosticType;
 
             return newOb;

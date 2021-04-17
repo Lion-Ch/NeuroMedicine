@@ -63,6 +63,7 @@ namespace DataLayer.Models.Factories
             newOb.DatePhoto = oldObj.DatePhoto;
             newOb.PhotoUrl = oldObj.PhotoUrl;
 
+            newOb.Service = ServiceFactory.Create(oldObj.RefService);
             newOb.Diagnosis = DiagnosisFactory.Create(oldObj.RefDiagnosis);
             newOb.Patient = PatientFactory.Create(oldObj.RefPatient);
             newOb.User = UserFactory.Create(oldObj.RefUser);

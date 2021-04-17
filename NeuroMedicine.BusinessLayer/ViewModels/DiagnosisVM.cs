@@ -76,7 +76,7 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
             HeaderVM = "Обследование пациента: " + patientPVM.Patient.FullName;
             _isChanged = isChanged;
             DiagnosysTypes = AppContainer.Instance.SQLDataManager.GetDiagnoses().ToObservable();
-            SelectedDiagnosysType = patientPVM.Diagnosis;
+            SelectedDiagnosysType = patientPVM.Diagnosis != null ? DiagnosysTypes.Where(x =>x.Id == patientPVM.Diagnosis.Id).FirstOrDefault() : DiagnosysTypes.FirstOrDefault();
             //AppContainer.Instance.LocalDataManager.GetDagnosysTypes().ToObservable();
             _saveCommand = new DelegateCommand(this.Save);
         }

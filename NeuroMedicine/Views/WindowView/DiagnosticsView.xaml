@@ -418,7 +418,7 @@
                         <DataGridTextColumn Header="Заключение"
                                             MinWidth="200"
                                             FontFamily="{StaticResource RobotoBlack}"
-                                            Binding="{Binding Path=DiagnosysType, Converter={StaticResource diagnosisTypeConverter}}"/>
+                                            Binding="{Binding Path=Diagnosis.Name}"/>
                     </DataGrid.Columns>
                     <DataGrid.Resources>
 

@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="AppContainer.cs" />
     <Compile Include="Commands\DelegateCommand.cs" />
+    <Compile Include="Logic\Classes\DateTimeConverter.cs" />
     <Compile Include="Logic\Extensions\CollectionHelper.cs" />
     <Compile Include="Logic\NeuralNetwork.cs" />
     <Compile Include="Logic\PhotoLoader\PhotoLoader.cs" />

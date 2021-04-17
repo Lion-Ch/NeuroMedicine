@@ -138,7 +138,7 @@
                                             MinWidth="100">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Path=DiagnosysType, Converter={StaticResource diagnosisTypeConverter}}"
+                                <TextBlock Text="{Binding Path=Diagnosis.Name}"
                                            Padding="5"
                                            FontFamily="{StaticResource RobotoBlack}"
                                            TextAlignment="Center"/>

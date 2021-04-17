@@ -3,6 +3,7 @@ using BusinessLayer.Logic.Extensions;
 using DataLayer.Models.Classes;
 using DataLayer.Models.Enums;
 using DataLayer.Models.PresentationVM;
+using NeuroMedicine.BusinessLayer.Logic.Classes;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -42,7 +43,8 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
             set 
             { 
                 _selectedDiagnosticType = value;
-                Doctors = AppContainer.Instance.SQLDataManager.GetDoctorByService(value.Id).ToObservable();
+                if (value != null)
+                    Doctors = AppContainer.Instance.SQLDataManager.GetDoctorByService(value.Id).ToObservable();
             }
         }
         private ObservableCollection<Service> _diagnosticTypes;
@@ -55,13 +57,54 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
                 SendPropertyChanged(() => _diagnosticTypes);
             }
         }
-        private Service _selectedDoctor;
-        public Service SelectedDoctor
+        private User _selectedDoctor;
+        public User SelectedDoctor
         {
             get { return _selectedDoctor; }
             set
             {
                 _selectedDoctor = value;
+                UpdateDaysWork();
+            }
+        }
+        private DateTime? _selectedDayWork;
+        public DateTime? SelectedDayWork
+        {
+            get { return _selectedDayWork; }
+            set
+            {
+                _selectedDayWork = value;
+                UpdateTimeWork();
+            }
+        }
+        private DateTime? _selectedTime;
+        public DateTime? SelectedTime
+        {
+            get { return _selectedTime; }
+            set
+            {
+                _selectedTime = value;
+            }
+        }
+        public ObservableCollection<DateTime> _times;
+        public ObservableCollection<DateTime> Times
+        {
+            get { return _times; }
+            set
+            {
+                _times = value;
+                SendPropertyChanged(() => Times);
+            }
+        }
+
+        public ObservableCollection<DateTime> _daysWork;
+        public ObservableCollection<DateTime> DaysWork
+        {
+            get { return _daysWork; }
+            set
+            {
+                _daysWork = value;
+                SendPropertyChanged(() => DaysWork);
             }
         }
 
@@ -101,27 +144,72 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
         }
         private void WriteSeans(object obj)
         {
-            if(SelectedPatient != null)
-            {
-                AppContainer.Instance.SQLDataManager.WriteSeans(
-                    new Reception()
-                    {
-                        DateRecording = DateTime.Now,
-                        RefServiceId = SelectedDiagnosticType.Id,
-                        RefPatientId = SelectedPatient.Id,
-                        IsActive = true
-                    });
-                SelectedPatient = null;
-                Result = "Пациент успешно записан на прием";
-                ColorMessage = "Green";
-            }
-            else
+            if (SelectedPatient == null)
             {
                 Result = "Выберите пациента";
                 ColorMessage = "Red";
             }
+            else if (SelectedDiagnosticType == null)
+            {
+                Result = "Выберите услугу";
+                ColorMessage = "Red";
+            }
+            else if (SelectedDoctor == null)
+            {
+                Result = "Выберите доктора";
+                ColorMessage = "Red";
+            }
+            else if (SelectedTime == null)
+            {
+                Result = "Выберите время приема";
+                ColorMessage = "Red";
+            }
+            else if (SelectedDayWork == null)
+            {
+                Result = "Выберите дату приема";
+                ColorMessage = "Red";
+            }
+            else
+            {
+                AppContainer.Instance.SQLDataManager.WriteSeans(
+                    new Reception()
+                    {
+                        DateRecording = new DateTime(SelectedDayWork.Value.Year, SelectedDayWork.Value.Month, SelectedDayWork.Value.Day,
+                            SelectedTime.Value.Hour, SelectedTime.Value.Minute, SelectedTime.Value.Second),
+                        RefServiceId = SelectedDiagnosticType.Id,
+                        RefPatientId = SelectedPatient.Id,
+                        RefUserId = SelectedDoctor.Id,
+                        IsActive = true
+                    });
+                SelectedPatient = null;
+                SelectedDiagnosticType = null;
+                Doctors = null;
+                Times = null;
+                DaysWork = null;
+                Result = "Пациент успешно записан на прием";
+                ColorMessage = "Green";
+            }
         }
 
+
+        private void UpdateDaysWork()
+        {
+            if(SelectedDoctor != null)
+            {
+                DateTimeConverter daysConverter = new DateTimeConverter(AppContainer.Instance.SQLDataManager.GetWorkDays(SelectedDoctor.Id));
+                DaysWork = daysConverter.GetWorkDays().ToObservable();
+            }
+        }
+        private void UpdateTimeWork()
+        {
+            if (SelectedDayWork != null)
+            {
+                var doctorSchedule = AppContainer.Instance.SQLDataManager.GetSchedule(AppContainer.Instance.CurrentUser.Id,
+                    (int)SelectedDayWork.Value.DayOfWeek);
+                var times = new DateTimeConverter().GetFreeWorkTimes(DateTime.Parse(doctorSchedule.TimeStart), DateTime.Parse(doctorSchedule.TimeEnd), doctorSchedule.NumPatients, AppContainer.Instance.SQLDataManager.GetNotFreeWorkTimes(AppContainer.Instance.CurrentUser.Id, SelectedDayWork.Value)).ToObservable();
+                Times = times;
+            }
+        }
         public RegistryVM()
         {
             HeaderVM = "Запись на прием";

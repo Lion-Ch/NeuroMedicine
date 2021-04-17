@@ -16,6 +16,8 @@ namespace DataLayer.SqlServer.Tables
         public bool IsActive { get; set; }
         public int RefServiceId { get; set; }
         public RefService RefService { get; set; }
+        public int RefUserId { get; set; }
+        public RefUser RefUser { get; set; }
         public DateTime DateRecording { get; set; }
     }
 }

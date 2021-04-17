@@ -111,6 +111,7 @@
     <Compile Include="Converters\DateBirthConverter.cs" />
     <Compile Include="Converters\DateTimeToDateTimeConverter.cs" />
     <Compile Include="Converters\DateTimeToDateConverter.cs" />
+    <Compile Include="Converters\DateTimeToTimeConverter.cs" />
     <Compile Include="Converters\DiagnosisTypeConverter.cs" />
     <Compile Include="Converters\GenderTypeToStringConverter.cs" />
     <Compile Include="Converters\NullImageConverter.cs" />

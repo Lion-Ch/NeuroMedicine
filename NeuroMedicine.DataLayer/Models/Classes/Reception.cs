@@ -16,6 +16,8 @@ namespace DataLayer.Models.Classes
         public bool IsActive { get; set; }
         public int RefServiceId { get; set; }
         public Service RefService { get; set; }
+        public int RefUserId { get; set; }
+        public User RefUser { get; set; }
         public DateTime DateRecording { get; set; }
     }
 }

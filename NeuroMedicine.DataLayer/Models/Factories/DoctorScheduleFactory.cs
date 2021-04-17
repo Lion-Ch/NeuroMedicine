@@ -18,8 +18,8 @@ namespace DataLayer.Models.Factories
             newOb.Id = oldObj.Id;
             newOb.NumDay = oldObj.NumDay;
             newOb.NumPatients = oldObj.NumPatients;
-            newOb.DateEnd = oldObj.DateEnd;
-            newOb.DateStart = oldObj.DateStart;
+            newOb.TimeEnd = oldObj.TimeEnd;
+            newOb.TimeStart = oldObj.TimeStart;
 
             return newOb;
         }
@@ -31,8 +31,8 @@ namespace DataLayer.Models.Factories
             newOb.Id = oldObj.Id;
             newOb.NumDay = oldObj.NumDay;
             newOb.NumPatients = oldObj.NumPatients;
-            newOb.DateEnd = oldObj.DateEnd;
-            newOb.DateStart = oldObj.DateStart;
+            newOb.TimeEnd = oldObj.TimeEnd;
+            newOb.TimeStart = oldObj.TimeStart;
 
             return newOb;
         }

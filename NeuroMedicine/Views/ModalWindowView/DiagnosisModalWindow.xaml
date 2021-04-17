@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:NeuroMedicine.Views.ModalWindowView"
              xmlns:b="clr-namespace:NeuroMedicine.Views.WindowView"
              xmlns:conv="clr-namespace:NeuroMedicine.Converters"
+             xmlns:vm ="clr-namespace:NeuroMedicine.BusinessLayer.ViewModels;assembly=BusinessLayer"
              mc:Ignorable="d"
              MinHeight="768" MinWidth="1366"
              MaxWidth="1920" MaxHeight="1080">

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataLayer.SqlServer
 {
-    internal class DBInitializer: DropCreateDatabaseAlways<DBContext>
+    internal class DBInitializer: DropCreateDatabaseIfModelChanges<DBContext>
     {
         protected override void Seed(DBContext db)
         {
@@ -25,6 +25,11 @@ namespace DataLayer.SqlServer
             db.RefDoctorServices.Add(new RefDoctorServices() { RefServiceId = 1, RefUserId = 1 });
             db.RefDoctorServices.Add(new RefDoctorServices() { RefServiceId = 2, RefUserId = 1 });
             db.RefDoctorServices.Add(new RefDoctorServices() { RefServiceId = 3, RefUserId = 1 });
+
+            db.RefDoctorSchedules.Add(new RefDoctorSchedule() { NumDay = 1, NumPatients = 5, TimeStart = "09:00", TimeEnd = "16:00", RefUserId = 1 });
+            db.RefDoctorSchedules.Add(new RefDoctorSchedule() { NumDay = 2, NumPatients = 5, TimeStart = "09:00", TimeEnd = "16:00", RefUserId = 1 });
+            db.RefDoctorSchedules.Add(new RefDoctorSchedule() { NumDay = 3, NumPatients = 5, TimeStart = "09:00", TimeEnd = "16:00", RefUserId = 1 });
+            db.RefDoctorSchedules.Add(new RefDoctorSchedule() { NumDay = 0, NumPatients = 5, TimeStart = "09:00", TimeEnd = "16:00", RefUserId = 1 });
 
             db.RefDiagnoses.Add(new RefDiagnosis() { Name = "Без патологий", RefServiceId = 2 });
             db.RefDiagnoses.Add(new RefDiagnosis() { Name = "Пневмония",RefServiceId = 2 });

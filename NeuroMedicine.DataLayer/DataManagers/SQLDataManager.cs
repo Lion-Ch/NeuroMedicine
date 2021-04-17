@@ -22,7 +22,56 @@ namespace DataLayer.DataManagers
 			var dataContext = new DBContext();
 			return dataContext;
 		}
+		/// <summary>
+		/// Получает время работы врача по номеру дня
+		/// </summary>
+		public DoctorSchedule GetSchedule(int idDoctor, int numDay)
+		{
 
+			using (var dataContext = GetNewDataContext())
+			{
+				var schedule = dataContext.RefDoctorSchedules
+					.Where(x => x.RefUserId == idDoctor && x.NumDay == numDay)
+					.ToList()
+					.Select(x=>DoctorScheduleFactory.Create(x))
+					.FirstOrDefault();
+				return schedule;
+			}
+		}
+		/// <summary>
+		/// Занятое время у врача
+		/// </summary>
+		public List<DateTime> GetNotFreeWorkTimes(int idDoctor, DateTime dateReception)
+		{
+			using (var dataContext = GetNewDataContext())
+			{
+				//Получить времена записей на дату
+				var workTimes = dataContext.RefReceptions
+					.Where(x => x.RefUserId == idDoctor && x.DateRecording.Year == dateReception.Year
+					   && x.DateRecording.Month == dateReception.Month
+					   && x.DateRecording.Day == dateReception.Day)
+					.ToList()
+					.Select(x=>x.DateRecording)
+					.ToList();
+				return workTimes;
+            }
+		}
+
+		/// <summary>
+		/// Дни работы врача
+		/// </summary>
+		public List<int> GetWorkDays(int idDoctor)
+		{
+			using (var dataContext = GetNewDataContext())
+			{
+				var days = dataContext.RefDoctorSchedules
+					.Where(x => x.RefUserId == idDoctor)
+					.ToList()
+					.Select(x => x.NumDay)
+					.ToList();
+				return days;
+			}
+		}
 		/// <summary>
 		/// Ищет пациента по ФИО, который записан на прием
 		/// </summary>
@@ -79,7 +128,7 @@ namespace DataLayer.DataManagers
 
 				var str = "%" + fullName + "%";
 				diagnoses = context.RefPatientDiagnoses
-					.Include(x => x.RefPatient).Include(x => x.RefUser);
+					.Include(x => x.RefPatient).Include(x => x.RefUser).Include(x=>x.RefDiagnosis).Include(x=>x.RefService);
 
 				if (!String.IsNullOrEmpty(fullName))
 					diagnoses = diagnoses.Where(x => DbFunctions.Like(x.RefPatient.FullName, str));
