@@ -162,6 +162,9 @@
     <Compile Include="Views\WindowView\ResultsDiagnosticsView.xaml.cs">
       <DependentUpon>ResultsDiagnosticsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\WindowView\ServicesViews\BloodTestView.xaml.cs">
+      <DependentUpon>BloodTestView.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -235,6 +238,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\WindowView\ResultsDiagnosticsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WindowView\ServicesViews\BloodTestView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

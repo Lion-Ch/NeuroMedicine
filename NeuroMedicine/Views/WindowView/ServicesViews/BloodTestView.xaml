@@ -1,0 +1,86 @@
+﻿<views:BaseView x:Class="NeuroMedicine.Views.WindowView.ServicesViews.BloodTestView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:views="clr-namespace:NeuroMedicine.Views.WindowView"
+             mc:Ignorable="d" 
+             d:DesignHeight="768" d:DesignWidth="1366">
+    <Border Padding="10"  Background="AliceBlue">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="200"/>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 20 0 0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Margin="0 0 50 0">
+                            <TextBlock MaxWidth="400" Padding="5" Margin="0 5 0 0" TextWrapping="Wrap" Text="СОЭ через 1 час (мм)" FontSize="16"/>
+                            <TextBlock MaxWidth="400" Padding="5" Margin="0 5 0 0" TextWrapping="Wrap" Text="Нв гр." FontSize="16"/>
+                            <TextBlock MaxWidth="400" Padding="5" Margin="0 5 0 0" TextWrapping="Wrap" Text="Лейкоциты" FontSize="16"/>
+                            <TextBlock MaxWidth="400" Padding="5" Margin="0 5 0 0" TextWrapping="Wrap" Text="Эритроциты" FontSize="16"/>
+                            <TextBlock MaxWidth="400" Padding="5" Margin="0 5 0 0" TextWrapping="Wrap" Text="Эритроцитарный индекс (ССГ)" FontSize="16"/>
+                            <TextBlock MaxWidth="400" Padding="5" Margin="0 5 0 0" TextWrapping="Wrap" Text="Изменение эритроцитов" FontSize="16"/>
+                            <TextBlock MaxWidth="400" Padding="5" Margin="0 5 0 0" TextWrapping="Wrap" Text="Свертываемость" FontSize="16"/>
+                            <TextBlock MaxWidth="400" Padding="5" Margin="0 5 0 0" TextWrapping="Wrap" Text="Тромбоциты" FontSize="16"/>
+                            <TextBlock MaxWidth="400" Padding="5" Margin="0 5 0 0" TextWrapping="Wrap" Text="Протромбинованный индекс" FontSize="16"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" HorizontalAlignment="Right">
+                            <TextBox Width="200" Padding="5" Margin="0 5 0 0" TextWrapping="Wrap" FontSize="16" Text="{Binding RefBloodTest.ESR, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Delay=250}"/>
+                            <TextBox Width="200" Padding="5" Margin="0 5 0 0" TextWrapping="Wrap" FontSize="16" Text="{Binding RefBloodTest.HB, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Delay=250}"/>
+                            <TextBox Width="200" Padding="5" Margin="0 5 0 0" TextWrapping="Wrap" FontSize="16" Text="{Binding RefBloodTest.Leukocytes, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Delay=250}"/>
+                            <TextBox Width="200" Padding="5" Margin="0 5 0 0" TextWrapping="Wrap" FontSize="16" Text="{Binding RefBloodTest.Erythrocytes, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Delay=250}"/>
+                            <TextBox Width="200" Padding="5" Margin="0 5 0 0" TextWrapping="Wrap" FontSize="16" Text="{Binding RefBloodTest.ErythrocyteIndex, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Delay=250}"/>
+                            <TextBox Width="200" Padding="5" Margin="0 5 0 0" TextWrapping="Wrap" FontSize="16" Text="{Binding RefBloodTest.ChangeErythrocytes, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Delay=250}"/>
+                            <TextBox Width="200" Padding="5" Margin="0 5 0 0" TextWrapping="Wrap" FontSize="16" Text="{Binding RefBloodTest.Coagulability, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Delay=250}"/>
+                            <TextBox Width="200" Padding="5" Margin="0 5 0 0" TextWrapping="Wrap" FontSize="16" Text="{Binding RefBloodTest.Platelets, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Delay=250}"/>
+                            <TextBox Width="200" Padding="5" Margin="0 5 0 0" TextWrapping="Wrap" FontSize="16" Text="{Binding RefBloodTest.ProthrombinIndex, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Delay=250}"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Лейкоцитарная формула" Grid.Row="0" TextAlignment="Center" FontSize="16" Margin="0 20 0 0"/>
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBlock MaxHeight="50" MinWidth="50" Padding="10" TextAlignment="Center" VerticalAlignment="Center"   Text="Б" FontSize="16"/>
+                            <TextBlock MaxHeight="50" MinWidth="50" Padding="10"  TextAlignment="Center" VerticalAlignment="Center"  Text="Э" FontSize="16"/>
+                            <TextBlock MaxHeight="50" MinWidth="50" Padding="10"  TextAlignment="Center" VerticalAlignment="Center"  Text="Ю" FontSize="16"/>
+                            <TextBlock MaxHeight="50" MinWidth="50" Padding="10"  TextAlignment="Center" VerticalAlignment="Center"  Text="П" FontSize="16"/>
+                            <TextBlock MaxHeight="50" MinWidth="50" Padding="10"  TextAlignment="Center" VerticalAlignment="Center"  Text="С" FontSize="16"/>
+                            <TextBlock MaxHeight="50" MinWidth="50" Padding="10"  TextAlignment="Center" VerticalAlignment="Center"  Text="Л" FontSize="16"/>
+                            <TextBlock MaxHeight="50" MinWidth="50" Padding="10"  TextAlignment="Center" VerticalAlignment="Center"  Text="М" FontSize="16"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBox MinHeight="50" MinWidth="50" MaxWidth="50" TextWrapping="Wrap" MaxLength="10" TextAlignment="Center" VerticalAlignment="Center"   Text="{Binding RefBloodTest.ESR, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="16"/>
+                            <TextBox MinHeight="50" MinWidth="50" MaxWidth="50" TextWrapping="Wrap" TextAlignment="Center" MaxLength="10"  VerticalAlignment="Center"  Text="{Binding RefBloodTest.HB, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="16"/>
+                            <TextBox MinHeight="50" MinWidth="50" MaxWidth="50" TextWrapping="Wrap" TextAlignment="Center" MaxLength="10"  VerticalAlignment="Center"  Text="{Binding RefBloodTest.Leukocytes, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="16"/>
+                            <TextBox MinHeight="50" MinWidth="50" MaxWidth="50" TextWrapping="Wrap" TextAlignment="Center" MaxLength="10"  VerticalAlignment="Center"  Text="{Binding RefBloodTe.Erythrocytes, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="16"/>
+                            <TextBox MinHeight="50" MinWidth="50" MaxWidth="50" TextWrapping="Wrap" TextAlignment="Center" MaxLength="10"  VerticalAlignment="Center"  Text="{Binding RefBloodTest.ErythrocyteIndex, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="16"/>
+                            <TextBox MinHeight="50" MinWidth="50" MaxWidth="50" TextWrapping="Wrap" TextAlignment="Center" MaxLength="10"  VerticalAlignment="Center"  Text="{Binding RefBloodTest.ChangeErythrocytes, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="16"/>
+                            <TextBox MinHeight="50" MinWidth="50" MaxWidth="50" TextWrapping="Wrap" TextAlignment="Center" MaxLength="10"  VerticalAlignment="Center"  Text="{Binding RefBloodTest, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="16"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Border>
+            <TextBlock MaxWidth="500" Text="{Binding Message}" TextWrapping="Wrap" TextAlignment="Center" Grid.Row="1"/>
+            <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button Content="Сохранить" Style="{StaticResource ButtonHover}" Margin="0 0 10 0"/>
+                <Button Content="Печать" Style="{StaticResource ButtonHover}"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</views:BaseView>

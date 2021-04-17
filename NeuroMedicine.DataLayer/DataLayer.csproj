@@ -125,6 +125,10 @@
     <Compile Include="Migrations\202104171141203_NewFldInReception.designer.cs">
       <DependentUpon>202104171141203_NewFldInReception.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202104171850132_NewServiceBloodTest.cs" />
+    <Compile Include="Migrations\202104171850132_NewServiceBloodTest.designer.cs">
+      <DependentUpon>202104171850132_NewServiceBloodTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Classes\Diagnosis.cs" />
     <Compile Include="Models\Classes\DiagnosticTypeDictionary.cs" />
@@ -140,6 +144,7 @@
     <Compile Include="Models\Enums\DiagnosticType.cs" />
     <Compile Include="Models\Enums\DiagnosysType.cs" />
     <Compile Include="Models\Enums\GenderType.cs" />
+    <Compile Include="Models\Enums\ServiceType.cs" />
     <Compile Include="Models\Enums\UserType.cs" />
     <Compile Include="Models\Factories\DiagnosisFactory.cs" />
     <Compile Include="Models\Factories\DoctorScheduleFactory.cs" />
@@ -155,6 +160,7 @@
     <Compile Include="Security\Encryption.cs" />
     <Compile Include="SqlServer\DBContext.cs" />
     <Compile Include="SqlServer\DBInitializer.cs" />
+    <Compile Include="SqlServer\Tables\RefBloodTest.cs" />
     <Compile Include="SqlServer\Tables\RefDiagnosis.cs" />
     <Compile Include="SqlServer\Tables\RefDoctorSchedule.cs" />
     <Compile Include="SqlServer\Tables\RefDoctorServices.cs" />
@@ -219,6 +225,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202104171141203_NewFldInReception.resx">
       <DependentUpon>202104171141203_NewFldInReception.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104171850132_NewServiceBloodTest.resx">
+      <DependentUpon>202104171850132_NewServiceBloodTest.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

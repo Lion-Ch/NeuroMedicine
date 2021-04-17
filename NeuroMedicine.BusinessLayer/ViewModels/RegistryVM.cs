@@ -181,9 +181,10 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
                         RefUserId = SelectedDoctor.Id,
                         IsActive = true
                     });
+                DiagnosticTypes = _diagnosticTypes;
                 SelectedPatient = null;
                 SelectedDiagnosticType = null;
-                Doctors = null;
+                //Doctors = null;
                 Times = null;
                 DaysWork = null;
                 Result = "Пациент успешно записан на прием";

@@ -440,7 +440,7 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
 
         public DiagnosticVM()
         {
-            HeaderVM = "Диагностика пациентов";
+            HeaderVM = "Нейродиагностика пациентов";
             DiagnosticTypes = AppContainer.Instance.SQLDataManager.GetServicesNeuro().ToObservable();
                 //AppContainer.Instance.LocalDataManager.GetDiagnosticTypes().ToObservable();
             _proceedCommand = new DelegateCommand(this.Proceed);

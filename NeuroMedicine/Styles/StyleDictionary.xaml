@@ -30,6 +30,7 @@
     <FontFamily x:Key="RobotoBlack">/NeuroMedicine;component/Fonts/#Roboto Black</FontFamily>
     
     <SolidColorBrush x:Key="Blue" Color="#1687a7"/>
+    <SolidColorBrush x:Key="Gray" Color="#9E9E9E"/>
 
     <Style x:Key="DataGrid" TargetType="{x:Type DataGridColumnHeader}">
         <Setter Property="FontFamily" Value="{StaticResource MyFont}"/>
@@ -38,6 +39,7 @@
         <Setter Property="BorderBrush" Value="Black"/>
         <Setter Property="BorderThickness" Value="1 1 1 1"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="5"/>
         <Setter Property="ContentTemplate">
             <Setter.Value>
                 <DataTemplate>
@@ -84,7 +86,8 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border Background="{TemplateBinding Background}" 
-                                Padding="{TemplateBinding Padding}">
+                                Padding="{TemplateBinding Padding}"
+                                CornerRadius="5">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
@@ -101,4 +104,5 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
 </ResourceDictionary>

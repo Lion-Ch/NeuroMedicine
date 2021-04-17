@@ -5,8 +5,94 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NeuroMedicine.Views.WindowView"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <TextBlock Text="Personal"/>
-    </Grid>
+             d:DesignHeight="768" d:DesignWidth="1366">
+    <Border Padding="20"  Background="White">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Right" Text="Петров Генадий Александрович" FontSize="18"/>
+                    <TextBlock DockPanel.Dock="Left" Text="Принято пациентов: " FontSize="18" />
+                </DockPanel>
+            </Border>
+            <Border Grid.Row="1"  Margin="0 10 0 0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Orientation="Vertical">
+                        <TextBlock FontSize="16"
+                                   FontFamily="{StaticResource RobotoBlack}"
+                               VerticalAlignment="Center"
+                               Text="Пациент"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.8*"/>
+                                <ColumnDefinition Width="0.2*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.Column="0" BorderBrush="{StaticResource Blue}" BorderThickness="2" Padding="0" Margin="10,13,255,10" Grid.ColumnSpan="2">
+                                <TextBlock FontSize="16"
+                                           Padding="10 0 0 0"
+                                   Text="{Binding SelectedPatient.FullName}" 
+                                   VerticalAlignment="Center"/>
+                            </Border>
+                            <Button HorizontalAlignment="Center"
+                                    FontWeight="Bold"
+                                    FontSize="16"
+                                    Margin="0 5 0 10"
+                                    Padding="20 10"
+                                    Grid.Column="1"
+                                    Content="Выбрать пациента"
+                                    Style="{StaticResource ButtonHover}"
+                                    Command="{Binding SearchPatientCommand}"/>
+                        </Grid>
+                       
+                        
+                        <TextBlock Text="Услуги" FontSize="18" Margin="0 10 0 0" FontFamily="{StaticResource RobotoBlack}"/>
+                        <DataGrid IsReadOnly="True"
+                                  MaxHeight="500"
+                                FontSize="16"
+                                Margin="0 10 0 0"
+                                HorizontalScrollBarVisibility="Hidden"
+                                SelectedItem="{Binding SelectedService}"
+                                AutoGenerateColumns="False"
+                                ItemsSource="{Binding Services}"
+                                ColumnHeaderStyle="{StaticResource DataGrid}">
+                            <DataGrid.InputBindings>
+                                <MouseBinding Gesture="LeftDoubleClick" 
+                                            Command="{Binding Path=DataContext.SelectServiceCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"/>
+                            </DataGrid.InputBindings>
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Header="Наименование">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Path=Name}"
+                                                       HorizontalAlignment="Center"
+                                                       TextAlignment="Center"
+                                                       Width="{Binding Path=ActualWidth,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}} }"
+                                                       Padding="5"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                    
+                    <StackPanel Grid.Row="1" Orientation="Vertical">
+                        <TextBlock Text="Пациенты" FontSize="18"/>
+                        <DataGrid>
+
+                        </DataGrid>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+    
 </local:BaseView>

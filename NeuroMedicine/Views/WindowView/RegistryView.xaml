@@ -10,127 +10,135 @@
     <local:BaseView.DataContext>
         <vm:RegistryVM/>
     </local:BaseView.DataContext>
-    <Grid Background="White">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/NeuroMedicine;component/Img/Background.png"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="2*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <StackPanel Background="White"
-                    Grid.Column="1" Margin="0 10 0 0">
+        <Border Grid.Column="1" Grid.Row="1" Padding="50" Margin="0 10" Background="White"
+                CornerRadius="5">
+            <StackPanel Background="White">
 
-            <StackPanel Orientation="Vertical" 
-                    VerticalAlignment="Center"
-                    Grid.Column="1" 
-                    Background="White">
-                <TextBlock FontSize="22"
-                           FontWeight="Bold"
-                           VerticalAlignment="Center"
-                           Text="Пациент"/>
-                <Border BorderBrush="{StaticResource Blue}" BorderThickness="2"
-                            Padding="10" 
-                            Margin="0 10">
-                    <TextBlock FontSize="16"
-                               Text="{Binding SelectedPatient.FullName}" 
-                               VerticalAlignment="Center"/>
-                </Border>
-                <Button HorizontalAlignment="Left"
-                        FontWeight="Bold"
-                        FontSize="16"
-                        Margin="0 5 0 10"
-                        Padding="20 10"
-                        Content="Выбрать пациента"
-                        Style="{StaticResource ButtonHover}"
-                        Command="{Binding SearchPatientCommand}"/>
-                <TextBlock FontSize="22"
-                           FontWeight="Bold"
-                           VerticalAlignment="Center"
-                           Text="Услуга"/>
-                <ComboBox FontSize="16"
-                          BorderBrush="{StaticResource Blue}"
-                          BorderThickness="2"
-                          IsEditable="True"
-                          Margin="0 10"
-                          IsTextSearchEnabled="True"
-                            VerticalAlignment="Center"
-                            Padding="10"
-                            ItemsSource="{Binding DiagnosticTypes}"
-                            DisplayMemberPath="Name"
-                            SelectedItem="{Binding SelectedDiagnosticType}"/>
-                <TextBlock FontSize="22"
-                           FontWeight="Bold"
-                           VerticalAlignment="Center"
-                           Text="Доктор"/>
+                <StackPanel Orientation="Vertical" 
+                        VerticalAlignment="Center"
+                        Grid.Column="1" 
+                        Background="White">
+                    <TextBlock FontSize="22"
+                               FontWeight="Bold"
+                               VerticalAlignment="Center"
+                               Text="Пациент"/>
+                    <Border BorderBrush="{StaticResource Blue}" BorderThickness="2"
+                                Padding="10" 
+                                Margin="0 10">
+                        <TextBlock FontSize="16"
+                                   Text="{Binding SelectedPatient.FullName}" 
+                                   VerticalAlignment="Center"/>
+                    </Border>
+                    <Button HorizontalAlignment="Left"
+                            FontWeight="Bold"
+                            FontSize="16"
+                            Margin="0 5 0 10"
+                            Padding="20 10"
+                            Content="Выбрать пациента"
+                            Style="{StaticResource ButtonHover}"
+                            Command="{Binding SearchPatientCommand}"/>
+                    <TextBlock FontSize="22"
+                               FontWeight="Bold"
+                               VerticalAlignment="Center"
+                               Text="Услуга"/>
+                    <ComboBox FontSize="16"
+                              BorderBrush="{StaticResource Blue}"
+                              BorderThickness="2"
+                              IsEditable="True"
+                              Margin="0 10"
+                              IsTextSearchEnabled="True"
+                                VerticalAlignment="Center"
+                                Padding="10"
+                                ItemsSource="{Binding DiagnosticTypes}"
+                                DisplayMemberPath="Name"
+                                SelectedItem="{Binding SelectedDiagnosticType}"/>
+                    <TextBlock FontSize="22"
+                               FontWeight="Bold"
+                               VerticalAlignment="Center"
+                               Text="Доктор"/>
 
-                <ComboBox FontSize="16"
-                          BorderBrush="{StaticResource Blue}"
-                          BorderThickness="2"
-                          IsEditable="True"
-                          Margin="0 10"
-                          IsTextSearchEnabled="True"
-                            VerticalAlignment="Center"
-                            Padding="10"
-                            ItemsSource="{Binding Doctors}"
-                            DisplayMemberPath="FullName"
-                            SelectedItem="{Binding SelectedDoctor}"/>
+                    <ComboBox FontSize="16"
+                              BorderBrush="{StaticResource Blue}"
+                              BorderThickness="2"
+                              Margin="0 10"
+                              IsEditable="True"
+                              IsTextSearchEnabled="True"
+                                VerticalAlignment="Center"
+                                Padding="10"
+                                ItemsSource="{Binding Doctors}"
+                                DisplayMemberPath="FullName"
+                                SelectedItem="{Binding SelectedDoctor}"/>
                 
-                <TextBlock FontSize="22"
-                           FontWeight="Bold"
-                           VerticalAlignment="Center"
-                           Text="Дата"/>
-                <ComboBox FontSize="16"
-                          BorderBrush="{StaticResource Blue}"
-                          BorderThickness="2"
-                          Margin="0 10"
-                          IsTextSearchEnabled="True"
-                          VerticalAlignment="Center"
-                          Padding="10"
-                          ItemsSource="{Binding DaysWork}"
-                          SelectedItem="{Binding SelectedDayWork}">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Date, Converter={StaticResource dateTimeToDateConv}}"/>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
+                    <TextBlock FontSize="22"
+                               FontWeight="Bold"
+                               VerticalAlignment="Center"
+                               Text="Дата"/>
+                    <ComboBox FontSize="16"
+                              BorderBrush="{StaticResource Blue}"
+                              BorderThickness="2"
+                              Margin="0 10"
+                              VerticalAlignment="Center"
+                              Padding="10"
+                              ItemsSource="{Binding DaysWork}"
+                              SelectedItem="{Binding SelectedDayWork}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Date, Converter={StaticResource dateTimeToDateConv}}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
 
-                <TextBlock FontSize="22"
-                           FontWeight="Bold"
-                           VerticalAlignment="Center"
-                           Text="Время"/>
-                <ComboBox FontSize="16"
-                          Margin="0 10"
-                          BorderBrush="{StaticResource Blue}"
-                          BorderThickness="2"
-                          IsTextSearchEnabled="True"
-                          VerticalAlignment="Center"
-                          Padding="10"
-                          ItemsSource="{Binding Times, Mode=TwoWay}"
-                          SelectedItem="{Binding SelectedTime, Mode=TwoWay}">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding TimeOfDay}"/>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
+                    <TextBlock FontSize="22"
+                               FontWeight="Bold"
+                               VerticalAlignment="Center"
+                               Text="Время"/>
+                    <ComboBox FontSize="16"
+                              Margin="0 10"
+                              BorderBrush="{StaticResource Blue}"
+                              BorderThickness="2"
+                              VerticalAlignment="Center"
+                              Padding="10"
+                              ItemsSource="{Binding Times, Mode=TwoWay}"
+                              SelectedItem="{Binding SelectedTime, Mode=TwoWay}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding TimeOfDay}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
                 
-                <TextBlock FontSize="18"
-                           Margin="0 20 0 0"
-                           FontWeight="Bold"
-                           HorizontalAlignment="Center"
-                           Text="{Binding Result}"
-                           Foreground="{Binding ColorMessage}"/>
-                <Button HorizontalAlignment="Stretch"
-                        FontWeight="Bold"
-                        FontSize="18"
-                        Margin="40 20 40 0"
-                        Padding="0 10"
-                        Content="Записать"
-                        Style="{StaticResource ButtonHover}"
-                        Command="{Binding WriteSeansCommand}"/>
+                    <TextBlock FontSize="18"
+                               Margin="0 5 0 0"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               Text="{Binding Result}"
+                               Foreground="{Binding ColorMessage}"/>
+                    <Button HorizontalAlignment="Stretch"
+                            FontWeight="Bold"
+                            FontSize="18"
+                            Margin="40 20 40 0"
+                            Padding="0 10"
+                            Content="Записать"
+                            Style="{StaticResource ButtonHover}"
+                            Command="{Binding WriteSeansCommand}"/>
 
-            </StackPanel>
-        </StackPanel>
+                </StackPanel>
+                </StackPanel>
+        </Border>
     </Grid>
     
 </local:BaseView>

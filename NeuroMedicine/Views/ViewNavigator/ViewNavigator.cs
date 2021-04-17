@@ -1,7 +1,9 @@
 ﻿using BusinessLayer.Logic.ViewNavigation;
 using NeuroMedicine.BusinessLayer.ViewModels;
+using NeuroMedicine.BusinessLayer.ViewModels.ServicesVM;
 using NeuroMedicine.Views.ModalWindowView;
 using NeuroMedicine.Views.WindowView;
+using NeuroMedicine.Views.WindowView.ServicesViews;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -31,6 +33,9 @@ namespace NeuroMedicine.Views.ViewNavigator
             _viewModelToViewMap.Add(typeof(ConfirmationModalVM), typeof(ConfirmModalWindow));
             _viewModelToViewMap.Add(typeof(DiagnosisVM), typeof(DiagnosisModalWindow));
             _viewModelToViewMap.Add(typeof(RegistryVM), typeof(RegistryView));
+
+            //Услуги
+            _viewModelToViewMap.Add(typeof(BloodTestServiceVM), typeof(BloodTestView));
         }
         //Перемещение по самому приложению
         public void NavigateToWindow(BaseViewModel newView)

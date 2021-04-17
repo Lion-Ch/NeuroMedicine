@@ -22,12 +22,24 @@ namespace DataLayer.DataManagers
 			var dataContext = new DBContext();
 			return dataContext;
 		}
+		public List<Service> GetServicesByDoctor(int idDoctor)
+		{
+			using (var dataContext = GetNewDataContext())
+			{
+				var services = dataContext.RefDoctorServices
+					.Where(x => x.RefUserId == idDoctor)
+					.Include(x => x.RefService)
+					.ToList()
+					.Select(x => ServiceFactory.Create(x.RefService))
+					.ToList();
+				return services;
+			}
+		}
 		/// <summary>
 		/// Получает время работы врача по номеру дня
 		/// </summary>
 		public DoctorSchedule GetSchedule(int idDoctor, int numDay)
 		{
-
 			using (var dataContext = GetNewDataContext())
 			{
 				var schedule = dataContext.RefDoctorSchedules

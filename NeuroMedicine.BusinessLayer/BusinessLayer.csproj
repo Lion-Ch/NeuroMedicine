@@ -61,6 +61,7 @@
     <Compile Include="Logic\ViewNavigation\IViewNavigator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AuthorizationVM.cs" />
+    <Compile Include="ViewModels\ServicesVM\BaseServiceResultVM.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\ConfirmationModalVM.cs" />
     <Compile Include="ViewModels\DiagnosisVM.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="ViewModels\PhotoVM.cs" />
     <Compile Include="ViewModels\RegistryVM.cs" />
     <Compile Include="ViewModels\SearchPatientVM.cs" />
+    <Compile Include="ViewModels\ServicesVM\BloodTestServiceVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Neuromedicine.Core\Neuromedicine.Core.csproj">

@@ -26,9 +26,19 @@
                 <StackPanel Orientation="Horizontal"
                             Margin="10 0"
                             Style="{StaticResource MainMenuItem}"
+                            MouseDown="PersonalCabinet_MouseDown">
+                    <Image Margin="10" Source="/NeuroMedicine;component/Icons/user.png" Width="30"/>
+                    <TextBlock Text="Личный кабинет" 
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Stretch"
+                               Margin="10 0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            Margin="10 0"
+                            Style="{StaticResource MainMenuItem}"
                             MouseDown="Diagnostic_MouseDown">
                     <Image Margin="10" Source="/NeuroMedicine;component/Icons/analysis.png" Width="30"/>
-                    <TextBlock Text="Диагностика" 
+                    <TextBlock Text="Нейродиагностика" 
                                VerticalAlignment="Center"
                                HorizontalAlignment="Stretch"
                                Margin="10 0"/>
@@ -38,18 +48,8 @@
                             Style="{StaticResource MainMenuItem}"
                             MouseDown="History_MouseDown">
                     <Image Margin="10" Source="/NeuroMedicine;component/Icons/analytics.png" Width="30"/>
-                    <TextBlock Text="История обследований" 
+                    <TextBlock Text="История флюрографии" 
                                TextWrapping="Wrap"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Stretch"
-                               Margin="10 0"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal"
-                            Margin="10 0"
-                            Style="{StaticResource MainMenuItem}"
-                            MouseDown="PersonalCabinet_MouseDown">
-                    <Image Margin="10" Source="/NeuroMedicine;component/Icons/user.png" Width="30"/>
-                    <TextBlock Text="Личный кабинет врача" 
                                VerticalAlignment="Center"
                                HorizontalAlignment="Stretch"
                                Margin="10 0"/>
@@ -86,25 +86,29 @@
                 </StackPanel>
             </StackPanel>
         </Border>
-        
-        <Grid Background="AntiqueWhite"
+
+        <Grid Background="{StaticResource Blue}"
               Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
+            <Border BorderThickness="10 0 0 5" BorderBrush="{StaticResource Gray}"
+                            Grid.Row="0" Grid.Column="1" >
             <TextBlock Grid.Row="0" Grid.Column="1" 
                        Text="{Binding DataContext.HeaderVM}"
-                       Foreground="#37648d"
+                       Foreground="White"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        FontSize="32"
                        FontWeight="Bold"/>
-
-            <ContentControl Content="{Binding}"
+            </Border>
+            <Border BorderThickness="10 5 0 0" BorderBrush="{StaticResource Gray}"
                             Grid.Row="1" 
-                            Grid.Column="1"/>
+                            Grid.Column="1">
+                <ContentControl Content="{Binding}"/>
+            </Border>
         </Grid>
 
 
