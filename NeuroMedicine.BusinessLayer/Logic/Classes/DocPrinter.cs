@@ -15,52 +15,39 @@ namespace NeuroMedicine.BusinessLayer.Logic
     {
         private string _pathToDocs;
 
+        private readonly string nameOrgTag = "{nameOrg}";
         private readonly string fioPatientTag = "{fio}";
+        private readonly string dateTag = "{date}";
+        private readonly string soeTag = "{ESR}";
+        private readonly string hbTag = "{HB}";
+        private readonly string leukocytesTag = "{Leukocytes}";
+        private readonly string erythrocytesTag = "{Erythrocytes}";
+        private readonly string erythrocyteIndexTag = "{ErythrocyteIndex}";
+        private readonly string coagulabilityTag = "{Coagulability}";
+        private readonly string plateletsTag = "{Platelets}";
+        private readonly string prothrombinIndexTag = "{ProthrombinIndex}";
+        private readonly string bTag = "{B}";
+        private readonly string eTag = "{E}";
+        private readonly string yuTag = "{YU}";
+        private readonly string pTag = "{P}";
+        private readonly string fromTag = "{FROM}";
+        private readonly string lTag = "{L}";
+        private readonly string mTag = "{M}";
 
-        public void PrintBloodTest(Patient patient, RefBloodTest bloodTest)
+        private Word.Application GetApplication(string nameDoc)
         {
             Word.Application app = null;
             try
             {
-                if(File.Exists(_pathToDocs + "Анализ крови.docx"))
+                if (File.Exists(_pathToDocs + nameDoc))
                 {
 
                     app = new Word.Application();
-
-                    //var wordDoc = app.Documents.Add(_pathToDocs + "Анализ крови.docx");//Открываем шаблон
-                    //ReplaceStub(fioPatientTag, patient.FullName, wordDoc);//Заменяем метку на данные из формы(здесь конкретно из текстбокса с именем textBox_fio)
-                    //app.ActiveDocument.Prin
-                    //wordDoc.SaveAs2(wordDoc.);
-                    ///Может быть много таких меток
-                    var _fileInfo = GetFileInfo("Анализ крови.docx");
+                    var _fileInfo = GetFileInfo(nameDoc);
                     app = new Word.Application();
-                    Object missing = Type.Missing;
 
                     app.Documents.Open(_fileInfo.FullName);
-
-                    Word.Find find = app.Selection.Find;
-                    //Сделать цикл для словаря
-                    find.Text = fioPatientTag;
-                    find.Replacement.Text = patient.FullName;
-
-                    Object wrap = Word.WdFindWrap.wdFindContinue;
-                    Object replace = Word.WdReplace.wdReplaceAll;
-
-                    find.Execute(FindText: Type.Missing,
-                        MatchCase: false,
-                        MatchWholeWord: false,
-                        MatchWildcards: false,
-                        MatchSoundsLike: missing,
-                        MatchAllWordForms: false,
-                        Forward: true,
-                        Wrap: wrap,
-                        Format: false,
-                        ReplaceWith: missing,
-                        Replace: replace);
-                    app.Visible = true;
-                    Object newFileName = Path.Combine(_fileInfo.DirectoryName, _fileInfo.Name + $"_{patient.FullName}_{DateTime.Now.ToString("yyyyMMdd_HHmmss")}.docx");
-                    app.ActiveDocument.SaveAs2(newFileName);
-                    //app.ActiveDocument.Close();
+                    return app;
                 }
                 else
                 {
@@ -71,13 +58,62 @@ namespace NeuroMedicine.BusinessLayer.Logic
             {
                 AppContainer.Instance.ViewNavigator.NavigateToModal(new ConfirmationModalVM(e.Message));
             }
-            finally
+
+            return null;
+        }
+        public void PrintBloodTest(Patient patient, RefBloodTest bloodTest)
+        {
+            Dictionary<string, string> values = new Dictionary<string, string>()
             {
-                //if(app!= null)
-                //{
-                //    app.Quit();
-                //}    
+                {nameOrgTag,AppContainer.Instance.Settings.NameOrganization },
+                {fioPatientTag,patient.FullName },
+                {dateTag, bloodTest.Date.ToString("dd.MM.yyyy") },
+                {soeTag,bloodTest.ESR.ToString()},
+                {hbTag,bloodTest.HB.ToString() },
+                {leukocytesTag,bloodTest.Leukocytes.ToString() },
+                {erythrocytesTag,bloodTest.Erythrocytes.ToString() },
+                {erythrocyteIndexTag,bloodTest.ErythrocyteIndex.ToString() },
+                {coagulabilityTag,bloodTest.Coagulability.ToString() },
+                {plateletsTag,bloodTest.Platelets.ToString() },
+                {prothrombinIndexTag,bloodTest.ProthrombinIndex.ToString() },
+                {bTag,bloodTest.B.ToString() },
+                {eTag,bloodTest.E.ToString() },
+                {yuTag,bloodTest.YU.ToString() },
+                {pTag,bloodTest.P.ToString() },
+                {fromTag,bloodTest.FROM.ToString() },
+                {lTag,bloodTest.L.ToString() },
+                {mTag,bloodTest.M.ToString() }
+            };
+            var app = GetApplication("Анализ крови.docx");
+
+            Word.Find find = app.Selection.Find;
+            foreach(var item in values)
+            {
+                //Сделать цикл для словаря
+                find.Text = item.Key;
+                find.Replacement.Text = item.Value;
+
+                Object wrap = Word.WdFindWrap.wdFindContinue;
+                Object replace = Word.WdReplace.wdReplaceAll;
+                Object missing = Type.Missing;
+
+                find.Execute(FindText: Type.Missing,
+                            MatchCase: false,
+                            MatchWholeWord: false,
+                            MatchWildcards: false,
+                            MatchSoundsLike: missing,
+                            MatchAllWordForms: false,
+                            Forward: true,
+                            Wrap: wrap,
+                            Format: false,
+                            ReplaceWith: missing,
+                            Replace: replace);
             }
+            
+            app.Visible = true;
+                    //Object newFileName = Path.Combine(_fileInfo.DirectoryName, _fileInfo.Name + $"_{patient.FullName}_{DateTime.Now.ToString("yyyyMMdd_HHmmss")}.docx");
+                    //app.ActiveDocument.SaveAs2(newFileName);
+                    //app.ActiveDocument.Close();
         }
 
         private FileInfo GetFileInfo(string nameFile)
