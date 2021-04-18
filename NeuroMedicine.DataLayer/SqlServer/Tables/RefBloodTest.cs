@@ -21,12 +21,12 @@ namespace DataLayer.SqlServer.Tables
         public double Leukocytes { get; set; }
         public double Erythrocytes { get; set; }
         public double ErythrocyteIndex { get; set; }
-        public double ChangeErythrocytes { get; set; }
-        public double Coagulability { get; set; }
-        public double Platelets { get; set; }
-        public double ProthrombinIndex { get; set; }
-        public double B { get; set; }
-        public double YU { get; set; }
+        public double? Coagulability { get; set; }
+        public double? Platelets { get; set; }
+        public double? ProthrombinIndex { get; set; }
+        public double? B { get; set; }
+        public double E { get; set; }
+        public double? YU { get; set; }
         public double P { get; set; }
         public double FROM { get; set; }
         public double L { get; set; }

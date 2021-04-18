@@ -129,6 +129,10 @@
     <Compile Include="Migrations\202104171850132_NewServiceBloodTest.designer.cs">
       <DependentUpon>202104171850132_NewServiceBloodTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202104181326545_UpdateRefBloodTest.cs" />
+    <Compile Include="Migrations\202104181326545_UpdateRefBloodTest.designer.cs">
+      <DependentUpon>202104181326545_UpdateRefBloodTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Classes\Diagnosis.cs" />
     <Compile Include="Models\Classes\DiagnosticTypeDictionary.cs" />
@@ -158,6 +162,7 @@
     <Compile Include="Models\PresentationVM\PatientPVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\Encryption.cs" />
+    <Compile Include="Settings\Settings.cs" />
     <Compile Include="SqlServer\DBContext.cs" />
     <Compile Include="SqlServer\DBInitializer.cs" />
     <Compile Include="SqlServer\Tables\RefBloodTest.cs" />
@@ -229,6 +234,9 @@
     <EmbeddedResource Include="Migrations\202104171850132_NewServiceBloodTest.resx">
       <DependentUpon>202104171850132_NewServiceBloodTest.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104181326545_UpdateRefBloodTest.resx">
+      <DependentUpon>202104181326545_UpdateRefBloodTest.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Neuromedicine.Core\Neuromedicine.Core.csproj">
@@ -239,6 +247,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="PrintDocs\Анализ крови.docx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

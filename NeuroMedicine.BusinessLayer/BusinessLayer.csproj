@@ -34,6 +34,10 @@
     <Reference Include="Keras, Version=3.8.5.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Keras.NET.3.8.5\lib\netstandard2.0\Keras.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Word.15.0.4797.1003\lib\net20\Microsoft.Office.Interop.Word.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Numpy.Bare, Version=3.7.1.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Numpy.Bare.3.8.1.25\lib\netstandard2.0\Numpy.Bare.dll</HintPath>
     </Reference>
@@ -55,6 +59,7 @@
     <Compile Include="AppContainer.cs" />
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Logic\Classes\DateTimeConverter.cs" />
+    <Compile Include="Logic\Classes\DocPrinter.cs" />
     <Compile Include="Logic\Extensions\CollectionHelper.cs" />
     <Compile Include="Logic\NeuralNetwork.cs" />
     <Compile Include="Logic\PhotoLoader\PhotoLoader.cs" />

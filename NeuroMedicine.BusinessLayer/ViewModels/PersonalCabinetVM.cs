@@ -17,6 +17,7 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
 {
     public class PersonalCabinetVM : BaseViewModel
     {
+        public string NumPatients { get; set; } = $"Принято пациентов: {AppContainer.Instance.NumPatients}";
         private Patient _selectedPatient;
         public Patient SelectedPatient
         {

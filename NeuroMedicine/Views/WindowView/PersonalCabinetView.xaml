@@ -16,7 +16,7 @@
             <Border Grid.Row="0">
                 <DockPanel>
                     <TextBlock DockPanel.Dock="Right" Text="Петров Генадий Александрович" FontSize="18"/>
-                    <TextBlock DockPanel.Dock="Left" Text="Принято пациентов: " FontSize="18" />
+                    <TextBlock DockPanel.Dock="Left" Text="{Binding NumPatients}" FontSize="18" />
                 </DockPanel>
             </Border>
             <Border Grid.Row="1"  Margin="0 10 0 0">
@@ -85,10 +85,13 @@
                     </StackPanel>
                     
                     <StackPanel Grid.Row="1" Orientation="Vertical">
-                        <TextBlock Text="Пациенты" FontSize="18"/>
-                        <DataGrid>
-
-                        </DataGrid>
+                        <TextBlock Text="История пациента" FontFamily="{StaticResource RobotoBlack}" FontSize="18"/>
+                        <TabControl TabStripPlacement="Left" Margin="0 10 0 0">
+                            <TabItem Padding="10" FontSize="16" Header="Консультации"/>
+                            <TabItem Padding="10" FontSize="16" Header="Анализы мочи"/>
+                            <TabItem Padding="10" FontSize="16" Header="Анализы крови"/>
+                            <TabItem Padding="10" FontSize="16" Header="Флюорографии"/>
+                        </TabControl>
                     </StackPanel>
                 </Grid>
             </Border>

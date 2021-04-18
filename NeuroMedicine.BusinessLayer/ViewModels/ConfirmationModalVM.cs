@@ -8,5 +8,21 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
 {
     public class ConfirmationModalVM: BaseViewModel
     {
+        private string _text;
+        public string Text
+        {
+            get { return _text; }
+            set
+            {
+                _text = value;
+                SendPropertyChanged(() => Text);
+            }
+        }
+
+        public ConfirmationModalVM(string text)
+        {
+            HeaderVM = "Уведомление";
+            Text = text;
+        }
     }
 }

@@ -18,7 +18,7 @@ namespace NeuroMedicine.Views.ModalWindowView
     /// <summary>
     /// Логика взаимодействия для ConfirmModalWindow.xaml
     /// </summary>
-    public partial class ConfirmModalWindow : UserControl
+    public partial class ConfirmModalWindow
     {
         public ConfirmModalWindow()
         {
