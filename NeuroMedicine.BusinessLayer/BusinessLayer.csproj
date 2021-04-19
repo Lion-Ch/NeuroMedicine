@@ -80,6 +80,7 @@
     <Compile Include="ViewModels\RegistryVM.cs" />
     <Compile Include="ViewModels\SearchPatientVM.cs" />
     <Compile Include="ViewModels\ServicesVM\BloodTestServiceVM.cs" />
+    <Compile Include="ViewModels\ServicesVM\UrineTestServiceVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Neuromedicine.Core\Neuromedicine.Core.csproj">

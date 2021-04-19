@@ -16,7 +16,13 @@ namespace NeuroMedicine.BusinessLayer.Logic
         private string _pathToDocs;
 
         private readonly string nameOrgTag = "{nameOrg}";
+
         private readonly string fioPatientTag = "{fio}";
+        private readonly string fioDocTag= "{fioDoc}";
+        private readonly string dateBirthTag = "{dateBirth}";
+        private readonly string imageTag = "{image}";
+        private readonly string diagnosisTag = "{diagnosis}";
+        private readonly string serviceTag = "{service}";
         private readonly string dateTag = "{date}";
         private readonly string soeTag = "{ESR}";
         private readonly string hbTag = "{HB}";
@@ -33,6 +39,16 @@ namespace NeuroMedicine.BusinessLayer.Logic
         private readonly string fromTag = "{FROM}";
         private readonly string lTag = "{L}";
         private readonly string mTag = "{M}";
+        private readonly string QuantityTag = "{Quantity}";
+        private readonly string TransparencyTag = "{Transparency}";
+        private readonly string ColorTag = "{Color}";
+        private readonly string SpecificGravityTag = "{SpecificGravity}";
+        private readonly string ReactionTag = "{Reaction}";
+        private readonly string ProteinTag = "{Protein}";
+        private readonly string SugarTag = "{Sugar}";
+        private readonly string CylindersTag = "{Cylinders}";
+        private readonly string RenalEpitheliumTag = "{RenalEpithelium}";
+        private readonly string EpitheliumTag = "{Epithelium}";
 
         private Word.Application GetApplication(string nameDoc)
         {
@@ -56,10 +72,70 @@ namespace NeuroMedicine.BusinessLayer.Logic
             }
             catch(Exception e)
             {
-                AppContainer.Instance.ViewNavigator.NavigateToModal(new ConfirmationModalVM(e.Message));
             }
 
             return null;
+        }
+
+        private Word.Application PrintDoc(string nameDoc, Dictionary<string,string> keyValues)
+        {
+            var app = GetApplication(nameDoc);
+
+            if (app != null)
+            {
+                Word.Find find = app.Selection.Find;
+                foreach (var item in keyValues)
+                {
+                    //Сделать цикл для словаря
+                    find.Text = item.Key;
+                    find.Replacement.Text = item.Value;
+
+                    Object wrap = Word.WdFindWrap.wdFindContinue;
+                    Object replace = Word.WdReplace.wdReplaceAll;
+                    Object missing = Type.Missing;
+
+                    find.Execute(FindText: Type.Missing,
+                                MatchCase: false,
+                                MatchWholeWord: false,
+                                MatchWildcards: false,
+                                MatchSoundsLike: missing,
+                                MatchAllWordForms: false,
+                                Forward: true,
+                                Wrap: wrap,
+                                Format: false,
+                                ReplaceWith: missing,
+                                Replace: replace);
+                }
+
+                app.Visible = true;
+            }
+            else
+            {
+                AppContainer.Instance.ViewNavigator.NavigateToModal(new ConfirmationModalVM("Файл шаблона не найден!"));
+            }
+
+            return app;
+        }
+        private FileInfo GetFileInfo(string nameFile)
+        {
+            if(File.Exists(_pathToDocs + nameFile))
+            {
+                return new FileInfo(_pathToDocs + nameFile);
+            }
+            else
+            {
+                return null;
+            }
+        }
+        /// <summary>
+        /// Замена нужного параметра на текст
+        /// </summary>
+        private void ReplaceStub(string stubToReplace, string text, Word.Document worldDocument)
+        {
+            var range = worldDocument.Content;
+            range.Find.ClearFormatting();
+            object wdReplaceAll = Word.WdReplace.wdReplaceAll;
+            range.Find.Execute(FindText: stubToReplace, ReplaceWith: text, Replace: wdReplaceAll);
         }
         public void PrintBloodTest(Patient patient, RefBloodTest bloodTest)
         {
@@ -84,58 +160,59 @@ namespace NeuroMedicine.BusinessLayer.Logic
                 {lTag,bloodTest.L.ToString() },
                 {mTag,bloodTest.M.ToString() }
             };
-            var app = GetApplication("Анализ крови.docx");
-
-            Word.Find find = app.Selection.Find;
-            foreach(var item in values)
+            PrintDoc("Анализ крови.docx", values);
+        }
+        public void PrintUrineTest(Patient patient, RefUrineTest refUrineTest)
+        {
+            Dictionary<string, string> values = new Dictionary<string, string>()
             {
-                //Сделать цикл для словаря
-                find.Text = item.Key;
-                find.Replacement.Text = item.Value;
-
-                Object wrap = Word.WdFindWrap.wdFindContinue;
-                Object replace = Word.WdReplace.wdReplaceAll;
-                Object missing = Type.Missing;
-
-                find.Execute(FindText: Type.Missing,
-                            MatchCase: false,
-                            MatchWholeWord: false,
-                            MatchWildcards: false,
-                            MatchSoundsLike: missing,
-                            MatchAllWordForms: false,
-                            Forward: true,
-                            Wrap: wrap,
-                            Format: false,
-                            ReplaceWith: missing,
-                            Replace: replace);
-            }
-            
-            app.Visible = true;
-                    //Object newFileName = Path.Combine(_fileInfo.DirectoryName, _fileInfo.Name + $"_{patient.FullName}_{DateTime.Now.ToString("yyyyMMdd_HHmmss")}.docx");
-                    //app.ActiveDocument.SaveAs2(newFileName);
-                    //app.ActiveDocument.Close();
+                {nameOrgTag,AppContainer.Instance.Settings.NameOrganization },
+                {fioPatientTag,patient.FullName },
+                {dateTag, refUrineTest.Date.ToString("dd.MM.yyyy") },
+                {QuantityTag,refUrineTest.Quantity.ToString()},
+                {ColorTag,refUrineTest.Color.ToString() },
+                {TransparencyTag,refUrineTest.Transparency.ToString() },
+                {SpecificGravityTag,refUrineTest.SpecificGravity.ToString() },
+                {ReactionTag,refUrineTest.Reaction.ToString() },
+                {ProteinTag,refUrineTest.Protein.ToString() },
+                {SugarTag,refUrineTest.Sugar.ToString() },
+                {CylindersTag,refUrineTest.Cylinders.ToString() },
+                {RenalEpitheliumTag,refUrineTest.RenalEpithelium.ToString() },
+                {erythrocytesTag,refUrineTest.Erythrocytes.ToString() },
+                {leukocytesTag,refUrineTest.Leukocytes.ToString() },
+                {EpitheliumTag,refUrineTest.Epithelium.ToString() }
+            };
+            PrintDoc("Анализ мочи.docx", values);
         }
 
-        private FileInfo GetFileInfo(string nameFile)
+        public void PrintTalon(string fioDoc, DateTime date, string fioPatient, string nameService)
         {
-            if(File.Exists(_pathToDocs + nameFile))
+            Dictionary<string, string> values = new Dictionary<string, string>()
             {
-                return new FileInfo(_pathToDocs + nameFile);
-            }
-            else
-            {
-                return null;
-            }
+                {nameOrgTag,AppContainer.Instance.Settings.NameOrganization },
+                {fioPatientTag,fioPatient },
+                {fioDocTag, fioDoc },
+                {serviceTag, nameService },
+                {dateTag, date.ToString("HH:mm dd.MM.yyyy") }
+            };
+            PrintDoc("Талон.docx", values);
         }
-        /// <summary>
-        /// Замена нужного параметра на текст
-        /// </summary>
-        private void ReplaceStub(string stubToReplace, string text, Word.Document worldDocument)
+        public void PrintImg(Patient patient, string imgPath, string nameService, string diagnosis, User doctor)
         {
-            var range = worldDocument.Content;
-            range.Find.ClearFormatting();
-            object wdReplaceAll = Word.WdReplace.wdReplaceAll;
-            range.Find.Execute(FindText: stubToReplace, ReplaceWith: text, Replace: wdReplaceAll);
+            //Dictionary<string, string> values = new Dictionary<string, string>()
+            //{
+            //    {nameOrgTag,AppContainer.Instance.Settings.NameOrganization },
+            //    {fioPatientTag,fioPatient },
+            //    {fioDocTag, fioDoc },
+            //    {serviceTag, nameService },
+            //    {dateTag, date.ToString("HH:mm dd.MM.yyyy") }
+            //};
+            //var sel = app.Selection;
+            //sel.Find.Text = "{image}";
+            //sel.Find.Execute(Replace: Word.WdReplace.wdReplaceNone);
+            //sel.Range.Select();
+            //sel.InlineShapes.AddPicture(@"C:\Users\levac\OneDrive\Рабочий стол\Учеба\Диплом\Dataset\test\NORMAL\IM-0001-0001.jpeg");
+            //app.Visible = true;
         }
         public DocPrinter()
         {

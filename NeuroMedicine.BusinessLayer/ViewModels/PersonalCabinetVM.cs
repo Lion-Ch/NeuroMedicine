@@ -61,7 +61,7 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
 
         private void SelectService(object obj)
         {
-            if(SelectedPatient != null)
+            if(SelectedPatient != null && SelectedService != null)
             {
                 //Переход на выбранную услугу
                 switch (SelectedService.Id)
@@ -74,6 +74,7 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
                     case (int)ServiceType.ECG:
                         break;
                     case (int)ServiceType.AnalysisOfUrine:
+                        AppContainer.Instance.ViewNavigator.NavigateToView(new UrineTestServiceVM(SelectedPatient));
                         break;
                 }
             }

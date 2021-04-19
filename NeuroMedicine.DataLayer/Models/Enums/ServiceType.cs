@@ -24,12 +24,12 @@ namespace DataLayer.Models.Enums
         /// </summary>
         BloodTest = 3,
         /// <summary>
-        /// ЭКГ
-        /// </summary>
-        ECG = 4,
-        /// <summary>
         /// Анализ мочи
         /// </summary>
-        AnalysisOfUrine = 5,
+        AnalysisOfUrine = 4,
+        /// <summary>
+        /// ЭКГ
+        /// </summary>
+        ECG = 5
     }
 }

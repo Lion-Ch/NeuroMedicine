@@ -15,6 +15,7 @@ namespace DataLayer.SqlServer
         public DbSet<RefDoctorServices> RefDoctorServices { get; set; }
         public DbSet<RefService> RefServices { get; set; }
         public DbSet<RefBloodTest> RefBlodTests { get; set; }
+        public DbSet<RefUrineTest> RefUrineTests { get; set; }
         public DBContext()
             : base("DefaultConnection")
         {

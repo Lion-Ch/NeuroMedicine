@@ -22,6 +22,14 @@ namespace DataLayer.DataManagers
 			var dataContext = new DBContext();
 			return dataContext;
 		}
+		public void AddUrineTest(RefUrineTest urineTest)
+		{
+			using (var dataContext = GetNewDataContext())
+			{
+				dataContext.RefUrineTests.Add(urineTest);
+				dataContext.SaveChanges();
+			}
+		}
 		public void AddBloodTest(RefBloodTest bloodTest)
 		{
 			using (var dataContext = GetNewDataContext())

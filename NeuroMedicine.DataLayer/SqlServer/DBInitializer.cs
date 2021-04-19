@@ -21,12 +21,14 @@ namespace DataLayer.SqlServer
             db.RefServices.Add(new RefService() {Id = (int)ServiceType.Consultation, Name = "Консультация", IsUseNeuralNetwork = false });
             db.RefServices.Add(new RefService() { Id = (int)ServiceType.Fluorography, Name = "Диагностика флюрографии", IsUseNeuralNetwork = true });
             db.RefServices.Add(new RefService() { Id = (int)ServiceType.BloodTest, Name = "Общий анализ крови", IsUseNeuralNetwork = false });
+            db.RefServices.Add(new RefService() { Id = (int)ServiceType.ECG, Name = "ЭКГ", IsUseNeuralNetwork = false });
             db.RefServices.Add(new RefService() { Id = (int)ServiceType.AnalysisOfUrine, Name = "Общий анализ мочи", IsUseNeuralNetwork = false });
 
 
             db.RefDoctorServices.Add(new RefDoctorServices() { RefServiceId = (int)ServiceType.Consultation, RefUserId = 1 });
             db.RefDoctorServices.Add(new RefDoctorServices() { RefServiceId = (int)ServiceType.Fluorography, RefUserId = 1 });
             db.RefDoctorServices.Add(new RefDoctorServices() { RefServiceId = (int)ServiceType.BloodTest, RefUserId = 1 });
+            db.RefDoctorServices.Add(new RefDoctorServices() { RefServiceId = (int)ServiceType.AnalysisOfUrine, RefUserId = 1 });
 
             db.RefDoctorSchedules.Add(new RefDoctorSchedule() { NumDay = 1, NumPatients = 5, TimeStart = "09:00", TimeEnd = "16:00", RefUserId = 1 });
             db.RefDoctorSchedules.Add(new RefDoctorSchedule() { NumDay = 2, NumPatients = 5, TimeStart = "09:00", TimeEnd = "16:00", RefUserId = 1 });
