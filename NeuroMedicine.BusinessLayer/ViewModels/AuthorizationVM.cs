@@ -37,7 +37,6 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
         }
         public AuthorizationVM()
         {
-
         }
     }
 }

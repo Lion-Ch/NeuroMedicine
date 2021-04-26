@@ -70,6 +70,12 @@
                     <TextBox Text="{Binding Patient.Passport}" Padding="5" FontSize="16"/>
                 </StackPanel>
                 <StackPanel Margin="0 10 0 0">
+                    <TextBlock Text="Кем и когда выдан паспорт*" 
+                               FontFamily="{StaticResource RobotoBlack}" Foreground="Red" FontSize="16" 
+                       Margin="0 5"/>
+                    <TextBox Text="{Binding Patient.PassportInfo}" Padding="5" FontSize="16"/>
+                </StackPanel>
+                <StackPanel Margin="0 10 0 0">
                     <TextBlock Text="Снилс*"
                                FontFamily="{StaticResource RobotoBlack}" Foreground="Red" FontSize="16" 
                        Margin="0 5"/>

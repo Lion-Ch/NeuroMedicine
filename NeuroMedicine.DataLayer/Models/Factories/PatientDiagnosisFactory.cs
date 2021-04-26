@@ -91,5 +91,31 @@ namespace DataLayer.Models.Factories
 
             return newOb;
         }
+
+        public static List<PatientDiagnosis> Create(List<PatientPVM> list)
+        {
+            List<PatientDiagnosis> newlist = new List<PatientDiagnosis>();
+            if (list == null) return null;
+
+            foreach(var oldObj in list)
+            {
+                var newOb = new PatientDiagnosis();
+                newOb.Id = oldObj.Id;
+                newOb.Conclusion = oldObj.Conclusion;
+                newOb.ResultNeuralNetwork = oldObj.ProbobilityDisease;
+                newOb.Date = oldObj.Date;
+                newOb.DatePhoto = oldObj.DatePhoto;
+                newOb.PhotoUrl = oldObj.PhotoUrl;
+
+                //newOb.RefPatientId = oldObj.Patient.Id;
+                newOb.RefPatient = oldObj.Patient;
+                //newOb.RefUserId = oldObj.User.Id;
+                newOb.RefUser = oldObj.User;
+
+                newlist.Add(newOb);
+            }
+
+            return newlist;
+        }
     }
 }

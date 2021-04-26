@@ -19,6 +19,8 @@ namespace DataLayer.Models.Factories
             newOb.IsUseNeuralNetwork = oldObj.IsUseNeuralNetwork;
             newOb.Name = oldObj.Name;
             newOb.PathToNeuralNetwork = oldObj.PathToNeuralNetwork;
+            newOb.Price = oldObj.Price;
+            newOb.Duration = oldObj.Duration;
 
             return newOb;
         }
@@ -31,6 +33,8 @@ namespace DataLayer.Models.Factories
             newOb.IsUseNeuralNetwork = oldObj.IsUseNeuralNetwork;
             newOb.Name = oldObj.Name;
             newOb.PathToNeuralNetwork = oldObj.PathToNeuralNetwork;
+            newOb.Price = oldObj.Price;
+            newOb.Duration = oldObj.Duration;
 
             return newOb;
         }

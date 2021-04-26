@@ -181,6 +181,7 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
                         RefUserId = SelectedDoctor.Id,
                         IsActive = true
                     });
+                AppContainer.Instance.DocPrinter.PrintContract(_selectedPatient, _selectedDiagnosticType, AppContainer.Instance.CurrentUser);
                 AppContainer.Instance.DocPrinter.PrintTalon(SelectedDoctor.FullName,
                     new DateTime(SelectedDayWork.Value.Year, SelectedDayWork.Value.Month, SelectedDayWork.Value.Day,
                             SelectedTime.Value.Hour, SelectedTime.Value.Minute, SelectedTime.Value.Second),

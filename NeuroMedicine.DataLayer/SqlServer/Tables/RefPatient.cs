@@ -37,6 +37,10 @@ namespace DataLayer.SqlServer.Tables
         /// </summary>
         public string Passport { get; set; }
         /// <summary>
+        /// Кем выдан
+        /// </summary>
+        public string PassportInfo { get; set; }
+        /// <summary>
         /// СНИЛС
         /// </summary>
         public string Snills { get; set; }

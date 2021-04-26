@@ -137,6 +137,10 @@
     <Compile Include="Migrations\202104191646573_NewTableRefUrineTest.designer.cs">
       <DependentUpon>202104191646573_NewTableRefUrineTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202104211547253_NewFildsInTables.cs" />
+    <Compile Include="Migrations\202104211547253_NewFildsInTables.designer.cs">
+      <DependentUpon>202104211547253_NewFildsInTables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Classes\Diagnosis.cs" />
     <Compile Include="Models\Classes\DiagnosticTypeDictionary.cs" />
@@ -244,6 +248,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202104191646573_NewTableRefUrineTest.resx">
       <DependentUpon>202104191646573_NewTableRefUrineTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104211547253_NewFildsInTables.resx">
+      <DependentUpon>202104211547253_NewFildsInTables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

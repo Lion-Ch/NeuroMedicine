@@ -101,5 +101,15 @@ namespace DataLayer.Models.PresentationVM
                 SendPropertyChanged(() => Policy);
             }
         }
+        private string _passportInfo;
+        public string PassportInfo
+        {
+            get { return _passportInfo; }
+            set
+            {
+                _passportInfo = value;
+                SendPropertyChanged(() => PassportInfo);
+            }
+        }
     }
 }

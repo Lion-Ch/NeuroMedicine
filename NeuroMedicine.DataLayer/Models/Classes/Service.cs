@@ -12,5 +12,7 @@ namespace DataLayer.Models.Classes
         public string Name { get; set; }
         public bool IsUseNeuralNetwork { get; set; }
         public string PathToNeuralNetwork { get; set; }
+        public double Price { get; set; }
+        public int Duration { get; set; }
     }
 }

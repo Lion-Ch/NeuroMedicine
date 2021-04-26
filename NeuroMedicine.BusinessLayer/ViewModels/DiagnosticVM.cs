@@ -12,6 +12,7 @@ using System.IO;
 using System.ComponentModel;
 using System.Windows.Data;
 using System.Linq;
+using DataLayer.Models.Factories;
 
 namespace NeuroMedicine.BusinessLayer.ViewModels
 {
@@ -246,6 +247,7 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
                         if (Notifications.Count == 0)
                         {
                             SaveDiagnosesPatients();
+                            AppContainer.Instance.DocPrinter.PrintLungs("ЦИФРОВАЯ ФЛЮРОГРАФИЯ В ПРЯМОЙ ПРОЕКЦИИ" ,PatientDiagnosisFactory.Create(Patients.ToList()));
                             AppContainer.Instance.ViewNavigator.NavigateToView(new PersonalCabinetVM());
                         }
                     }
@@ -440,7 +442,7 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
 
         public DiagnosticVM()
         {
-            HeaderVM = "Нейродиагностика пациентов";
+            HeaderVM = "Нейродиагностика";
             DiagnosticTypes = AppContainer.Instance.SQLDataManager.GetServicesNeuro().ToObservable();
                 //AppContainer.Instance.LocalDataManager.GetDiagnosticTypes().ToObservable();
             _proceedCommand = new DelegateCommand(this.Proceed);

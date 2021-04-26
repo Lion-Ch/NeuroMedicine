@@ -136,6 +136,11 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
                     valid = false;
                 }
             }
+            if (String.IsNullOrEmpty(Patient.PassportInfo))
+            {
+                Errors += "Не указано кем и когда выдан паспорт!\n";
+                valid = false;
+            }
             if (String.IsNullOrEmpty(Patient.Address))
             {
                 Errors += "Не указан адрес проживания!\n";

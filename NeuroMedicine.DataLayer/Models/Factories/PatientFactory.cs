@@ -22,6 +22,7 @@ namespace DataLayer.Models.Factories
             newPatient.Snills = encryption.Encrypt(patient.Snills);
             newPatient.Policy = encryption.Encrypt(patient.Policy);
             newPatient.Gender = patient.Gender;
+            newPatient.PassportInfo = patient.PassportInfo;
 
             return newPatient;
         }
@@ -40,6 +41,7 @@ namespace DataLayer.Models.Factories
             newPatient.Snills = patient.Snills;
             newPatient.Policy = patient.Policy;
             newPatient.Gender = patient.Gender;
+            newPatient.PassportInfo = patient.PassportInfo;
 
             return newPatient;
         }
@@ -54,6 +56,13 @@ namespace DataLayer.Models.Factories
             newPatient.FullName = patient.FullName;
             newPatient.DateBirth = patient.DateBirth;
             newPatient.Gender = patient.Gender;
+            newPatient.Mobile = patient.Mobile;
+            newPatient.Mail = patient.Mail;
+            newPatient.Address = patient.Address;
+            newPatient.Passport = patient.Passport;
+            newPatient.Snills = patient.Snills;
+            newPatient.Policy = patient.Policy;
+            newPatient.PassportInfo = patient.PassportInfo;
 
             return newPatient;
         }
