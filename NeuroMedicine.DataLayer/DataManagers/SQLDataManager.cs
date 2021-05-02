@@ -17,7 +17,17 @@ namespace DataLayer.DataManagers
     public class SQLDataManager
     {
 		private readonly int _numSaveRecord = 500;
-		private DBContext GetNewDataContext()
+
+		public void SaveConsultation(PatientPVM patientPVM)
+		{
+			using (var dataContext = GetNewDataContext())
+			{
+				dataContext.RefConsultations.Add(PatientDiagnosisFactory.CreateConsultation(patientPVM));
+				dataContext.SaveChanges();
+			}
+		}
+
+        private DBContext GetNewDataContext()
 		{
 			var dataContext = new DBContext();
 			return dataContext;
@@ -30,6 +40,25 @@ namespace DataLayer.DataManagers
 				dataContext.SaveChanges();
 			}
 		}
+
+		public Settings.Settings GetSettings()
+		{
+			using (var dataContext = GetNewDataContext())
+			{
+				return dataContext.RefSettings.ToList().Select(x => SettingsFactory.Create(x)).FirstOrDefault();
+			}
+		}
+		public void SaveSettings(Settings.Settings settings)
+		{
+			using (var dataContext = GetNewDataContext())
+			{
+				var set = SettingsFactory.Create(settings);
+				dataContext.RefSettings.Attach(set);
+				dataContext.Entry(set).State = EntityState.Modified;
+				dataContext.SaveChanges();
+			}
+		}
+
 		public void AddBloodTest(RefBloodTest bloodTest)
 		{
 			using (var dataContext = GetNewDataContext())
@@ -134,6 +163,14 @@ namespace DataLayer.DataManagers
 				context.SaveChanges();
 			}
 		}
+		public int GetNumberContract()
+		{
+			using (var context = GetNewDataContext())
+			{
+				return context.RefReceptions.Count() + 1;
+			}
+		}
+
 		public void SaveDiagnosis(PatientPVM patient)
 		{
 			using (var context = GetNewDataContext())

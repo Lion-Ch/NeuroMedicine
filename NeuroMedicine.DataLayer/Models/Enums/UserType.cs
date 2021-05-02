@@ -9,6 +9,7 @@ namespace DataLayer.Models.Enums
     public enum UserType
     {
         Admin = 0,
-        Doctor = 1
+        Doctor = 1,
+        Registratur = 2
     }
 }

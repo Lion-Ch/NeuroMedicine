@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Neuromedicine.Core.NotifyPropertyChanged;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace DataLayer.Settings
 {
-    public class Settings
+    public class Settings: BaseNotifyPropertyChanged
     {
+        public int Id { get; set; }
         public string NameOrganization { get; set; } = "Медицинский центр \"Пульс\"";
         public string fioDirector { get; set; } = "Иванов Иван Иванович";
         public string cityOrgTag { get; set; } = "Новочеркасск";
@@ -19,5 +21,6 @@ namespace DataLayer.Settings
         public string bankOrgTag { get; set; } = "Сбербанк";
         public string ksOrgTag { get; set; } = "123456789012";
         public string bikOrgTag { get; set; } = "1234567890";
+        public string PathToNeuro { get; set; } = @"C:\Users\levac\OneDrive\Рабочий стол\Учеба\Диплом\Модель";
     }
 }

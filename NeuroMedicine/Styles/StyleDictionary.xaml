@@ -24,6 +24,7 @@
 
     <conv:DateTimeToDateConverter x:Key="dateTimeToDateConv"/>
     <conv:DateTimeToTimeConverter x:Key="dateTimeToTimeConv"/>
+    <conv:BoolToVisibilityConverter x:Key="boolToVisConv"/>
 
     <FontFamily x:Key="MyFont">/NeuroMedicine;component/Fonts/#Roboto Regular</FontFamily>
     <FontFamily x:Key="RobotoBold">/NeuroMedicine;component/Fonts/#Roboto Bold</FontFamily>

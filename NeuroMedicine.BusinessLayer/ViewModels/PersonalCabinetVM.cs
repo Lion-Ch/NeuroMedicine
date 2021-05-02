@@ -100,6 +100,12 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
                 switch (SelectedService.Id)
                 {
                     case (int)ServiceType.Consultation:
+                        AppContainer.Instance.ViewNavigator.NavigateToView(new ConsultationVM(new PatientPVM()
+                        {
+                            Patient = SelectedPatient,
+                            Service = SelectedService,
+                            User = AppContainer.Instance.CurrentUser
+                        }));
                         break;
                     case (int)ServiceType.BloodTest:
                         AppContainer.Instance.ViewNavigator.NavigateToView(new BloodTestServiceVM(SelectedPatient));

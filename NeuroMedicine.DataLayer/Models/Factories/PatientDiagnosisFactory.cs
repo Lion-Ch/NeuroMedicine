@@ -91,7 +91,24 @@ namespace DataLayer.Models.Factories
 
             return newOb;
         }
+        public static RefConsultation CreateConsultation(PatientPVM oldObj)
+        {
+            if (oldObj == null) return null;
 
+            var newOb = new RefConsultation();
+            newOb.Id = oldObj.Id;
+            newOb.Conclusion = oldObj.Conclusion;
+            newOb.Date = oldObj.Date;
+
+            newOb.RefDiagnosisId = oldObj.Diagnosis.Id;
+            newOb.RefServiceId = oldObj.Service.Id;
+            newOb.RefPatientId = oldObj.Patient.Id;
+            //newOb.RefPatient = PatientFactory.Create(oldObj.Patient);
+            newOb.RefUserId = oldObj.User.Id;
+            //newOb.RefUser = UserFactory.Create(oldObj.User);
+
+            return newOb;
+        }
         public static List<PatientDiagnosis> Create(List<PatientPVM> list)
         {
             List<PatientDiagnosis> newlist = new List<PatientDiagnosis>();

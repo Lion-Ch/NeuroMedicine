@@ -30,7 +30,18 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
                 if (user != null)
                 {
                     AppContainer.Instance.CurrentUser = user;
-                    AppContainer.Instance.ViewNavigator.NavigateToView(new DiagnosticVM());
+                    switch(user.UserType)
+                    {
+                        case DataLayer.Models.Enums.UserType.Admin:
+                            AppContainer.Instance.ViewNavigator.NavigateToView(new SettingsVM());
+                            break;
+                        case DataLayer.Models.Enums.UserType.Doctor:
+                            AppContainer.Instance.ViewNavigator.NavigateToView(new PersonalCabinetVM());
+                            break;
+                        case DataLayer.Models.Enums.UserType.Registratur:
+                            AppContainer.Instance.ViewNavigator.NavigateToView(new RegistryVM());
+                            break;
+                    }
                 }
             }
             

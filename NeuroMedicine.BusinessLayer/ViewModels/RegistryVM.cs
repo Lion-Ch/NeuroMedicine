@@ -181,7 +181,7 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
                         RefUserId = SelectedDoctor.Id,
                         IsActive = true
                     });
-                AppContainer.Instance.DocPrinter.PrintContract(_selectedPatient, _selectedDiagnosticType, AppContainer.Instance.CurrentUser);
+                AppContainer.Instance.DocPrinter.PrintContract(_selectedPatient, _selectedDiagnosticType, AppContainer.Instance.CurrentUser, AppContainer.Instance.SQLDataManager.GetNumberContract());
                 AppContainer.Instance.DocPrinter.PrintTalon(SelectedDoctor.FullName,
                     new DateTime(SelectedDayWork.Value.Year, SelectedDayWork.Value.Month, SelectedDayWork.Value.Day,
                             SelectedTime.Value.Hour, SelectedTime.Value.Minute, SelectedTime.Value.Second),
@@ -211,7 +211,7 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
         {
             if (SelectedDayWork != null)
             {
-                var doctorSchedule = AppContainer.Instance.SQLDataManager.GetSchedule(AppContainer.Instance.CurrentUser.Id,
+                var doctorSchedule = AppContainer.Instance.SQLDataManager.GetSchedule(SelectedDoctor.Id,
                     (int)SelectedDayWork.Value.DayOfWeek);
                 var times = new DateTimeConverter().GetFreeWorkTimes(DateTime.Parse(doctorSchedule.TimeStart), DateTime.Parse(doctorSchedule.TimeEnd), doctorSchedule.NumPatients, AppContainer.Instance.SQLDataManager.GetNotFreeWorkTimes(AppContainer.Instance.CurrentUser.Id, SelectedDayWork.Value)).ToObservable();
                 Times = times;

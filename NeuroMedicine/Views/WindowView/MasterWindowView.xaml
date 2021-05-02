@@ -24,6 +24,7 @@
             <StackPanel Background="#37648d"
                         Orientation="Vertical">
                 <StackPanel Orientation="Horizontal"
+                            x:Name="Cabinet"
                             Margin="10 0"
                             Style="{StaticResource MainMenuItem}"
                             MouseDown="PersonalCabinet_MouseDown">
@@ -35,8 +36,10 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal"
                             Margin="10 0"
+                            x:Name="Neuro"
                             Style="{StaticResource MainMenuItem}"
-                            MouseDown="Diagnostic_MouseDown">
+                            MouseDown="Diagnostic_MouseDown"
+                            Visibility="{Binding VisibilityNeuro, Converter={StaticResource boolToVisConv}}">
                     <Image Margin="10" Source="/NeuroMedicine;component/Icons/analysis.png" Width="30"/>
                     <TextBlock Text="Нейродиагностика" 
                                VerticalAlignment="Center"
@@ -46,7 +49,9 @@
                 <StackPanel Orientation="Horizontal"
                             Margin="10 0"
                             Style="{StaticResource MainMenuItem}"
-                            MouseDown="History_MouseDown">
+                            MouseDown="History_MouseDown"
+                            x:Name="History"
+                            Visibility="{Binding VisibilityFlu, Converter={StaticResource boolToVisConv}}">
                     <Image Margin="10" Source="/NeuroMedicine;component/Icons/analytics.png" Width="30"/>
                     <TextBlock Text="История флюрографии" 
                                TextWrapping="Wrap"
@@ -57,7 +62,9 @@
                 <StackPanel Orientation="Horizontal"
                             Margin="10 0"
                             Style="{StaticResource MainMenuItem}"
-                            MouseDown="Registratur_MouseDown">
+                            MouseDown="Registratur_MouseDown"
+                            x:Name="Registr"
+                            Visibility="{Binding VisibilityRegis, Converter={StaticResource boolToVisConv}}">
                     <Image Margin="10" Source="/NeuroMedicine;component/Icons/user.png" Width="30"/>
                     <TextBlock Text="Регистратура" 
                                VerticalAlignment="Center"
@@ -67,9 +74,23 @@
                 <StackPanel Orientation="Horizontal"
                             Margin="10 0"
                             Style="{StaticResource MainMenuItem}"
-                            MouseDown="Patients_MouseDown">
+                            MouseDown="Patients_MouseDown"
+                            x:Name="AddNewPatient"
+                            Visibility="{Binding VisibilityAddUser, Converter={StaticResource boolToVisConv}}">
                     <Image Margin="10" Source="/NeuroMedicine;component/Icons/hospitalisation.png" Width="30"/>
                     <TextBlock Text="Добавление нового пациента" 
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Stretch"
+                               Margin="10 0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            Margin="10 0"
+                            Style="{StaticResource MainMenuItem}"
+                            MouseDown="Settings_MouseDown"
+                            x:Name="Settings"
+                            Visibility="{Binding VisibilitySettings, Converter={StaticResource boolToVisConv}}">
+                    <Image Margin="10" Source="/NeuroMedicine;component/Icons/settings.png" Width="30"/>
+                    <TextBlock Text="Настройки" 
                                VerticalAlignment="Center"
                                HorizontalAlignment="Stretch"
                                Margin="10 0"/>

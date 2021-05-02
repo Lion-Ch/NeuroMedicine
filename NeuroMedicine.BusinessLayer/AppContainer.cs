@@ -8,7 +8,16 @@ namespace NeuroMedicine.BusinessLayer
 {
     public class AppContainer
     {
-        public User CurrentUser { get; set; }
+        private User _currUser;
+        public User CurrentUser
+        {
+            get { return _currUser; }
+            set
+            {
+                ViewNavigator.SetSettings(value.UserType);
+                _currUser = value;
+            }
+        }
         public int NumPatients = 0;
 
         private static AppContainer _instance;

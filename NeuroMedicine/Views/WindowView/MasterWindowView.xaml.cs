@@ -43,9 +43,12 @@ namespace NeuroMedicine.Views.WindowView
         }
         private void Exit_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            BussinesModel.ViewNavigator.NavigateToView(new AuthorizationVM(), false);
+        }
+        private void Settings_MouseDown(object sender, MouseButtonEventArgs e)
+        {
 
         }
-
         private void Registratur_MouseDown(object sender, MouseButtonEventArgs e)
         {
             BussinesModel.ViewNavigator.NavigateToView(new RegistryVM());

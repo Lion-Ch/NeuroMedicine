@@ -141,6 +141,18 @@
     <Compile Include="Migrations\202104211547253_NewFildsInTables.designer.cs">
       <DependentUpon>202104211547253_NewFildsInTables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202105011642017_NewTableConsultation.cs" />
+    <Compile Include="Migrations\202105011642017_NewTableConsultation.designer.cs">
+      <DependentUpon>202105011642017_NewTableConsultation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105021046008_AddSettings.cs" />
+    <Compile Include="Migrations\202105021046008_AddSettings.designer.cs">
+      <DependentUpon>202105021046008_AddSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105021227233_AddMeasurment.cs" />
+    <Compile Include="Migrations\202105021227233_AddMeasurment.designer.cs">
+      <DependentUpon>202105021227233_AddMeasurment.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Classes\Diagnosis.cs" />
     <Compile Include="Models\Classes\DiagnosticTypeDictionary.cs" />
@@ -164,6 +176,7 @@
     <Compile Include="Models\Factories\PatientFactory.cs" />
     <Compile Include="Models\Factories\ReceptionFactory.cs" />
     <Compile Include="Models\Factories\ServiceFactory.cs" />
+    <Compile Include="Models\Factories\SettingsFactory.cs" />
     <Compile Include="Models\Factories\UserFactory.cs" />
     <Compile Include="Models\PresentationVM\ListItem.cs" />
     <Compile Include="Models\PresentationVM\NewPatientPVM.cs" />
@@ -174,13 +187,16 @@
     <Compile Include="SqlServer\DBContext.cs" />
     <Compile Include="SqlServer\DBInitializer.cs" />
     <Compile Include="SqlServer\Tables\RefBloodTest.cs" />
+    <Compile Include="SqlServer\Tables\RefConsultation.cs" />
     <Compile Include="SqlServer\Tables\RefDiagnosis.cs" />
     <Compile Include="SqlServer\Tables\RefDoctorSchedule.cs" />
     <Compile Include="SqlServer\Tables\RefDoctorServices.cs" />
+    <Compile Include="SqlServer\Tables\RefMeasurment.cs" />
     <Compile Include="SqlServer\Tables\RefPatient.cs" />
     <Compile Include="SqlServer\Tables\RefPatientDiagnosis.cs" />
     <Compile Include="SqlServer\Tables\RefReception.cs" />
     <Compile Include="SqlServer\Tables\RefService.cs" />
+    <Compile Include="SqlServer\Tables\RefSettings.cs" />
     <Compile Include="SqlServer\Tables\RefUrineTest.cs" />
     <Compile Include="SqlServer\Tables\RefUser.cs" />
     <Compile Include="SqlServer\Tables\RefUserAccount.cs" />
@@ -252,6 +268,15 @@
     <EmbeddedResource Include="Migrations\202104211547253_NewFildsInTables.resx">
       <DependentUpon>202104211547253_NewFildsInTables.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105011642017_NewTableConsultation.resx">
+      <DependentUpon>202105011642017_NewTableConsultation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105021046008_AddSettings.resx">
+      <DependentUpon>202105021046008_AddSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105021227233_AddMeasurment.resx">
+      <DependentUpon>202105021227233_AddMeasurment.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Neuromedicine.Core\Neuromedicine.Core.csproj">
@@ -262,8 +287,10 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="PrintDocs\Анализ крови.docx" />
-    <None Include="PrintDocs\Анализ мочи.docx" />
+    <Resource Include="PrintDocs\Анализ крови.docx" />
+    <None Include="PrintDocs\Анализ мочи.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="PrintDocs\Талон.docx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -277,7 +277,7 @@ namespace NeuroMedicine.BusinessLayer.Logic
                     _app.Quit();
             }
         }
-        public void PrintContract(Patient patient, Service service, User user)
+        public void PrintContract(Patient patient, Service service, User user, int numberContract)
         {
             try
             {
@@ -285,6 +285,7 @@ namespace NeuroMedicine.BusinessLayer.Logic
                 var set = AppContainer.Instance.Settings;
                 Dictionary<string, string> values = new Dictionary<string, string>()
                 {
+                    {"{number}", numberContract.ToString() },
                     {nameOrgTag, AppContainer.Instance.Settings.NameOrganization },
                     {fioDirectorTag,set.fioDirector },
                     {cityOrgTag, set.cityOrgTag},

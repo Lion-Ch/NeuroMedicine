@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Logic.ViewNavigation;
+using DataLayer.Models.Enums;
 using NeuroMedicine.BusinessLayer.ViewModels;
 using NeuroMedicine.BusinessLayer.ViewModels.ServicesVM;
 using NeuroMedicine.Views.ModalWindowView;
@@ -33,6 +34,8 @@ namespace NeuroMedicine.Views.ViewNavigator
             _viewModelToViewMap.Add(typeof(ConfirmationModalVM), typeof(ConfirmModalWindow));
             _viewModelToViewMap.Add(typeof(DiagnosisVM), typeof(DiagnosisModalWindow));
             _viewModelToViewMap.Add(typeof(RegistryVM), typeof(RegistryView));
+            _viewModelToViewMap.Add(typeof(SettingsVM), typeof(SettingsView));
+            _viewModelToViewMap.Add(typeof(ConsultationVM), typeof(ConsultationView));
 
             //Услуги
             _viewModelToViewMap.Add(typeof(BloodTestServiceVM), typeof(BloodTestView));
@@ -99,6 +102,38 @@ namespace NeuroMedicine.Views.ViewNavigator
                 }
                 window.ShowDialog();
 
+            }
+        }
+        public void SetSettings(UserType userType)
+        {
+            FrameworkElement[] controls = new FrameworkElement[]
+            {
+                _masterWindow.Cabinet,
+                _masterWindow.Neuro,
+                _masterWindow.History,
+                _masterWindow.AddNewPatient,
+                _masterWindow.Settings,
+                _masterWindow.Registr
+            };
+            foreach(var control in controls)
+            {
+                control.Visibility = Visibility.Collapsed;
+            }
+
+            switch(userType)
+            {
+                case UserType.Admin:
+                    _masterWindow.Settings.Visibility = Visibility.Visible;
+                    break;
+                case UserType.Registratur:
+                    _masterWindow.AddNewPatient.Visibility = Visibility.Visible;
+                    _masterWindow.Registr.Visibility = Visibility.Visible;
+                    break;
+                case UserType.Doctor:
+                    _masterWindow.Cabinet.Visibility = Visibility.Visible;
+                    _masterWindow.Neuro.Visibility = Visibility.Visible;
+                    _masterWindow.History.Visibility = Visibility.Visible;
+                    break;
             }
         }
     }

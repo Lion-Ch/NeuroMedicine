@@ -18,7 +18,7 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
         //Изменяем существующую запись
         private bool _isChanged = false;
 
-        private PatientPVM _patientPVM;
+        protected PatientPVM _patientPVM;
         public PatientPVM PatientPVM
         {
             get { return _patientPVM; }
@@ -29,7 +29,7 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
             }
         }
 
-        private ObservableCollection<Diagnosis> _diagnosysTypes;
+        protected ObservableCollection<Diagnosis> _diagnosysTypes;
         public ObservableCollection<Diagnosis> DiagnosysTypes
         {
             get { return _diagnosysTypes; }
@@ -40,7 +40,7 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
             }
         }
 
-        private Diagnosis _selectedDiagnosysType;
+        protected Diagnosis _selectedDiagnosysType;
         public Diagnosis SelectedDiagnosysType
         {
             get { return _selectedDiagnosysType; }
@@ -61,7 +61,7 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
         private DelegateCommand _saveCommand;
         public ICommand SaveCommand { get { return _saveCommand; } }
 
-        private void Save(object obj)
+        protected virtual void Save(object obj)
         {
             if(_isChanged)
             {

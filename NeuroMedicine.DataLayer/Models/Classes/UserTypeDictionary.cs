@@ -12,7 +12,8 @@ namespace DataLayer.Models.Classes
         private static Dictionary<UserType, string> Dictionary = new Dictionary<UserType, string>()
         {
             {UserType.Admin, "Администратор" },
-            {UserType.Doctor, "Доктор" }
+            {UserType.Doctor, "Доктор" },
+            {UserType.Registratur, "Персонал регистратуры" }
         };
 
         public static string GetString(UserType userType)

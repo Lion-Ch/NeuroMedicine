@@ -1,4 +1,5 @@
-﻿using NeuroMedicine.BusinessLayer.ViewModels;
+﻿using DataLayer.Models.Enums;
+using NeuroMedicine.BusinessLayer.ViewModels;
 
 namespace BusinessLayer.Logic.ViewNavigation
 {
@@ -7,5 +8,6 @@ namespace BusinessLayer.Logic.ViewNavigation
         void NavigateToView(BaseViewModel newView, bool inMasterWindow = true);
         void NavigateToModal(BaseViewModel newView, bool isMaximazed = false);
         void NavigateToWindow(BaseViewModel newView);
+        void SetSettings(UserType userType);
     }
 }
