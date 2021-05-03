@@ -3,6 +3,7 @@ using BusinessLayer.Logic.Extensions;
 using DataLayer.Models.Classes;
 using DataLayer.Models.Enums;
 using DataLayer.Models.PresentationVM;
+using DataLayer.SqlServer.Tables;
 using NeuroMedicine.BusinessLayer.Logic.Classes;
 using NeuroMedicine.BusinessLayer.ViewModels.ServicesVM;
 using OxyPlot;
@@ -43,6 +44,7 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
                 SendPropertyChanged(() => Services);
             }
         }
+        public User User { get; set; }
         private Service _selectedService;
         public Service SelectedService
         {
@@ -101,6 +103,7 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
         {
             HeaderVM = "Личный кабинет";
             Services = AppContainer.Instance.SQLDataManager.GetServicesByDoctor(AppContainer.Instance.CurrentUser.Id).ToObservable();
+            User = AppContainer.Instance.CurrentUser;
         }
 
         private void LoadGraphics()

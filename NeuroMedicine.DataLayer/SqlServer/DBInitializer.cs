@@ -13,11 +13,11 @@ namespace DataLayer.SqlServer
     {
         protected override void Seed(DBContext db)
         {
-            var a = new RefUserAccount() { Login = "admin".GetHashCode(), Password = "admin".GetHashCode() };
+            var a = new RefUserAccount() { Login = "admin", Password = "admin" };
             db.RefUsers.Add(new SqlServer.Tables.RefUser() {Id=1 ,FullName = "Петров Петр Петрович", UserType = Models.Enums.UserType.Admin, RefUserAccount = a });
-            var b = new RefUserAccount() { Login = "regis".GetHashCode(), Password = "regis".GetHashCode() };
+            var b = new RefUserAccount() { Login = "regis", Password = "regis" };
             db.RefUsers.Add(new SqlServer.Tables.RefUser() { Id = 2, FullName = "Кириченко Людмила Петровна", UserType = Models.Enums.UserType.Registratur, RefUserAccount = b });
-            var c = new RefUserAccount() { Login = "doc".GetHashCode(), Password = "doc".GetHashCode() };
+            var c = new RefUserAccount() { Login = "doc", Password = "doc" };
             db.RefUsers.Add(new SqlServer.Tables.RefUser() { Id = 3, FullName = "Евшеев Петр Николаевич", UserType = Models.Enums.UserType.Doctor, RefUserAccount = c });
 
             db.RefPatients.Add(

@@ -27,10 +27,24 @@ namespace DataLayer.DataManagers
 			}
 		}
 
-        private DBContext GetNewDataContext()
+        public DBContext GetNewDataContext()
 		{
 			var dataContext = new DBContext();
 			return dataContext;
+		}
+		public List<RefDoctorSchedule> GetSchedules()
+        {
+			using (var dataContext = GetNewDataContext())
+			{
+				return dataContext.RefDoctorSchedules.ToList();
+			}
+		}
+		public List<RefUser> GetUsers()
+		{
+			using (var dataContext = GetNewDataContext())
+			{
+				return dataContext.RefUsers.Include(x => x.RefUserAccount).ToList();
+			}
 		}
 		public PatientHistory GetPatientHistory(int patientId)
         {
@@ -42,9 +56,16 @@ namespace DataLayer.DataManagers
 				patientHistory.RefMeasurments = dataContext.RefMeasurments.Where(x => x.RefPatientId == patientId)
 						.OrderBy(x => x.Date).ToList();
 				patientHistory.RefUrineTests = dataContext.RefUrineTests.Where(x => x.RefPatientId == patientId)
-						.OrderBy(x => x.Date).ToList();
+						.OrderBy(x => x.Date).ToList(); 
 			}
 			return patientHistory;
+		}
+		public List<RefDoctorServices> GetAllServices()
+		{
+			using (var dataContext = GetNewDataContext())
+			{
+				return dataContext.RefDoctorServices.ToList();
+			}
 		}
 		public void AddMeansurment(RefMeasurment means)
 		{
@@ -63,7 +84,69 @@ namespace DataLayer.DataManagers
 			}
 		}
 
-		public Settings.Settings GetSettings()
+		public void SaveUserData(UserDataPVM userDataPVM)
+		{
+			using (var db = GetNewDataContext())
+			{
+				foreach(var user in userDataPVM.RefUsers)
+                {
+					if(db.RefUsers.Where(x=>x.Id == user.Id).Count() == 0)
+                    {
+						db.RefUsers.Add(user);
+                    }
+					else
+					{
+						db.RefUsers.Attach(user);
+						db.Entry(user).State = EntityState.Modified;
+					}
+                }
+				foreach (var user in userDataPVM.RefUserAccounts)
+				{
+					if (db.RefUserAccounts.Where(x => x.Id == user.Id).Count() == 0)
+					{
+						db.RefUserAccounts.Add(user);
+					}
+					else
+					{
+						db.RefUserAccounts.Attach(user);
+						db.Entry(user).State = EntityState.Modified;
+					}
+				}
+				foreach (var user in userDataPVM.RefDoctorSchedules)
+				{
+					if (db.RefDoctorSchedules.Where(x => x.Id == user.Id).Count() == 0)
+					{
+						db.RefDoctorSchedules.Add(user);
+					}
+					else
+					{
+						db.RefDoctorSchedules.Attach(user);
+						db.Entry(user).State = EntityState.Modified;
+					}
+				}
+				foreach (var user in userDataPVM.RefDoctorServices)
+				{
+					if (db.RefDoctorServices.Where(x => x.Id == user.Id).Count() == 0)
+					{
+						db.RefDoctorServices.Add(user);
+					}
+					else
+					{
+						db.RefDoctorServices.Attach(user);
+						db.Entry(user).State = EntityState.Modified;
+					}
+				}
+				db.SaveChanges();
+			}
+		}
+		public List<RefService> GetListServices()
+        {
+			using (var dataContext = GetNewDataContext())
+			{
+				return dataContext.RefServices.ToList();
+			}
+		}
+        public Settings.Settings GetSettings()
 		{
 			using (var dataContext = GetNewDataContext())
 			{
@@ -297,7 +380,7 @@ namespace DataLayer.DataManagers
 		/// <summary>
 		/// Возвращает юзера по хешам логина и пароля
 		/// </summary>
-		public User FindUser(int hashLogin, int hashPassword)
+		public User FindUser(string hashLogin, string hashPassword)
 		{
 			using (var dataContext = GetNewDataContext())
 			{

@@ -20,7 +20,7 @@
 
             <Border Grid.Row="0">
                 <DockPanel>
-                    <TextBlock DockPanel.Dock="Right" Text="Петров Генадий Александрович" FontSize="18"/>
+                    <TextBlock DockPanel.Dock="Right" Text="{Binding User.FullName}" FontSize="18"/>
                     <TextBlock DockPanel.Dock="Left" Text="{Binding NumPatients}" FontSize="18" />
                 </DockPanel>
             </Border>

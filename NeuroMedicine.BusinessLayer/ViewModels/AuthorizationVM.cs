@@ -26,7 +26,7 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
         {
             if(!(String.IsNullOrEmpty(Login)&& String.IsNullOrEmpty(Password)))
             {
-                var user = AppContainer.Instance.SQLDataManager.FindUser(Login.GetHashCode(), Password.GetHashCode());
+                var user = AppContainer.Instance.SQLDataManager.FindUser(Login, Password);
                 if (user != null)
                 {
                     AppContainer.Instance.CurrentUser = user;

@@ -157,6 +157,10 @@
     <Compile Include="Migrations\202105021857001_AddNullableMeansurment.designer.cs">
       <DependentUpon>202105021857001_AddNullableMeansurment.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202105031946235_ChangeUserAccount.cs" />
+    <Compile Include="Migrations\202105031946235_ChangeUserAccount.designer.cs">
+      <DependentUpon>202105031946235_ChangeUserAccount.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Classes\Diagnosis.cs" />
     <Compile Include="Models\Classes\DiagnosticTypeDictionary.cs" />
@@ -186,6 +190,7 @@
     <Compile Include="Models\PresentationVM\NewPatientPVM.cs" />
     <Compile Include="Models\PresentationVM\PatientHistory.cs" />
     <Compile Include="Models\PresentationVM\PatientPVM.cs" />
+    <Compile Include="Models\PresentationVM\UserDataPVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\Encryption.cs" />
     <Compile Include="Settings\Settings.cs" />
@@ -284,6 +289,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202105021857001_AddNullableMeansurment.resx">
       <DependentUpon>202105021857001_AddNullableMeansurment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105031946235_ChangeUserAccount.resx">
+      <DependentUpon>202105031946235_ChangeUserAccount.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

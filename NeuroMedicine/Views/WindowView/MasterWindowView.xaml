@@ -53,7 +53,7 @@
                             x:Name="History"
                             Visibility="{Binding VisibilityFlu, Converter={StaticResource boolToVisConv}}">
                     <Image Margin="10" Source="/NeuroMedicine;component/Icons/analytics.png" Width="30"/>
-                    <TextBlock Text="История флюрографии" 
+                    <TextBlock Text="История флюорографии" 
                                TextWrapping="Wrap"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Stretch"

@@ -4,63 +4,94 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NeuroMedicine.Views.WindowView"
+                xmlns:enums="clr-namespace:DataLayer.Models.Enums;assembly=DataLayer"
+                xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <WrapPanel Background="AliceBlue" Orientation="Horizontal" ItemWidth="400">
-            <StackPanel Orientation="Vertical" Margin="10">
-                <TextBlock Text="Наименование организации"/>
-                <TextBox Text="{Binding Settings.NameOrganization, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            </StackPanel>
-            <StackPanel Orientation="Vertical" Margin="10">
-                <TextBlock Text="ФИО директора"/>
-            <TextBox Text="{Binding Settings.fioDirector, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            </StackPanel>
-            <StackPanel Orientation="Vertical" Margin="10">
-                <TextBlock Text="Город"/>
-            <TextBox Text="{Binding Settings.cityOrgTag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            </StackPanel>
-            <StackPanel Orientation="Vertical" Margin="10">
-                <TextBlock Text="Адрес"/>
-            <TextBox Text="{Binding Settings.addressOrgTag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            </StackPanel>
-            <StackPanel Orientation="Vertical" Margin="10">
-                <TextBlock Text="Индекс"/>
-            <TextBox TextWrapping="Wrap" Text="{Binding Settings.indexOrgTag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            </StackPanel>
-            <StackPanel Orientation="Vertical" Margin="10">
-                <TextBlock Text="Номер телефона"/>
-            <TextBox Text="{Binding Settings.phoneOrgTag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            </StackPanel>
-            <StackPanel Orientation="Vertical" Margin="10">
-                <TextBlock Text="ИНН"/>
-            <TextBox Text="{Binding Settings.innOrgTag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            </StackPanel>
-            <StackPanel Orientation="Vertical" Margin="10">
-                <TextBlock Text="Расчетный счет"/>
-            <TextBox Text="{Binding Settings.rsOrgTag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            </StackPanel>
-            <StackPanel Orientation="Vertical" Margin="10">
-                <TextBlock Text="Наименование банка"/>
-            <TextBox Text="{Binding Settings.bankOrgTag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            </StackPanel>
-            <StackPanel Orientation="Vertical" Margin="10">
-                <TextBlock Text="Кореспондентский счет"/>
-            <TextBox Text="{Binding Settings.ksOrgTag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            </StackPanel>
-            <StackPanel Orientation="Vertical" Margin="10">
-            <TextBlock Text="БИК"/>
-            <TextBox Text="{Binding Settings.bikOrgTag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        </StackPanel>
-        <StackPanel Orientation="Vertical" Margin="10">
-            <TextBlock Text="Путь до нейросети"/>
-            <StackPanel Orientation="Horizontal">
-                <TextBox Text="{Binding Settings.PathToNeuro, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" TextWrapping="Wrap" MaxWidth="300"/>
-                <Button Content="Указать путь" Command="{Binding ShowPathCommand}"/>
-            </StackPanel>
-        </StackPanel>
-        <Button Style="{StaticResource ButtonHover}"
+             d:DesignHeight="900" d:DesignWidth="800">
+    <ScrollViewer>
+        <StackPanel Background="AliceBlue">
+            <WrapPanel Orientation="Horizontal"  ItemWidth="400">
+                <StackPanel Orientation="Vertical" Margin="10">
+                    <TextBlock Text="Наименование организации"/>
+                    <TextBox Text="{Binding Settings.NameOrganization, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Margin="10">
+                    <TextBlock Text="ФИО директора"/>
+                    <TextBox Text="{Binding Settings.fioDirector, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Margin="10">
+                    <TextBlock Text="Город"/>
+                    <TextBox Text="{Binding Settings.cityOrgTag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Margin="10">
+                    <TextBlock Text="Адрес"/>
+                    <TextBox Text="{Binding Settings.addressOrgTag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Margin="10">
+                    <TextBlock Text="Индекс"/>
+                    <TextBox TextWrapping="Wrap" Text="{Binding Settings.indexOrgTag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Margin="10">
+                    <TextBlock Text="Номер телефона"/>
+                    <TextBox Text="{Binding Settings.phoneOrgTag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Margin="10">
+                    <TextBlock Text="ИНН"/>
+                    <TextBox Text="{Binding Settings.innOrgTag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Margin="10">
+                    <TextBlock Text="Расчетный счет"/>
+                    <TextBox Text="{Binding Settings.rsOrgTag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Margin="10">
+                    <TextBlock Text="Наименование банка"/>
+                    <TextBox Text="{Binding Settings.bankOrgTag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Margin="10">
+                    <TextBlock Text="Кореспондентский счет"/>
+                    <TextBox Text="{Binding Settings.ksOrgTag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Margin="10">
+                    <TextBlock Text="БИК"/>
+                    <TextBox Text="{Binding Settings.bikOrgTag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Margin="10">
+                    <TextBlock Text="Путь до нейросети"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Text="{Binding Settings.PathToNeuro, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" TextWrapping="Wrap" MaxWidth="300"/>
+                        <Button Content="Указать путь" Command="{Binding ShowPathCommand}"/>
+                    </StackPanel>
+                </StackPanel>
+                <Button Style="{StaticResource ButtonHover}"
                 Command="{Binding SaveSettingsCommand}"
-                Content="Сохранить"
+                Content="Сохранить настройки"
                 Width="300" Height="40"/>
-    </WrapPanel>
+            </WrapPanel>
+            <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                <DataGrid Height="300" ItemsSource="{Binding Users}" Name="UserGrid"/>
+                <Button Content="Удалить" Click="Button_Click"/>
+                <DataGrid Height="300" ItemsSource="{Binding Logins}" Name="LoginsGrid"/>
+                <Button Content="Удалить" Click="Button_Click_1"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                <DataGrid Height="300"  ItemsSource="{Binding UserServices}" Name="UserServiceGrid"/>
+                <Button Content="Удалить" Click="Button_Click_2"/>
+                <DataGrid Height="300"  ItemsSource="{Binding Schedules}" Name="ScheduleGrid"/>
+                <Button Content="Удалить" Click="Button_Click_3"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                <DataGrid Height="300" IsReadOnly="True"  ItemsSource="{Binding AllServices}"/>
+            </StackPanel>
+            <Button Style="{StaticResource ButtonHover}"
+                Command="{Binding UpdateCommand}"
+                Content="Обновить"
+                Margin="0 10 0 10"
+                Width="300" Height="40"/>
+            <Button Style="{StaticResource ButtonHover}"
+                Command="{Binding SaveUserDataCommand}"
+                Content="Сохранить данные врачей"
+                Margin="0 10 0 40"
+                Width="300" Height="40"/>
+        </StackPanel>
+    </ScrollViewer>
 </local:BaseView>

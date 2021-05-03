@@ -13,8 +13,8 @@ namespace DataLayer.SqlServer.Tables
         [Key]
         [ForeignKey("RefUser")]
         public int Id { get; set; }
-        public int Login { get; set; }
-        public int Password { get; set; }
+        public string Login { get; set; }
+        public string Password { get; set; }
 
         public RefUser RefUser { get; set; }
     }
