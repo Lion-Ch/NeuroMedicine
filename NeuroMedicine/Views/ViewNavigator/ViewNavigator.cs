@@ -40,6 +40,7 @@ namespace NeuroMedicine.Views.ViewNavigator
             //Услуги
             _viewModelToViewMap.Add(typeof(BloodTestServiceVM), typeof(BloodTestView));
             _viewModelToViewMap.Add(typeof(UrineTestServiceVM), typeof(UrineTestServiceView));
+            _viewModelToViewMap.Add(typeof(MeansurmentVM), typeof(MeansurmentView));
         }
         //Перемещение по самому приложению
         public void NavigateToWindow(BaseViewModel newView)

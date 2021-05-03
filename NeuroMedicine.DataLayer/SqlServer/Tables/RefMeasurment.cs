@@ -25,10 +25,10 @@ namespace DataLayer.SqlServer.Tables
         public RefUser RefUser { get; set; }
 
         public DateTime Date { get; set; }
-        public float Height { get; set; }
-        public float Weight { get; set; }
-        public int Pulse { get; set; }
-        public int PressureSystolic { get; set; }
-        public int PressureDiastolic { get; set; }
+        public float? Height { get; set; }
+        public float? Weight { get; set; }
+        public int? Pulse { get; set; }
+        public int? PressureSystolic { get; set; }
+        public int? PressureDiastolic { get; set; }
     }
 }

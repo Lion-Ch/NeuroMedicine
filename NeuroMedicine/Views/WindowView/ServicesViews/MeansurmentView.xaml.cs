@@ -1,7 +1,5 @@
 ﻿using NeuroMedicine.BusinessLayer.ViewModels;
-using OxyPlot;
-using OxyPlot.Axes;
-using OxyPlot.Series;
+using NeuroMedicine.BusinessLayer.ViewModels.ServicesVM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,11 +15,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace NeuroMedicine.Views.WindowView
+namespace NeuroMedicine.Views.WindowView.ServicesViews
 {
-    public partial class PersonalCabinet
+    /// <summary>
+    /// Логика взаимодействия для MeansurmentView.xaml
+    /// </summary>
+    public partial class MeansurmentView
     {
-        private PersonalCabinetVM _viewModel;
+        private MeansurmentVM _viewModel;
         public override BaseViewModel ViewModel
         {
             get
@@ -30,12 +31,11 @@ namespace NeuroMedicine.Views.WindowView
             }
             set
             {
-                _viewModel = (PersonalCabinetVM)value;
+                _viewModel = (MeansurmentVM)value;
                 this.DataContext = _viewModel;
             }
         }
-
-        public PersonalCabinet()
+        public MeansurmentView()
         {
             InitializeComponent();
         }

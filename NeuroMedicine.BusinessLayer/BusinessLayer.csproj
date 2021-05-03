@@ -85,6 +85,7 @@
     <Compile Include="ViewModels\RegistryVM.cs" />
     <Compile Include="ViewModels\SearchPatientVM.cs" />
     <Compile Include="ViewModels\ServicesVM\BloodTestServiceVM.cs" />
+    <Compile Include="ViewModels\ServicesVM\MeansurmentVM.cs" />
     <Compile Include="ViewModels\ServicesVM\UrineTestServiceVM.cs" />
     <Compile Include="ViewModels\SettingsVM.cs" />
   </ItemGroup>

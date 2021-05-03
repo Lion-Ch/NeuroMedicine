@@ -32,6 +32,28 @@ namespace DataLayer.DataManagers
 			var dataContext = new DBContext();
 			return dataContext;
 		}
+		public PatientHistory GetPatientHistory(int patientId)
+        {
+			PatientHistory patientHistory = new PatientHistory();
+			using (var dataContext = GetNewDataContext())
+			{
+				patientHistory.RefBloodTests = dataContext.RefBlodTests.Where(x => x.RefPatientId == patientId)
+						.OrderBy(x => x.Date).ToList();
+				patientHistory.RefMeasurments = dataContext.RefMeasurments.Where(x => x.RefPatientId == patientId)
+						.OrderBy(x => x.Date).ToList();
+				patientHistory.RefUrineTests = dataContext.RefUrineTests.Where(x => x.RefPatientId == patientId)
+						.OrderBy(x => x.Date).ToList();
+			}
+			return patientHistory;
+		}
+		public void AddMeansurment(RefMeasurment means)
+		{
+			using (var dataContext = GetNewDataContext())
+			{
+				dataContext.RefMeasurments.Add(means);
+				dataContext.SaveChanges();
+			}
+		}
 		public void AddUrineTest(RefUrineTest urineTest)
 		{
 			using (var dataContext = GetNewDataContext())

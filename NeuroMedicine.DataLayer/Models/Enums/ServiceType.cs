@@ -30,6 +30,7 @@ namespace DataLayer.Models.Enums
         /// <summary>
         /// ЭКГ
         /// </summary>
-        ECG = 5
+        ECG = 5,
+        Meansurment = 6
     }
 }

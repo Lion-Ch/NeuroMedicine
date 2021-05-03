@@ -153,6 +153,10 @@
     <Compile Include="Migrations\202105021227233_AddMeasurment.designer.cs">
       <DependentUpon>202105021227233_AddMeasurment.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202105021857001_AddNullableMeansurment.cs" />
+    <Compile Include="Migrations\202105021857001_AddNullableMeansurment.designer.cs">
+      <DependentUpon>202105021857001_AddNullableMeansurment.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Classes\Diagnosis.cs" />
     <Compile Include="Models\Classes\DiagnosticTypeDictionary.cs" />
@@ -180,6 +184,7 @@
     <Compile Include="Models\Factories\UserFactory.cs" />
     <Compile Include="Models\PresentationVM\ListItem.cs" />
     <Compile Include="Models\PresentationVM\NewPatientPVM.cs" />
+    <Compile Include="Models\PresentationVM\PatientHistory.cs" />
     <Compile Include="Models\PresentationVM\PatientPVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\Encryption.cs" />
@@ -276,6 +281,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202105021227233_AddMeasurment.resx">
       <DependentUpon>202105021227233_AddMeasurment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105021857001_AddNullableMeansurment.resx">
+      <DependentUpon>202105021857001_AddNullableMeansurment.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
