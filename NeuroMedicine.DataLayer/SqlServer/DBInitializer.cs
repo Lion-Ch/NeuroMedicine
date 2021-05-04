@@ -20,12 +20,12 @@ namespace DataLayer.SqlServer
             var c = new RefUserAccount() { Login = "doc", Password = "doc" };
             db.RefUsers.Add(new SqlServer.Tables.RefUser() { Id = 3, FullName = "Евшеев Петр Николаевич", UserType = Models.Enums.UserType.Doctor, RefUserAccount = c });
 
-            db.RefPatients.Add(
-                new RefPatient() { FullName = "Елисеев Алексей Николаевич", DateBirth = DateTime.Now.AddDays(365*-20),
-                Address="Новочеркасс, улица Энгельса 25", Mail="asfasf@mail.ru", Mobile="89185530000", Gender= GenderType.Male, PassportInfo = "МВД Рос по РО 21.04.15", Passport="1234567890", Policy="1234567890123456", Snills="123456789012"});
+            //db.RefPatients.Add(
+            //    new RefPatient() { FullName = "Елисеев Алексей Николаевич", DateBirth = DateTime.Now.AddDays(365*-20),
+            //    Address="Новочеркасс, улица Энгельса 25", Mail="asfasf@mail.ru", Mobile="89185530000", Gender= GenderType.Male, PassportInfo = "МВД Рос по РО 21.04.15", Passport="1234567890", Policy="1234567890123456", Snills="123456789012"});
 
             db.RefServices.Add(new RefService() {Id = (int)ServiceType.Consultation, Name = "Консультация", IsUseNeuralNetwork = false, Price =300, Duration=30 });
-            db.RefServices.Add(new RefService() { Id = (int)ServiceType.Fluorography, Name = "Диагностика флюрографии", IsUseNeuralNetwork = true, Price = 450, Duration = 30 });
+            db.RefServices.Add(new RefService() { Id = (int)ServiceType.Fluorography, Name = "Диагностика флюорографии", IsUseNeuralNetwork = true, Price = 450, Duration = 30 });
             db.RefServices.Add(new RefService() { Id = (int)ServiceType.BloodTest, Name = "Общий анализ крови", IsUseNeuralNetwork = false, Price = 270, Duration = 30 });
             db.RefServices.Add(new RefService() { Id = (int)ServiceType.ECG, Name = "ЭКГ", IsUseNeuralNetwork = false, Price = 440, Duration = 30 });
             db.RefServices.Add(new RefService() { Id = (int)ServiceType.AnalysisOfUrine, Name = "Общий анализ мочи", IsUseNeuralNetwork = false, Price = 300, Duration = 30 });

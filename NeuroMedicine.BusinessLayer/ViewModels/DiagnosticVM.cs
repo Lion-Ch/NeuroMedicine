@@ -295,9 +295,25 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
                 foreach (var photoUrl in a)
                 {
                     var patient = CreatePatientPVM(photoUrl);
-                    if (!IsReadDateFromNamePhoto)
+                    if (IsReadDateFromNamePhoto && File.Exists(photoUrl))
+                    {
+                        patient.DatePhoto = System.IO.File.GetCreationTime(photoUrl);
+                    }
+                    else
+                    {
                         patient.DatePhoto = DateTime.Now;
-                    patient.Patient = AppContainer.Instance.SQLDataManager.FindPatients("ел").FirstOrDefault();
+                    }
+
+                    if (IsReadFullNameFromNamePhoto)
+                    {
+                        
+                        var s = Path.GetFileName(photoUrl).Split(new string[]{" ", ".jpeg" },StringSplitOptions.RemoveEmptyEntries);
+                        if(s.Count() == 3)
+                            patient.Patient = AppContainer.Instance.SQLDataManager
+                                .FindPatients($"{s[0]} {s[1]} {s[2]}")
+                                .FirstOrDefault();
+                    }
+
                     Patients.Add(patient);
                 }
             }

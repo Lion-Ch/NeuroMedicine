@@ -91,11 +91,11 @@
                     
                     <StackPanel Grid.Row="1" Orientation="Vertical">
                         <TextBlock Text="История пациента" FontFamily="{StaticResource RobotoBlack}" FontSize="18"/>
-                        <TabControl TabStripPlacement="Left" Margin="0 10 0 0">
-                            <TabItem Padding="10" FontSize="16" Header="Базовые показатели">
+                        <TabControl TabStripPlacement="Left" Margin="0 10 0 0" Height="250">
+                            <TabItem Padding="10" FontSize="16" Header="Базовые показатели" >
                                 <ScrollViewer CanContentScroll="True">
-                                    <StackPanel Orientation="Vertical" Height="400">
-                                        <oxy:Plot Title="Рост (см)" Height="150"><oxy:Plot.Axes>
+                                    <StackPanel Orientation="Vertical">
+                                        <oxy:Plot Title="Рост (см)" Height="120"><oxy:Plot.Axes>
                                                 <oxy:DateTimeAxis StringFormat="dd.MM.yyyy" 
                                                                   MinorGridlineColor="Red" 
                                                                   MajorGridlineStyle="Dash"
@@ -107,7 +107,7 @@
                                                 <oxy:LineSeries ItemsSource="{Binding Height}"/>
                                             </oxy:Plot.Series>
                                         </oxy:Plot>
-                                        <oxy:Plot Title="Вес (кг)" Height="150"><oxy:Plot.Axes>
+                                        <oxy:Plot Title="Вес (кг)" Height="120"><oxy:Plot.Axes>
                                                 <oxy:DateTimeAxis StringFormat="dd.MM.yyyy" 
                                                                   MinorGridlineColor="Red" 
                                                                   MajorGridlineStyle="Dash"
@@ -119,7 +119,7 @@
                                                 <oxy:LineSeries ItemsSource="{Binding Weight}"/>
                                             </oxy:Plot.Series>
                                         </oxy:Plot>
-                                        <oxy:Plot Title="Пульс" Height="150"><oxy:Plot.Axes>
+                                        <oxy:Plot Title="Пульс" Height="120"><oxy:Plot.Axes>
                                                 <oxy:DateTimeAxis StringFormat="dd.MM.yyyy" 
                                                                   MinorGridlineColor="Red" 
                                                                   MajorGridlineStyle="Dash"
@@ -131,7 +131,7 @@
                                                 <oxy:LineSeries ItemsSource="{Binding Pulse}"/>
                                             </oxy:Plot.Series>
                                         </oxy:Plot>
-                                        <oxy:Plot Title="Систолическое давление" Height="150"><oxy:Plot.Axes>
+                                        <oxy:Plot Title="Систолическое давление" Height="120"><oxy:Plot.Axes>
                                                 <oxy:DateTimeAxis StringFormat="dd.MM.yyyy" 
                                                                   MinorGridlineColor="Red" 
                                                                   MajorGridlineStyle="Dash"
@@ -143,7 +143,7 @@
                                                 <oxy:LineSeries ItemsSource="{Binding SistPrepare}"/>
                                             </oxy:Plot.Series>
                                         </oxy:Plot>
-                                        <oxy:Plot Title="Диастолическое давление" Height="150"><oxy:Plot.Axes>
+                                        <oxy:Plot Title="Диастолическое давление" Height="120"><oxy:Plot.Axes>
                                                 <oxy:DateTimeAxis StringFormat="dd.MM.yyyy" 
                                                                   MinorGridlineColor="Red" 
                                                                   MajorGridlineStyle="Dash"
@@ -160,8 +160,8 @@
                             </TabItem>
                             <TabItem Padding="10" FontSize="16" Header="Анализы крови">
                                 <ScrollViewer CanContentScroll="True">
-                                    <StackPanel Orientation="Vertical" Height="400">
-                                        <oxy:Plot Title="СОЭ через час" Height="150">
+                                    <StackPanel Orientation="Vertical">
+                                        <oxy:Plot Title="СОЭ через час" Height="120">
                                             <oxy:Plot.Axes>
                                                 <oxy:DateTimeAxis StringFormat="dd.MM.yyyy" 
                                                                   MinorGridlineColor="Red" 
@@ -174,7 +174,7 @@
                                                 <oxy:LineSeries ItemsSource="{Binding SOE}"/>
                                             </oxy:Plot.Series>
                                         </oxy:Plot>
-                                        <oxy:Plot Title="Гемоглобин" Height="150">
+                                        <oxy:Plot Title="Гемоглобин" Height="120">
                                             <oxy:Plot.Axes>
                                                 <oxy:DateTimeAxis StringFormat="dd.MM.yyyy" 
                                                                   MinorGridlineColor="Red" 
@@ -187,7 +187,7 @@
                                                 <oxy:LineSeries ItemsSource="{Binding Hb}"/>
                                             </oxy:Plot.Series>
                                         </oxy:Plot>
-                                        <oxy:Plot Title="Лейкоциты" Height="150">
+                                        <oxy:Plot Title="Лейкоциты" Height="120">
                                             <oxy:Plot.Axes>
                                                 <oxy:DateTimeAxis StringFormat="dd.MM.yyyy" 
                                                                   MinorGridlineColor="Red" 
@@ -200,7 +200,7 @@
                                                 <oxy:LineSeries ItemsSource="{Binding Lekocit}"/>
                                             </oxy:Plot.Series>
                                         </oxy:Plot>
-                                        <oxy:Plot Title="Эритроциты" Height="150">
+                                        <oxy:Plot Title="Эритроциты" Height="120">
                                             <oxy:Plot.Axes>
                                                 <oxy:DateTimeAxis StringFormat="dd.MM.yyyy" 
                                                                   MinorGridlineColor="Red" 
@@ -213,7 +213,7 @@
                                                 <oxy:LineSeries ItemsSource="{Binding Eritrocit}"/>
                                             </oxy:Plot.Series>
                                         </oxy:Plot>
-                                        <oxy:Plot Title="Эритроцитарный индекс" Height="150">
+                                        <oxy:Plot Title="Эритроцитарный индекс" Height="120">
                                             <oxy:Plot.Axes>
                                                 <oxy:DateTimeAxis StringFormat="dd.MM.yyyy" 
                                                                   MinorGridlineColor="Red" 
@@ -226,7 +226,7 @@
                                                 <oxy:LineSeries ItemsSource="{Binding EritrocitIndex}"/>
                                             </oxy:Plot.Series>
                                         </oxy:Plot>
-                                        <oxy:Plot Title="Б" Height="150">
+                                        <oxy:Plot Title="Б" Height="120">
                                             <oxy:Plot.Axes>
                                                 <oxy:DateTimeAxis StringFormat="dd.MM.yyyy" 
                                                                   MinorGridlineColor="Red" 
@@ -239,7 +239,7 @@
                                                 <oxy:LineSeries ItemsSource="{Binding B}"/>
                                             </oxy:Plot.Series>
                                         </oxy:Plot>
-                                        <oxy:Plot Title="Э" Height="150">
+                                        <oxy:Plot Title="Э" Height="120">
                                             <oxy:Plot.Axes>
                                                 <oxy:DateTimeAxis StringFormat="dd.MM.yyyy" 
                                                                   MinorGridlineColor="Red" 
@@ -252,7 +252,7 @@
                                                 <oxy:LineSeries ItemsSource="{Binding E}"/>
                                             </oxy:Plot.Series>
                                         </oxy:Plot>
-                                        <oxy:Plot Title="Ю" Height="150">
+                                        <oxy:Plot Title="Ю" Height="120">
                                             <oxy:Plot.Axes>
                                                 <oxy:DateTimeAxis StringFormat="dd.MM.yyyy" 
                                                                   MinorGridlineColor="Red" 
@@ -265,7 +265,7 @@
                                                 <oxy:LineSeries ItemsSource="{Binding YU}"/>
                                             </oxy:Plot.Series>
                                         </oxy:Plot>
-                                        <oxy:Plot Title="П" Height="150">
+                                        <oxy:Plot Title="П" Height="120">
                                             <oxy:Plot.Axes>
                                                 <oxy:DateTimeAxis StringFormat="dd.MM.yyyy" 
                                                                   MinorGridlineColor="Red" 
@@ -278,7 +278,7 @@
                                                 <oxy:LineSeries ItemsSource="{Binding P}"/>
                                             </oxy:Plot.Series>
                                         </oxy:Plot>
-                                        <oxy:Plot Title="С" Height="150">
+                                        <oxy:Plot Title="С" Height="120">
                                             <oxy:Plot.Axes>
                                                 <oxy:DateTimeAxis StringFormat="dd.MM.yyyy" 
                                                                   MinorGridlineColor="Red" 
@@ -291,7 +291,7 @@
                                                 <oxy:LineSeries ItemsSource="{Binding S}"/>
                                             </oxy:Plot.Series>
                                         </oxy:Plot>
-                                        <oxy:Plot Title="Л" Height="150">
+                                        <oxy:Plot Title="Л" Height="120">
                                             <oxy:Plot.Axes>
                                                 <oxy:DateTimeAxis StringFormat="dd.MM.yyyy" 
                                                                   MinorGridlineColor="Red" 
@@ -304,7 +304,7 @@
                                                 <oxy:LineSeries ItemsSource="{Binding L}"/>
                                             </oxy:Plot.Series>
                                         </oxy:Plot>
-                                        <oxy:Plot Title="М" Height="150">
+                                        <oxy:Plot Title="М" Height="120">
                                             <oxy:Plot.Axes>
                                                 <oxy:DateTimeAxis StringFormat="dd.MM.yyyy" 
                                                                   MinorGridlineColor="Red" 
@@ -322,8 +322,8 @@
                             </TabItem>
                             <TabItem Padding="10" FontSize="16" Header="Анализы мочи">
                                 <ScrollViewer CanContentScroll="True">
-                                    <StackPanel Orientation="Vertical" Height="400">
-                                        <oxy:Plot Title="Удельный вес" Height="150">
+                                    <StackPanel Orientation="Vertical">
+                                        <oxy:Plot Title="Удельный вес" Height="120">
                                             <oxy:Plot.Axes>
                                                 <oxy:DateTimeAxis StringFormat="dd.MM.yyyy" 
                                                                   MinorGridlineColor="Red" 

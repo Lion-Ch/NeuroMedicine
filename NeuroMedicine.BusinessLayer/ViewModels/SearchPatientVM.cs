@@ -82,7 +82,7 @@ namespace NeuroMedicine.BusinessLayer.ViewModels
 
         public SearchPatientVM(bool isSearchByReception = false)
         {
-            HeaderVM = "Поиск в базе";
+            HeaderVM = "Поиск пациента";
             _isSearchByReception = isSearchByReception;
 
             _searchCommand = new DelegateCommand(this.Search);

@@ -29,9 +29,10 @@
     <FontFamily x:Key="MyFont">/NeuroMedicine;component/Fonts/#Roboto Regular</FontFamily>
     <FontFamily x:Key="RobotoBold">/NeuroMedicine;component/Fonts/#Roboto Bold</FontFamily>
     <FontFamily x:Key="RobotoBlack">/NeuroMedicine;component/Fonts/#Roboto Black</FontFamily>
-    
+
     <SolidColorBrush x:Key="Blue" Color="#1687a7"/>
     <SolidColorBrush x:Key="Gray" Color="#9E9E9E"/>
+    <SolidColorBrush x:Key="DarkBlue" Color="#30577b"/>
 
     <Style x:Key="DataGrid" TargetType="{x:Type DataGridColumnHeader}">
         <Setter Property="FontFamily" Value="{StaticResource MyFont}"/>

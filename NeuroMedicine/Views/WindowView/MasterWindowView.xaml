@@ -108,7 +108,7 @@
             </StackPanel>
         </Border>
 
-        <Grid Background="{StaticResource Blue}"
+        <Grid Background="#37648d"
               Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>

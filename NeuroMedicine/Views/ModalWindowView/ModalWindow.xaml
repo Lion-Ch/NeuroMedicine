@@ -7,7 +7,9 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         SizeToContent="WidthAndHeight"
-        Title="ModalWindow" Loaded="Window_Loaded">
+        Title=""
+        Icon="/NeuroMedicine;component/Icons/hearth.png"
+        Loaded="Window_Loaded">
     <Window.Resources>
         <ResourceDictionary Source="/NeuroMedicine;component/Styles/StyleDictionary.xaml"/>
     </Window.Resources>
